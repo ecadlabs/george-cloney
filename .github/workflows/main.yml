@@ -1,5 +1,9 @@
 name: github pages
 
+## Set git users to the commit we are building from
+git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+
 on:
   push:
     branches:
@@ -17,8 +21,8 @@ jobs:
 
     - name: Build and Deploy
       run: |
-        git config --global user.email "sean@arrowburn.co.nz"
-        git config --global user.name "Sm00g15"
+        git config --global user.email sean@arrowburn.co.nz
+        git config --global user.name "Sean Magin"
         npm i
         npm run deploy
 
