@@ -80,14 +80,3 @@ const setSignerMethod = async (
 };
 
 export default setSignerMethod;
-
-// If you have time, could you make a gist with an example factory method,
-// that takes a private key, and gives you back a TezosToolkit instance that is configured with the in-memory signer,
-// and the given private key?
-import { InMemorySigner } from "@taquito/signer";
-import { Tezos } from "@taquito/taquito";
-
-const signerFactory = async (pk: string) => {
-  await Tezos.setProvider({ signer: new InMemorySigner(pk) });
-  return Tezos;
-};
