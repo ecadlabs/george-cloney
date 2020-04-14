@@ -180,3 +180,7 @@ li {
 .hide {
   display: none;
 }
+
+#contract-code-editor {
+  margin-bottom: 20px;
+}
