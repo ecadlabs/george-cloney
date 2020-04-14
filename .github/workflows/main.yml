@@ -14,4 +14,8 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build and Deploy
-      run: npm run deploy
+      run: |
+        npm i
+        npm run deploy
+
+
