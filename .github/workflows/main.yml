@@ -21,5 +21,7 @@ jobs:
           FIRST_NAME: Sean
           LAST_NAME: Magin
         run: |
+          git config user.email "sean@arrowburn.co.nz"
+          git config user.name "Sean Magin"
           npm i
           npm run deploy
