@@ -5,11 +5,11 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="left-container">
-        <img height="45" width="150" alt="Built With Taquito logo" src="taquito.png" />
+        <img height="45" width="150" alt="Built With Taquito logo" src="/public/taquito.png" />
       </div>
       <div className="right-container">
         <a href="https://github.com/ecadlabs/taquito">
-          <img alt="Github logo" height="55" width="100" src="github.jpg" />
+          <img alt="Github logo" height="55" width="100" src="/public/github.jpg" />
         </a>
       </div>
     </div>
