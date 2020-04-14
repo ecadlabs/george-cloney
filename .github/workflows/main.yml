@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        token: '${{ secrets.GITHUB_TOKEN }}'
+      - uses: actions/checkout@v2
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
 
-    - name: Build and Deploy
-      run: |
-        git config --global user.email sean@arrowburn.co.nz
-        git config --global user.name "Sean Magin"
-        npm i
-        npm run deploy
-
-
+      - name: Build and Deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FIRST_NAME: Sean
+          LAST_NAME: Magin
+        run: |
+          npm i
+          npm run deploy
