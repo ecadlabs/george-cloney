@@ -1,0 +1,182 @@
+body {
+  display: flex-start;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+h1 {
+  color: #35636e;
+}
+
+#wallet {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#rpc ul {
+  padding-left: 0px;
+}
+#rpc li {
+  list-style: none;
+}
+
+#dialog {
+  display: inline-flex;
+  flex-direction: column;
+  float: left;
+  margin-left: 20px;
+  width: 400px;
+  height: 230px;
+  border: 1px solid #35636e;
+  border-radius: 3px;
+  margin: 20px;
+}
+
+#rpc-dialog {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+#rpc h3 {
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+
+#header {
+  font-size: 28px;
+  padding: 20px;
+  background-color: #35636e;
+  color: white;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#last-launched-contract {
+  display: block;
+  margin-right: 20px;
+}
+
+#last-launched-contract h5 {
+  margin-top: 10px;
+}
+
+#main-forms {
+  display: flex;
+  justify-content: center;
+}
+
+#content {
+  display: inline-flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+#rpc-content {
+  display: flex-start;
+  flex-direction: column;
+  float: left;
+  padding: 0px 20px 20px 20px;
+}
+
+li {
+  padding-bottom: 5px;
+}
+
+#rpc h3:nth-child(2) {
+  padding-bottom: 0px;
+  padding-top: 5px;
+  margin-bottom: 5px;
+}
+
+#footer {
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+  padding-top: 20px;
+}
+
+#wallet h1 {
+  margin-top: 0px;
+}
+
+#address-input {
+  float: left;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  border: 1px solid #35636e;
+  border-radius: 3px;
+  width: 85%;
+}
+
+#rpc-input {
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  border: 1px solid #35636e;
+  border-radius: 3px;
+  width: 95%;
+}
+
+#show-balance-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #35636e;
+  border-radius: 3px;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #35636e;
+  transition: background 0.3s, color 0.3s;
+}
+
+#show-balance-button:hover {
+  background: #35636e;
+  color: white;
+}
+
+#show-balance-button:disabled {
+  background-color: #aaa;
+  color: white !important;
+  border: none !important;
+}
+
+#balance-output {
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 48px;
+  color: #333;
+}
+
+#error-message {
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #c73d18;
+  background: rgba(199, 61, 24, 0.3);
+}
+
+.taquito-logo {
+  background-image: url("/assets/built-with-taquito.png");
+}
+
+.show {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
