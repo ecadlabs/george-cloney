@@ -152,7 +152,7 @@ const App: React.FC = (): ReactElement => {
         )}
       </div>
       <div id="wallet">
-        <h1>Taquito Contract Tool</h1>
+        <h1>Contract Cloner</h1>
         <SnackbarGroup
           launchNetwork={launchNetwork}
           txnAddress={txnAddress}
