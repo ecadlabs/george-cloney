@@ -8,9 +8,10 @@ const SnackbarGroup = (props: SnackbarGroupProps) => {
   return (
     <>
       {txnAddress && !loadingMessage && (
-        <Snackbar snackbar={snackbar} closeSnackbar={closeSnackbar} type="success">
+        <Snackbar duration={5000} snackbar={snackbar} closeSnackbar={closeSnackbar} type="success">
           <>
             Launched new contract at {txnAddress}
+            <br />
             <a target="_blank" rel="noopener noreferrer" href={`https://${launchNetwork}.tzstats.com/${txnAddress}`}>
               View on TzStats
             </a>
