@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "./styles.css";
 
-const Navbar = () => {
+const Navbar = (): ReactElement => {
   return (
     <div className="navbar">
       <div className="left-container">

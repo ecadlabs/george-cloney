@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Snackbar from "../Snackbar/Snackbar";
 import { SnackbarGroupProps } from "./types";
 
-const SnackbarGroup = (props: SnackbarGroupProps) => {
+const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
   const { txnAddress, snackbar, closeSnackbar, error, loading, loadingMessage, launchNetwork } = props;
 
   return (

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useForm } from "react-hook-form";
 import { ProviderProps } from "./types";
 import "../../App.css";
 
-const Provider: any = (props: ProviderProps) => {
+const Provider: any = (props: ProviderProps): ReactElement => {
   const { register, handleSubmit } = useForm();
   const [providerMsg, setProviderMsg] = useState("");
   const [snackbar, showSnackbar] = useState(false);

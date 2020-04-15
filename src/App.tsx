@@ -99,6 +99,7 @@ const App: React.FC = (): ReactElement => {
   };
 
   const handleContractCodeSubmit = async (): Promise<any> => {
+    // Grab contracts code from the blockchain and add code to the editors
     setLoading(true);
     setLoadingMessage("Loading contract code...");
     showSnackbar(true);
@@ -114,21 +115,21 @@ const App: React.FC = (): ReactElement => {
   };
 
   const closeSnackbar = (): void => {
+    // Remove snackbar
     showSnackbar(false);
   };
 
   const updateProvider = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+    // Update provider node to use to push/pull data from the blockchain
     setProvider(event.target.value);
   };
 
   const updateContractAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    // Update the contract address that we'll be pulling data from
     setContractAddress(event.target.value);
   };
 
   const updateSigner = async (event: React.MouseEvent<HTMLInputElement>): Promise<any> => {
-    // Do TezBridge signer setup
-    if (event.currentTarget.value === "tezbridge") {
-    }
     setSigner(event.currentTarget.value);
   };
 
