@@ -69,7 +69,7 @@
 }
 
 #contract-launch-form input:disabled {
-  background-color: #aaa;
-  color: white !important;
-  border: none !important;
+  background-color: white;
+  color: #aaa !important;
+  border: 1px solid #aaa !important;
 }
