@@ -146,7 +146,7 @@ const App: React.FC = (): ReactElement => {
         {lastLaunchedContract && <LastLaunchedContract lastLaunchedContract={lastLaunchedContract} />}
       </div>
       <div id="wallet">
-        <h1>Contract Cloner</h1>
+        <h1>The George Cloney</h1>
         <SnackbarGroup
           launchNetwork={launchNetwork}
           txnAddress={txnAddress}

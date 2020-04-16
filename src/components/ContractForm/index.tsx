@@ -9,7 +9,6 @@ const ContractForm = (props: ContractFormProps): ReactElement => {
   const { register, handleSubmit } = useForm();
 
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
-
   const options = [
     { value: "mainnet", label: "Mainnet" },
     { value: "carthagenet", label: "Carthagenet" },
