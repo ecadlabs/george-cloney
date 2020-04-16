@@ -36,7 +36,7 @@ const ContractForm = (props: ContractFormProps): ReactElement => {
                 ref={register}
               />
               <br />
-              <input disabled={loading ? true : false} id="show-balance-button" type="submit" />
+              {!loading && <input id="show-balance-button" type="submit" />}
             </form>
           </div>
         </div>

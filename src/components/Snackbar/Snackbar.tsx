@@ -5,12 +5,19 @@ import { SnackbarProps } from "./types";
 
 const SnackbarComponent = (props: SnackbarProps): ReactElement => {
   const { snackbar, closeSnackbar, type, children, duration } = props;
+
+  const handleClose = (e: any, reason: string) => {
+    if (reason !== "clickaway") {
+      closeSnackbar();
+    }
+  };
+
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       open={snackbar}
       autoHideDuration={duration === "none" ? null : 5000}
-      onClose={closeSnackbar}
+      onClose={handleClose}
     >
       <MuiAlert elevation={6} variant="filled" onClose={closeSnackbar} severity={type}>
         {children}
