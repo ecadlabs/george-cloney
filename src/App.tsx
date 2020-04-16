@@ -2,11 +2,12 @@ import React, { useState, ReactElement, useEffect } from "react";
 import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { split as SplitEditor } from "react-ace";
-import Provider from "./components/Provider/Provider";
-import ContractForm from "./components/ContractForm/ContractForm";
-import LaunchForm from "./components/LaunchForm/LaunchForm";
-import SnackbarGroup from "./components/SnackbarGroup/SnackbarGroup";
-import Navbar from "./components/Navbar/Navbar";
+import Provider from "./components/Provider";
+import ContractForm from "./components/ContractForm";
+import LaunchForm from "./components/LaunchForm";
+import SnackbarGroup from "./components/SnackbarGroup";
+import LastLaunchedContract from "./components/LastLaunchedContract";
+import Navbar from "./components/Navbar";
 import setSignerMethod from "./utils/set-signer-method";
 import "./App.css";
 import "ace-builds/src-noconflict/mode-json";
@@ -75,7 +76,7 @@ const App: React.FC = (): ReactElement => {
       setTxnAddress,
       setError
     );
-
+    // Tezbridge is originated in setSignerMethod function
     if (signer !== "tezbridge") {
       // Originate a new contract
       Tezos.contract
@@ -130,6 +131,7 @@ const App: React.FC = (): ReactElement => {
   };
 
   const updateSigner = async (event: React.MouseEvent<HTMLInputElement>): Promise<any> => {
+    // Update the signer method
     setSigner(event.currentTarget.value);
   };
 
@@ -141,16 +143,7 @@ const App: React.FC = (): ReactElement => {
       <Navbar />
       <div id="top-header">
         <Provider loading={loading} provider={provider} updateProvider={updateProvider} />
-        {lastLaunchedContract && (
-          <>
-            <h3>
-              Last Launched Contract:
-              <div id="last-launched-contract">
-                <h5>{lastLaunchedContract}</h5>
-              </div>
-            </h3>
-          </>
-        )}
+        {lastLaunchedContract && <LastLaunchedContract lastLaunchedContract={lastLaunchedContract} />}
       </div>
       <div id="wallet">
         <h1>Contract Cloner</h1>
