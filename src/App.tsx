@@ -1,7 +1,7 @@
 import React, { useState, ReactElement, useEffect } from "react";
 import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
-import { split as SplitEditor } from "react-ace";
+import Editor from "./components/Editor";
 import Provider from "./components/Provider";
 import ContractCodeForm from "./components/ContractCodeForm";
 import LaunchContractForm from "./components/LaunchContractForm";
@@ -43,7 +43,6 @@ const App: React.FC = (): ReactElement => {
       await Tezos.setProvider({ rpc: `https://api.tez.ie/rpc/${network}` });
       setProvider(`https://api.tez.ie/rpc/${network}`);
     }
-    setProvider(network);
     setLaunchNetwork(network);
   };
 
@@ -137,11 +136,6 @@ const App: React.FC = (): ReactElement => {
     setSigner(event.currentTarget.value);
   };
 
-  const initialCodeValue = code.length > 0 ? "// Contract Code \n" + JSON.stringify(code, null, 2) : "// Contract Code";
-  const initialStorageValue = storage
-    ? "// Initial Storage Code \n" + JSON.stringify(storage, null, 2)
-    : "// Initial Storage Code ";
-
   return (
     <>
       <Navbar />
@@ -181,23 +175,7 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <div id="contract-code-editor">
-          {/* This is because of a types issue on Ace SplitEditor 
-            // @ts-ignore */}
-          <SplitEditor
-            width="1000px"
-            height="300px"
-            mode="json"
-            theme="monokai"
-            tabSize={2}
-            splits={2}
-            style={{ borderRadius: "5px", margin: "0 auto" }}
-            orientation="beside"
-            value={[initialCodeValue, initialStorageValue]}
-            name="contract-code-editor"
-            editorProps={{ $blockScrolling: true }}
-          />
-        </div>
+        <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>
   );

@@ -4,8 +4,8 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import "./styles.css";
 
-const LaunchForm = (props: LaunchFormProps): ReactElement => {
-  const { handleNetworkChange, network, handleLaunchSubmit, updateSigner, signer, loading } = props;
+const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
+  const { handleNetworkChange, network, handleLaunchSubmit, updateSigner, signer, loading, currentStep } = props;
   const { register, handleSubmit } = useForm();
 
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
@@ -20,6 +20,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement => {
     handleNetworkChange(selectedOption.value);
   };
 
+  if (currentStep !== 2) return null;
   return (
     <>
       <div id="dialog">
