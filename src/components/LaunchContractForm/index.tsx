@@ -23,7 +23,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement => {
   return (
     <>
       <div id="dialog">
-        <h2>Launch Contract</h2>
+        <h2>Originate Contract</h2>
         <Select
           name="address"
           ref={register}
@@ -36,12 +36,20 @@ const LaunchForm = (props: LaunchFormProps): ReactElement => {
           <div id="contract-launch-form">
             <form onSubmit={handleSubmit(handleLaunchSubmit)}>
               <span className="signer-toolbar">
-                <input onClick={updateSigner} value="ephemeral" id="ephemeral" type="radio" />
-                <label
-                  className={signer === "ephemeral" ? "signer-button-selected" : "signer-button"}
-                  htmlFor="ephemeral"
-                >
-                  Ephemeral Key
+                {network !== "mainnet" && (
+                  <>
+                    <input onClick={updateSigner} value="ephemeral" id="ephemeral" type="radio" />
+                    <label
+                      className={signer === "ephemeral" ? "signer-button-selected" : "signer-button"}
+                      htmlFor="ephemeral"
+                    >
+                      Ephemeral Key
+                    </label>
+                  </>
+                )}
+                <input onClick={updateSigner} value="beacon" id="beacon" type="radio" />
+                <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
+                  Beacon
                 </label>
                 <input onClick={updateSigner} value="tezbridge" id="tezbridge" type="radio" />
                 <label
@@ -49,10 +57,6 @@ const LaunchForm = (props: LaunchFormProps): ReactElement => {
                   htmlFor="tezbridge"
                 >
                   TezBridge
-                </label>
-                <input onClick={updateSigner} value="beacon" id="beacon" type="radio" />
-                <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
-                  Beacon
                 </label>
               </span>
               <input disabled={loading ? true : false} id="show-balance-button" type="submit" />

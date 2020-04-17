@@ -3,8 +3,8 @@ import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { split as SplitEditor } from "react-ace";
 import Provider from "./components/Provider";
-import ContractForm from "./components/ContractForm";
-import LaunchForm from "./components/LaunchForm";
+import ContractCodeForm from "./components/ContractCodeForm";
+import LaunchContractForm from "./components/LaunchContractForm";
 import SnackbarGroup from "./components/SnackbarGroup";
 import LastLaunchedContract from "./components/LastLaunchedContract";
 import Navbar from "./components/Navbar";
@@ -14,18 +14,19 @@ import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 
 const App: React.FC = (): ReactElement => {
-  const [txnAddress, setTxnAddress] = useState("");
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingMessage, setLoadingMessage] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [snackbar, showSnackbar] = useState<boolean>(false);
+  const [signer, setSigner] = useState<string>("ephemeral");
+  const [provider, setProvider] = useState<string>("");
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
   const [launchNetwork, setLaunchNetwork] = useState<string>("carthagenet");
   const [contractNetwork, setContractNetwork] = useState<string>("carthagenet");
   const [contractAddress, setContractAddress] = useState<string>("");
-  const [signer, setSigner] = useState<string>("ephemeral");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [loadingMessage, setLoadingMessage] = useState<string>("");
-  const [provider, setProvider] = useState<string>("");
-  const [error, setError] = useState<string>("");
-  const [snackbar, showSnackbar] = useState<boolean>(false);
+  const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastLaunchedContract, setLastLaunchedContract] = useState<string>("");
 
   useEffect(() => {
@@ -95,7 +96,8 @@ const App: React.FC = (): ReactElement => {
           setLoadingMessage("");
           setTxnAddress(contract.address);
           showSnackbar(true);
-        });
+        })
+        .catch((e) => setError(e));
     }
   };
 
@@ -136,7 +138,9 @@ const App: React.FC = (): ReactElement => {
   };
 
   const initialCodeValue = code.length > 0 ? "// Contract Code \n" + JSON.stringify(code, null, 2) : "// Contract Code";
-  const initialStorageValue = storage ? "// Storage Code \n" + JSON.stringify(storage, null, 2) : "// Storage Code ";
+  const initialStorageValue = storage
+    ? "// Initial Storage Code \n" + JSON.stringify(storage, null, 2)
+    : "// Initial Storage Code ";
 
   return (
     <>
@@ -157,14 +161,18 @@ const App: React.FC = (): ReactElement => {
           loadingMessage={loadingMessage}
         />
         <div id="main-forms">
-          <ContractForm
+          <ContractCodeForm
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
             loading={loading}
             handleContractSubmit={handleContractCodeSubmit}
             updateContractAddress={updateContractAddress}
             handleNetworkChange={handleContractNetworkChange}
             network={contractNetwork}
           />
-          <LaunchForm
+          <LaunchContractForm
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
             loading={loading}
             signer={signer}
             updateSigner={updateSigner}
