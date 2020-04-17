@@ -157,7 +157,6 @@ const App: React.FC = (): ReactElement => {
         <div id="main-forms">
           <ContractCodeForm
             currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
             loading={loading}
             handleContractSubmit={handleContractCodeSubmit}
             updateContractAddress={updateContractAddress}
@@ -175,7 +174,7 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <Editor currentStep={currentStep} code={code} storage={storage} />
+        <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>
   );
