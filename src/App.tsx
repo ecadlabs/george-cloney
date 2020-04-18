@@ -4,7 +4,8 @@ import { MichelsonV1Expression } from "@taquito/rpc";
 import Editor from "./components/Editor";
 import Provider from "./components/Provider";
 import ContractCodeForm from "./components/ContractCodeForm";
-import LaunchContractForm from "./components/LaunchContractForm";
+import LaunchContractForm from "./components/OriginateContractForm";
+import Signer from "./components/Signer";
 import SnackbarGroup from "./components/SnackbarGroup";
 import LastLaunchedContract from "./components/LastLaunchedContract";
 import Navbar from "./components/Navbar";
@@ -163,6 +164,7 @@ const App: React.FC = (): ReactElement => {
             handleNetworkChange={handleContractNetworkChange}
             network={contractNetwork}
           />
+          <Signer network={launchNetwork} signer={signer} updateSigner={updateSigner} currentStep={currentStep} />
           <LaunchContractForm
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}

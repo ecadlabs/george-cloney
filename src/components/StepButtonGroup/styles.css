@@ -2,3 +2,8 @@
   width: 400px;
   margin: 0 auto;
 }
+
+#step-buttons {
+  display: flex;
+  justify-content: space-between;
+}

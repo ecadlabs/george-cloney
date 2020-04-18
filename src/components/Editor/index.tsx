@@ -14,23 +14,25 @@ const Editor = (props: EditorProps) => {
   return (
     <>
       <StepButtonGroup currentStep={currentStep} setCurrentStep={setCurrentStep} />
-      <div id="contract-code-editor">
-        {/* This is because of a types issue on Ace SplitEditor 
+      {currentStep === 1 && (
+        <div id="contract-code-editor">
+          {/* This is because of a types issue on Ace SplitEditor 
             // @ts-ignore */}
-        <SplitEditor
-          width="700px"
-          height="300px"
-          mode="json"
-          theme="monokai"
-          tabSize={2}
-          splits={2}
-          style={{ borderRadius: "5px", margin: "0 auto" }}
-          orientation="beside"
-          value={[initialCodeValue, initialStorageValue]}
-          name="contract-code-editor"
-          editorProps={{ $blockScrolling: true }}
-        />
-      </div>
+          <SplitEditor
+            width="700px"
+            height="300px"
+            mode="json"
+            theme="monokai"
+            tabSize={2}
+            splits={2}
+            style={{ borderRadius: "5px", margin: "0 auto" }}
+            orientation="beside"
+            value={[initialCodeValue, initialStorageValue]}
+            name="contract-code-editor"
+            editorProps={{ $blockScrolling: true }}
+          />
+        </div>
+      )}
     </>
   );
 };
