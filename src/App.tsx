@@ -64,7 +64,10 @@ const App: React.FC = (): ReactElement => {
     // Make sure provider is updated to reflect launch network in the UI
     setProvider(`https://api.tez.ie/rpc/${launchNetwork}`);
     // Ensure provider is set to Launch Contract div's desired network
-    await Tezos.setProvider({ rpc: `https://api.tez.ie/rpc/${launchNetwork}` });
+    await Tezos.setProvider({
+      config: { confirmationPollingTimeoutSecond: 600 },
+      rpc: `https://api.tez.ie/rpc/${launchNetwork}`,
+    });
     await setSignerMethod(
       signer,
       contractNetwork,
