@@ -15,6 +15,8 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
     { value: "sandbox", label: "Sandbox" },
   ];
 
+  console.log(network);
+
   const handleChange = (selectedOption: any) => {
     handleNetworkChange(selectedOption.value);
   };

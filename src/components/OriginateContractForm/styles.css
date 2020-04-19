@@ -50,6 +50,8 @@
 
 .signer-toolbar {
   display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 .signer-button-selected {
