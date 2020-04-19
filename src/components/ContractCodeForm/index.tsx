@@ -5,7 +5,15 @@ import { useForm } from "react-hook-form";
 import "./styles.css";
 
 const ContractForm = (props: ContractFormProps): ReactElement | null => {
-  const { handleNetworkChange, network, updateContractAddress, handleContractSubmit, loading, currentStep } = props;
+  const {
+    handleNetworkChange,
+    network,
+    updateContractAddress,
+    handleContractSubmit,
+    loading,
+    currentStep,
+    contractAddress,
+  } = props;
   const { register, handleSubmit } = useForm();
 
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
@@ -23,9 +31,11 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
   return (
     <>
       <div id="dialog">
-        <h2>Get Contract Code</h2>
+        <h2>Lookup Contract Code</h2>
+        <label id="react-select-label">Choose Network</label>
         <Select className="network-select" options={options} value={selectValue} onChange={handleChange} />
         <div id="content">
+          <label id="react-select-lookup-label">Enter Contract Address</label>
           <div id="contract-code-form">
             <form onSubmit={handleSubmit(handleContractSubmit)}>
               <input
@@ -36,7 +46,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
                 ref={register}
               />
               <br />
-              <input disabled={loading ? true : false} id="show-balance-button" type="submit" />
+              <input disabled={loading || !contractAddress ? true : false} id="show-balance-button" type="submit" />
             </form>
           </div>
         </div>
