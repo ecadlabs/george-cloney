@@ -3,6 +3,7 @@ import { RemoteSigner } from "@taquito/remote-signer";
 // import { BeaconWallet } from "@taquito/beacon-wallet";
 import { TezBridgeSigner } from "@taquito/tezbridge-signer";
 import { Tezos } from "@taquito/taquito";
+import { MichelsonV1Expression } from "@taquito/rpc";
 import { Dispatch, SetStateAction } from "react";
 
 const setSignerMethod = async (
@@ -47,8 +48,8 @@ const setSignerMethod = async (
       // Originate a new contract
       Tezos.contract
         .originate({
-          code: code as any,
-          init: storage as any,
+          code: code as MichelsonV1Expression[],
+          init: storage as MichelsonV1Expression,
         })
         .then((originationOp) => {
           return originationOp.contract();

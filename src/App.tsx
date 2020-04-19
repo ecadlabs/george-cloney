@@ -81,8 +81,8 @@ const App: React.FC = (): ReactElement => {
       // Originate a new contract
       Tezos.contract
         .originate({
-          code: code as any,
-          init: storage as any,
+          code: code as MichelsonV1Expression[],
+          init: storage as MichelsonV1Expression,
         })
         .then((originationOp) => {
           return originationOp.contract();
@@ -106,7 +106,6 @@ const App: React.FC = (): ReactElement => {
     setLoadingMessage("Loading contract code...");
     showSnackbar(true);
     await Tezos.setProvider({ rpc: provider });
-    await setSignerMethod(signer, contractNetwork, launchNetwork);
 
     // Call contract and get code
     const newContract = await Tezos.contract.at(contractAddress);
@@ -156,6 +155,8 @@ const App: React.FC = (): ReactElement => {
         />
         <div id="main-forms">
           <ContractCodeForm
+            code={code}
+            contractAddress={contractAddress}
             currentStep={currentStep}
             loading={loading}
             handleContractSubmit={handleContractCodeSubmit}
@@ -174,6 +175,8 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
+        <span className={code.length > 0 ? "dot active" : "dot"}></span>
+        <span className={code.length > 0 ? "dot" : "dot"}></span>
         <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>

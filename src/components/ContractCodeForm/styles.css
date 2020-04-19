@@ -16,3 +16,19 @@
   color: #aaa !important;
   border: 1px solid #aaa !important;
 }
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #776a6a;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.active {
+  opacity: 1 !important;
+  background-color: #4caf50 !important;
+}
