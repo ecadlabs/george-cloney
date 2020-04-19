@@ -112,6 +112,7 @@ const App: React.FC = (): ReactElement => {
     const newContract = await Tezos.contract.at(contractAddress);
     setCode(newContract.script.code);
     setStorage(newContract.script.storage);
+    setContractAddress("");
     setLoadingMessage("");
     setLoading(false);
   };

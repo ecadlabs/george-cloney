@@ -12,7 +12,7 @@ const Dots = (props: DotsProps): ReactElement => {
       </span>
       <span className={`${code.length > 0 ? "dot completed" : "dot"} ${currentStep === 1 ? "active" : ""}`}>1</span>
       <span
-        className={`${launchNetwork !== "Select A Network..." && signer ? "dot active" : "dot"} ${
+        className={`${launchNetwork !== "Select A Network..." && signer ? "dot completed" : "dot"} ${
           currentStep === 2 ? "active" : ""
         }`}
       >
