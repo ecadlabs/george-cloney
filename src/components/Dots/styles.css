@@ -2,6 +2,11 @@
   margin-bottom: 12px;
 }
 
+.completed {
+  background-color: #4caf50 !important;
+  opacity: 0.5;
+}
+
 .dot {
   color: white;
   padding-top: 5px;
@@ -20,5 +25,4 @@
 
 .active {
   opacity: 1 !important;
-  background-color: #4caf50 !important;
 }

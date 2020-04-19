@@ -175,7 +175,7 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <Dots signer={signer} code={code} launchNetwork={launchNetwork} />
+        <Dots currentStep={currentStep} signer={signer} code={code} launchNetwork={launchNetwork} />
         <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>

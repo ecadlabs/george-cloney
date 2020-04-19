@@ -4,4 +4,5 @@ export interface DotsProps {
   code: MichelsonV1Expression[];
   launchNetwork: string;
   signer: string;
+  currentStep: number;
 }
