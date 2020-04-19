@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import "./styles.css";
 
 const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
-  const { signer, updateSigner, handleNetworkChange, network, handleLaunchSubmit, loading, currentStep } = props;
+  const { updateSigner, handleNetworkChange, network, handleLaunchSubmit, loading, currentStep } = props;
   const { register, handleSubmit } = useForm();
   const [chosenSigner, setChosenSigner] = useState<string>("");
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
