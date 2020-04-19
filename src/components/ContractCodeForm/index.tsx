@@ -46,7 +46,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
                 ref={register}
               />
               <br />
-              <input disabled={loading || !contractAddress ? true : false} id="show-balance-button" type="submit" />
+              <input disabled={!contractAddress ? true : false} id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`} type="submit" />
             </form>
           </div>
         </div>

@@ -175,8 +175,14 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <Dots currentStep={currentStep} signer={signer} code={code} launchNetwork={launchNetwork} />
-        <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
+        <Dots
+          setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
+          signer={signer}
+          code={code}
+          launchNetwork={launchNetwork}
+        />
+        <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>
   );
