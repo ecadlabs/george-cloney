@@ -25,6 +25,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
     <>
       <div id="dialog">
         <h2>Originate Contract</h2>
+        <label id="react-select-label">Choose Network</label>
         <Select
           name="address"
           ref={register}
@@ -33,6 +34,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
           value={selectValue}
           onChange={handleChange}
         />
+        <label id="react-select-signer-label">Choose Signer</label>
         <label className="signer-toolbar">
           {network !== "mainnet" && (
             <>

@@ -1,3 +1,20 @@
+#dialog #react-select-label {
+  display: flex;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#react-select-signer-label {
+  display: flex;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  padding-top: 15px;
+}
+
 .network-select {
   width: 91%;
   padding-left: 20px;
@@ -50,7 +67,6 @@
 
 .signer-toolbar {
   display: flex;
-  margin-top: 10px;
   margin-left: 20px;
 }
 
