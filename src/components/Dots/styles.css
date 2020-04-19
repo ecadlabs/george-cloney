@@ -1,0 +1,24 @@
+.dots-container {
+  margin-bottom: 12px;
+}
+
+.dot {
+  color: white;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-left: 3px;
+  height: 25px;
+  width: 25px;
+  margin: 0 5px;
+  background-color: #776a6a;
+  border: none;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.active {
+  opacity: 1 !important;
+  background-color: #4caf50 !important;
+}

@@ -7,6 +7,7 @@ import ContractCodeForm from "./components/ContractCodeForm";
 import LaunchContractForm from "./components/OriginateContractForm";
 import SnackbarGroup from "./components/SnackbarGroup";
 import LastLaunchedContract from "./components/LastLaunchedContract";
+import Dots from "./components/Dots";
 import Navbar from "./components/Navbar";
 import setSignerMethod from "./utils/set-signer-method";
 import "./App.css";
@@ -174,8 +175,7 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <span className={code.length > 0 ? "dot active" : "dot"}></span>
-        <span className={launchNetwork !== "Select A Network..." && signer ? "dot active" : "dot"}></span>
+        <Dots signer={signer} code={code} launchNetwork={launchNetwork} />
         <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>
