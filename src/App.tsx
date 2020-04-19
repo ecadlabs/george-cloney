@@ -155,7 +155,6 @@ const App: React.FC = (): ReactElement => {
         />
         <div id="main-forms">
           <ContractCodeForm
-            code={code}
             contractAddress={contractAddress}
             currentStep={currentStep}
             loading={loading}

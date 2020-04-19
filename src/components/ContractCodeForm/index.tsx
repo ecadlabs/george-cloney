@@ -5,15 +5,7 @@ import { useForm } from "react-hook-form";
 import "./styles.css";
 
 const ContractForm = (props: ContractFormProps): ReactElement | null => {
-  const {
-    handleNetworkChange,
-    network,
-    code,
-    updateContractAddress,
-    handleContractSubmit,
-    loading,
-    currentStep,
-  } = props;
+  const { handleNetworkChange, network, updateContractAddress, handleContractSubmit, loading, currentStep } = props;
   const { register, handleSubmit } = useForm();
 
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
