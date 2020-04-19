@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import { DotsProps } from "./types";
+import { WizardControlsProps } from "./types";
 import "./styles.css";
 
-const Dots = (props: DotsProps): ReactElement => {
+const Dots = (props: WizardControlsProps): ReactElement => {
   const { code, launchNetwork, signer, currentStep, setCurrentStep } = props;
 
   return (
@@ -21,7 +21,7 @@ const Dots = (props: DotsProps): ReactElement => {
       <button
         onClick={() => setCurrentStep(2)}
         disabled={code.length > 0 ? false : true}
-        className={`${currentStep === 2 ? "hide-step" : "next-step"}`}
+        className={`${currentStep === 2 || code.length === 0 ? "hide-step" : "next-step"}`}
       >
         Next Step
       </button>

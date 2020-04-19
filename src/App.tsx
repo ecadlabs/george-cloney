@@ -7,7 +7,7 @@ import ContractCodeForm from "./components/ContractCodeForm";
 import LaunchContractForm from "./components/OriginateContractForm";
 import SnackbarGroup from "./components/SnackbarGroup";
 import LastLaunchedContract from "./components/LastLaunchedContract";
-import Dots from "./components/Dots";
+import WizardControls from "./components/WizardControls";
 import Navbar from "./components/Navbar";
 import setSignerMethod from "./utils/set-signer-method";
 import "./App.css";
@@ -179,7 +179,7 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <Dots
+        <WizardControls
           setCurrentStep={setCurrentStep}
           currentStep={currentStep}
           signer={signer}
