@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { LaunchFormProps } from "./types";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
@@ -7,7 +7,7 @@ import "./styles.css";
 const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
   const { signer, updateSigner, handleNetworkChange, network, handleLaunchSubmit, loading, currentStep } = props;
   const { register, handleSubmit } = useForm();
-
+  const [chosenSigner, setChosenSigner] = useState<string>("");
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
 
   const options = [
@@ -18,6 +18,11 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
 
   const handleChange = (selectedOption: any) => {
     handleNetworkChange(selectedOption.value);
+  };
+
+  const locallyUpdateSigner = (e: React.MouseEvent<HTMLInputElement>) => {
+    setChosenSigner(e.currentTarget.value);
+    updateSigner(e);
   };
 
   if (currentStep !== 2) return null;
@@ -38,21 +43,24 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
         <label className="signer-toolbar">
           {network !== "mainnet" && (
             <>
-              <input onClick={updateSigner} value="ephemeral" id="ephemeral" type="radio" />
+              <input onClick={locallyUpdateSigner} value="ephemeral" id="ephemeral" type="radio" />
               <label
-                className={signer === "ephemeral" ? "signer-button-selected" : "signer-button"}
+                className={chosenSigner === "ephemeral" ? "signer-button-selected" : "signer-button"}
                 htmlFor="ephemeral"
               >
                 Ephemeral Key
               </label>
             </>
           )}
-          <input onClick={updateSigner} value="beacon" id="beacon" type="radio" />
-          <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
+          <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
+          <label className={chosenSigner === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
             Beacon
           </label>
-          <input onClick={updateSigner} value="tezbridge" id="tezbridge" type="radio" />
-          <label className={signer === "tezbridge" ? "signer-button-selected" : "signer-button"} htmlFor="tezbridge">
+          <input onClick={locallyUpdateSigner} value="tezbridge" id="tezbridge" type="radio" />
+          <label
+            className={chosenSigner === "tezbridge" ? "signer-button-selected" : "signer-button"}
+            htmlFor="tezbridge"
+          >
             TezBridge
           </label>
         </label>
@@ -60,7 +68,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
           <div id="contract-launch-form">
             <form onSubmit={handleSubmit(handleLaunchSubmit)}>
               <input
-                disabled={loading || network === "Select A Network..." ? true : false}
+                disabled={loading || network === "Select A Network..." || !chosenSigner ? true : false}
                 id="show-balance-button"
                 type="submit"
               />

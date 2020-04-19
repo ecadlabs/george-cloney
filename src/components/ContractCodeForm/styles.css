@@ -18,9 +18,3 @@
 .network-select > div > div > div {
   color: black;
 }
-
-#contract-code-form input:disabled {
-  background-color: white;
-  color: #aaa !important;
-  border: 1px solid #aaa !important;
-}

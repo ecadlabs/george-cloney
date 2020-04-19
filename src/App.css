@@ -162,8 +162,12 @@ li {
   transition: opacity 0.3s, color 0.3s;
 }
 
-#show-balance-button:disabled {
-  opacity: 0.6;
+#show-balance-button:disabled,
+#show-balance-button-hovered:disabled {
+  opacity: 0.6 !important;
+  background-color: #4caf50 !important;
+  border: 1px solid #4caf50 !important;
+  color: white !important;
 }
 
 #balance-output {

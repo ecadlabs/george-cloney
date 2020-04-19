@@ -85,9 +85,3 @@
   color: white !important;
   transition: background 0.3s, color 0.3s;
 }
-
-#contract-launch-form input:disabled {
-  background-color: white;
-  color: #aaa !important;
-  border: 1px solid #aaa !important;
-}

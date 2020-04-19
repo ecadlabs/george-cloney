@@ -50,7 +50,7 @@ const Provider: any = (props: ProviderProps): ReactElement => {
                 ref={register}
               />
               <br />
-              <input disabled={loading ? true : false} type="submit" />
+              <input id="show-balance-button" disabled={loading ? true : false} type="submit" />
             </form>
           </div>
         </div>
