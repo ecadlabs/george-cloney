@@ -14,17 +14,17 @@ import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 
 const App: React.FC = (): ReactElement => {
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [currentStep, setCurrentStep] = useState<number>(2);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingMessage, setLoadingMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [snackbar, showSnackbar] = useState<boolean>(false);
-  const [signer, setSigner] = useState<string>("ephemeral");
+  const [signer, setSigner] = useState<string>("");
   const [provider, setProvider] = useState<string>("");
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
-  const [launchNetwork, setLaunchNetwork] = useState<string>("carthagenet");
-  const [contractNetwork, setContractNetwork] = useState<string>("carthagenet");
+  const [launchNetwork, setLaunchNetwork] = useState<string>("Select A Network...");
+  const [contractNetwork, setContractNetwork] = useState<string>("Select A Network...");
   const [contractAddress, setContractAddress] = useState<string>("");
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastLaunchedContract, setLastLaunchedContract] = useState<string>("");
@@ -175,7 +175,7 @@ const App: React.FC = (): ReactElement => {
           />
         </div>
         <span className={code.length > 0 ? "dot active" : "dot"}></span>
-        <span className={code.length > 0 ? "dot" : "dot"}></span>
+        <span className={launchNetwork !== "Select A Network..." && signer ? "dot active" : "dot"}></span>
         <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>

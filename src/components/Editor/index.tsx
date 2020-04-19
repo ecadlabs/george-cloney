@@ -14,7 +14,6 @@ const Editor = (props: EditorProps): ReactElement | null => {
   return (
     <>
       <div id="contract-code-editor">
-        <button></button>
         {/* This is because of a types issue on Ace SplitEditor 
             // @ts-ignore */}
         <SplitEditor
@@ -31,7 +30,6 @@ const Editor = (props: EditorProps): ReactElement | null => {
           editorProps={{ $blockScrolling: true }}
         />
       </div>
-      )}
     </>
   );
 };

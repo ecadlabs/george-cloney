@@ -1,0 +1,14 @@
+@media only screen and (max-width: 774px) {
+  .last-launched-contract-div {
+    display: none;
+  }
+}
+
+#last-launched-contract {
+  display: block;
+  margin-right: 20px;
+}
+
+#last-launched-contract h5 {
+  margin-top: 10px;
+}
