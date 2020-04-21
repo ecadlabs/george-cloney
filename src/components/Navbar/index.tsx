@@ -6,7 +6,7 @@ const Navbar = (): ReactElement => {
     <div className="navbar">
       <div className="left-container">
         <a href="https://github.com/ecadlabs/taquito">
-          <img height="45" width="150" alt="Taquito logo" src="taquito.png" />
+          <img height="45" width="150" alt="Taquito logo" src="george-cloney.png" />
         </a>
       </div>
       <div className="right-container">
