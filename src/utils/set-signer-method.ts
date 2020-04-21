@@ -16,7 +16,7 @@ const setSignerMethod = async (
   showSnackbar?: Dispatch<SetStateAction<boolean>>,
   setLoadingMessage?: Dispatch<SetStateAction<string>>,
   setTxnAddress?: Dispatch<SetStateAction<string>>,
-  setError?: Dispatch<SetStateAction<string>>
+  handleError?: (error: any) => void
 ) => {
   switch (signer) {
     case "ephemeral":
@@ -36,7 +36,7 @@ const setSignerMethod = async (
         );
         await Tezos.setSignerProvider(signer);
       } catch (e) {
-        setError && setError(e.message);
+        handleError && handleError(e.message);
       }
       break;
 

@@ -38,6 +38,14 @@ const App: React.FC = (): ReactElement => {
     setLastLaunchedContract(lastLaunchedContract);
   }, [txnAddress]);
 
+  const handleError = (error: any): void => {
+    setLoading(false);
+    showSnackbar(false);
+    setLoadingMessage("");
+    setError(error?.message ?? error);
+    showSnackbar(true);
+  };
+
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {
     // Empty provider if network is sandbox so that user can provide a local node address
     if (network !== "sandbox") {
@@ -65,7 +73,7 @@ const App: React.FC = (): ReactElement => {
     setProvider(`https://api.tez.ie/rpc/${launchNetwork}`);
     // Ensure provider is set to Launch Contract div's desired network
     await Tezos.setProvider({
-      config: { confirmationPollingTimeoutSecond: 600 },
+      config: { confirmationPollingTimeoutSecond: 60 },
       rpc: `https://api.tez.ie/rpc/${launchNetwork}`,
     });
     await setSignerMethod(
@@ -78,7 +86,7 @@ const App: React.FC = (): ReactElement => {
       showSnackbar,
       setLoadingMessage,
       setTxnAddress,
-      setError
+      handleError
     );
     // Tezbridge is originated in setSignerMethod function
     if (signer !== "tezbridge") {
@@ -100,7 +108,13 @@ const App: React.FC = (): ReactElement => {
           setTxnAddress(contract.address);
           showSnackbar(true);
         })
-        .catch((e) => setError(e));
+        .catch((error) => {
+          setLoading(false);
+          showSnackbar(false);
+          setLoadingMessage("");
+          setError(error?.message ?? error);
+          showSnackbar(true);
+        });
     }
   };
 
