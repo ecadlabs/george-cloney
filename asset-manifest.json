@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/george-cloney/static/css/main.f21f1ebc.chunk.css",
-    "main.js": "/george-cloney/static/js/main.ce363e7f.chunk.js",
-    "main.js.map": "/george-cloney/static/js/main.ce363e7f.chunk.js.map",
+    "main.css": "/george-cloney/static/css/main.f3b9d8eb.chunk.css",
+    "main.js": "/george-cloney/static/js/main.b21e20bf.chunk.js",
+    "main.js.map": "/george-cloney/static/js/main.b21e20bf.chunk.js.map",
     "runtime-main.js": "/george-cloney/static/js/runtime-main.bea24db2.js",
     "runtime-main.js.map": "/george-cloney/static/js/runtime-main.bea24db2.js.map",
     "static/js/2.4e963799.chunk.js": "/george-cloney/static/js/2.4e963799.chunk.js",
     "static/js/2.4e963799.chunk.js.map": "/george-cloney/static/js/2.4e963799.chunk.js.map",
     "index.html": "/george-cloney/index.html",
-    "precache-manifest.3d0a886ee03dcb0acefc584660e98db1.js": "/george-cloney/precache-manifest.3d0a886ee03dcb0acefc584660e98db1.js",
+    "precache-manifest.01a3128b5a37ebc9b461b9912eec39a1.js": "/george-cloney/precache-manifest.01a3128b5a37ebc9b461b9912eec39a1.js",
     "service-worker.js": "/george-cloney/service-worker.js",
-    "static/css/main.f21f1ebc.chunk.css.map": "/george-cloney/static/css/main.f21f1ebc.chunk.css.map",
+    "static/css/main.f3b9d8eb.chunk.css.map": "/george-cloney/static/css/main.f3b9d8eb.chunk.css.map",
     "static/js/2.4e963799.chunk.js.LICENSE.txt": "/george-cloney/static/js/2.4e963799.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.bea24db2.js",
     "static/js/2.4e963799.chunk.js",
-    "static/css/main.f21f1ebc.chunk.css",
-    "static/js/main.ce363e7f.chunk.js"
+    "static/css/main.f3b9d8eb.chunk.css",
+    "static/js/main.b21e20bf.chunk.js"
   ]
 }
