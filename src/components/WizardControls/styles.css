@@ -84,3 +84,22 @@
     margin-left: 0px;
   }
 }
+
+@media only screen and (max-width: 350px) {
+  .wizard-container {
+    width: 300px;
+  }
+  .wizard-steps div {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 14px;
+  }
+  .wizard-steps div:nth-child(1) {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .wizard-steps div:nth-child(4) {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+}
