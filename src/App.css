@@ -23,6 +23,12 @@ h1 {
   text-align: center;
 }
 
+@media only screen and (max-width: 650px) {
+  .title-group {
+    width: 450px;
+  }
+}
+
 #rpc ul {
   padding-left: 0px;
 }

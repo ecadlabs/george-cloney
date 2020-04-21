@@ -1,4 +1,4 @@
-.dots-container {
+.wizard-container {
   margin: 0 auto;
   margin-bottom: 12px;
   width: 550px;
@@ -9,7 +9,7 @@
   opacity: 0.5;
 }
 
-.dot {
+.step {
   color: white;
   padding-top: 5px;
   padding-right: 3px;
@@ -26,7 +26,7 @@
   transition: all 0.1s ease-in-out;
 }
 
-.dot:hover {
+.step:hover {
   opacity: 1;
   box-shadow: 0 5px 15px #776a6a;
 }
@@ -46,4 +46,22 @@
   width: 120px;
   margin-right: 20px;
   margin-left: 20px;
+}
+
+@media only screen and (max-width: 560px) {
+  .wizard-container {
+    width: 480px;
+  }
+  .wizard-steps div {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .wizard-steps div:nth-child(1) {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .wizard-steps div:nth-child(4) {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
 }
