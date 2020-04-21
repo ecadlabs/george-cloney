@@ -6,7 +6,7 @@ import ContractCodeForm from "./components/ContractCodeForm";
 import ContractOriginationForm from "./components/ContractOriginationForm";
 import ContractResultForm from "./components/ContractResultForm";
 import SnackbarGroup from "./components/SnackbarGroup";
-import LastLaunchedContract from "./components/LastLaunchedContract";
+import LastOriginatedContract from "./components/LastOriginatedContract";
 import WizardControls from "./components/WizardControls";
 import Navbar from "./components/Navbar";
 import setSignerMethod from "./utils/set-signer-method";
@@ -153,9 +153,6 @@ const App: React.FC = (): ReactElement => {
   return (
     <>
       <Navbar />
-      <div className="top-header">
-        {lastLaunchedContract && <LastLaunchedContract lastLaunchedContract={lastLaunchedContract} />}
-      </div>
       <div id="wallet">
         <div className="title-group">
           <h1>The George Cloney</h1>
@@ -200,6 +197,9 @@ const App: React.FC = (): ReactElement => {
           />
           <ContractResultForm txnAddress={txnAddress} currentStep={currentStep} launchNetwork={launchNetwork} />
         </div>
+        {lastLaunchedContract && (
+          <LastOriginatedContract launchNetwork={launchNetwork} lastLaunchedContract={lastLaunchedContract} />
+        )}
         <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
       <div className="built-with-taquito-logo">

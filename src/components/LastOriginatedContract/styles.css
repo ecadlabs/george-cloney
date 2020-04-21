@@ -1,0 +1,14 @@
+.last-originated-contract-div button {
+  border: 1px solid #35636e;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 3px;
+  font-size: 11px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  text-transform: uppercase;
+  color: white;
+  background: #35636e;
+  margin-top: 20px;
+}

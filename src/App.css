@@ -15,6 +15,7 @@ h1 {
   width: 630px;
   margin: 0 auto;
   line-height: 2em;
+  margin-top: 70px;
 }
 
 #wallet {
@@ -56,13 +57,6 @@ h1 {
   padding: 20px;
   background-color: #35636e;
   color: white;
-}
-
-.top-header {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 15px;
-  margin-left: 20px;
 }
 
 #main-forms {
