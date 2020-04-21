@@ -33,12 +33,11 @@ h1 {
   display: inline-flex;
   flex-direction: column;
   float: left;
-  margin-left: 20px;
   width: 400px;
   height: 275px;
   border: 1px solid #35636e;
   border-radius: 3px;
-  margin: 20px;
+  margin: 0 20px 20px 20px;
 }
 
 #rpc-dialog {
