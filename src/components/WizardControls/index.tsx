@@ -3,7 +3,7 @@ import { WizardControlsProps } from "./types";
 import "./styles.css";
 
 const Dots = (props: WizardControlsProps): ReactElement => {
-  const { code, signer, currentStep, setCurrentStep } = props;
+  const { code, signer, currentStep, setCurrentStep, txnAddress } = props;
 
   const handleStepClick = (e: any) => {
     switch (e.target.innerText) {
@@ -42,7 +42,7 @@ const Dots = (props: WizardControlsProps): ReactElement => {
           Deploy New Contract
         </div>
         <div onClick={handleStepClick}>
-          <span className={`${signer ? "dot completed" : "dot"} ${currentStep === 4 ? "active" : ""}`}>4</span>
+          <span className={`${txnAddress ? "dot completed" : "dot"} ${currentStep === 4 ? "active" : ""}`}>4</span>
           <br />
           View New Contract
         </div>

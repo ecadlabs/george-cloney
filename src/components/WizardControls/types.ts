@@ -5,5 +5,6 @@ export interface WizardControlsProps {
   setCurrentStep: Dispatch<SetStateAction<number>>;
   code: MichelsonV1Expression[];
   signer: string;
+  txnAddress: string;
   currentStep: number;
 }
