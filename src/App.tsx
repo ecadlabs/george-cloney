@@ -160,8 +160,8 @@ const App: React.FC = (): ReactElement => {
         <div className="title-group">
           <h1>The George Cloney</h1>
           <h4>
-            George Cloney, being the gentleman he is, will take any Tezos Smart Contract and clone it for you. He even
-            allows you to edit the cloned contracts storage state! Great for testing and exploring.
+            George Cloney, being the gentleman he is, will take any Tezos Smart Contract <br /> and clone it for you.
+            Great for testing and exploring.
           </h4>
         </div>
         <SnackbarGroup

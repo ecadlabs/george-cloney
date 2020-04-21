@@ -1,0 +1,26 @@
+.newly-originated-contract {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 3px;
+  width: 85%;
+  margin-left: 20px;
+  margin-top: 0px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.contract-result-button {
+  border: 1px solid #35636e;
+  border-radius: 3px;
+  font-size: 11px;
+  padding: 10px;
+  margin-bottom: 8px;
+  margin-right: 10px;
+  text-transform: uppercase;
+  color: #35636e;
+}
+
+.contract-result-explorers {
+  display: inline-block;
+  margin-left: 15px;
+}
