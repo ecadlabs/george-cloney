@@ -196,7 +196,7 @@ const App: React.FC = (): ReactElement => {
         <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
       <div className="built-with-taquito-logo">
-        <img height="45" width="150" alt="Built with Taquito logo" src="built-with-taquito.png" />
+        <img height="45" width="120" alt="Built with Taquito logo" src="built-with-taquito.png" />
       </div>
     </>
   );
