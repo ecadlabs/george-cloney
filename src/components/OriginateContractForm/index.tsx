@@ -25,7 +25,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
     updateSigner(e);
   };
 
-  if (currentStep !== 2) return null;
+  if (currentStep !== 3) return null;
   return (
     <>
       <div id="dialog">

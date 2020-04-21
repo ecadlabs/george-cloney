@@ -10,7 +10,7 @@ const Editor = (props: EditorProps): ReactElement | null => {
     ? "// Initial Storage Code \n" + JSON.stringify(storage, null, 2)
     : "// Initial Storage Code ";
 
-  if (currentStep !== 1) return null;
+  if (currentStep !== 2) return null;
   return (
     <>
       <div id="contract-code-editor">

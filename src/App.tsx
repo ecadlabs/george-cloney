@@ -128,6 +128,7 @@ const App: React.FC = (): ReactElement => {
     const newContract = await Tezos.contract.at(contractAddress);
     setCode(newContract.script.code);
     setStorage(newContract.script.storage);
+    setCurrentStep(2);
     setContractAddress("");
     setLoadingMessage("");
     setLoading(false);
@@ -171,6 +172,7 @@ const App: React.FC = (): ReactElement => {
           loading={loading}
           loadingMessage={loadingMessage}
         />
+        <WizardControls setCurrentStep={setCurrentStep} currentStep={currentStep} signer={signer} code={code} />
         <div id="main-forms">
           <ContractCodeForm
             contractAddress={contractAddress}
@@ -192,7 +194,6 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <WizardControls setCurrentStep={setCurrentStep} currentStep={currentStep} signer={signer} code={code} />
         <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
       <div className="built-with-taquito-logo">

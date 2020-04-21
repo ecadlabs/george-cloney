@@ -64,8 +64,27 @@
   display: inline-flex;
   justify-content: center;
   opacity: 0.5;
+  transition: all 0.1s ease-in-out;
+}
+
+.dot:hover {
+  opacity: 1;
+  box-shadow: 0 5px 15px #776a6a;
 }
 
 .active {
   opacity: 1 !important;
+}
+
+.wizard-steps {
+  display: flex;
+  justify-content: center;
+}
+
+.wizard-steps div {
+  font-weight: bold;
+  cursor: pointer;
+  display: inline !important;
+  margin-right: 20px;
+  margin-left: 20px;
 }

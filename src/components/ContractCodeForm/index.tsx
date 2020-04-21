@@ -31,7 +31,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
   return (
     <>
       <div id="dialog">
-        <h2>Lookup Contract Code</h2>
+        <h2>Fetch Contract Code</h2>
         <label id="react-select-label">Choose Network</label>
         <Select className="network-select" options={options} value={selectValue} onChange={handleChange} />
         <div id="content">
@@ -46,7 +46,12 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
                 ref={register}
               />
               <br />
-              <input disabled={!contractAddress ? true : false} id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`} type="submit" />
+              <input
+                disabled={!contractAddress ? true : false}
+                id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`}
+                type="submit"
+                value="Fetch"
+              />
             </form>
           </div>
         </div>

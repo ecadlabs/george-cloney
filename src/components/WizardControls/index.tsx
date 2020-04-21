@@ -5,35 +5,41 @@ import "./styles.css";
 const Dots = (props: WizardControlsProps): ReactElement => {
   const { code, signer, currentStep, setCurrentStep } = props;
 
+  const handleStepClick = (e: any) => {
+    console.log(typeof e.target.innerText);
+    switch (e.target.innerText) {
+      case "1":
+        return setCurrentStep(1);
+      case "2":
+        if (code.length > 0) return setCurrentStep(2);
+        break;
+      case "3":
+        if (code.length > 0) return setCurrentStep(3);
+        break;
+    }
+  };
+
   return (
     <div className="dots-container">
-      <span onClick={() => setCurrentStep(1)} className={`${currentStep === 1 ? "hide-step" : "previous-step"}`}>
-        Prev Step
-      </span>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ display: "inline !important", marginRight: "20px", marginLeft: "20px" }}>
+      <div className="wizard-steps">
+        <div onClick={handleStepClick}>
           <span className={`${code.length > 0 ? "dot completed" : "dot"} ${currentStep === 1 ? "active" : ""}`}>1</span>
           <br />
           Fetch Contract
         </div>
-        <div style={{ display: "inline !important", marginRight: "20px", marginLeft: "20px" }}>
-          <span className={` ${signer ? "dot completed" : "dot"} ${currentStep === 2 ? "active" : ""}`}>2</span>
+        <div onClick={() => (code.length > 0 ? setCurrentStep(2) : null)}>
+          <span className={` ${code.length > 0 ? "dot completed" : "dot"} ${currentStep === 2 ? "active" : ""}`}>
+            2
+          </span>
           <br />
           Review Contract
         </div>
-        <div style={{ display: "inline !important", marginRight: "20px", marginLeft: "20px" }}>
-          <span className={`${code.length > 0 ? "dot completed" : "dot"} ${currentStep === 3 ? "active" : ""}`}>3</span>
+        <div onClick={() => (code.length > 0 ? setCurrentStep(3) : null)}>
+          <span className={`${signer ? "dot completed" : "dot"} ${currentStep === 3 ? "active" : ""}`}>3</span>
           <br />
-          Sign/Deploy Contract
+          Deploy Contract
         </div>
       </div>
-      <button
-        onClick={() => setCurrentStep(2)}
-        disabled={code.length > 0 ? false : true}
-        className={`${currentStep === 2 || code.length === 0 ? "hide-step" : "next-step"}`}
-      >
-        Next Step
-      </button>
     </div>
   );
 };
