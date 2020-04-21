@@ -17,10 +17,22 @@
   margin-bottom: 8px;
   margin-right: 10px;
   text-transform: uppercase;
+  background-color: #35636e;
+  color: white;
+}
+
+.contract-result-button:hover {
+  background-color: white;
   color: #35636e;
 }
 
 .contract-result-explorers {
   display: inline-block;
   margin-left: 15px;
+}
+
+@media only screen and (max-width: 560px) {
+  .newly-originated-contract {
+    font-size: 13px;
+  }
 }
