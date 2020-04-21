@@ -24,8 +24,8 @@ const App: React.FC = (): ReactElement => {
   const [provider, setProvider] = useState<string>("");
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
-  const [launchNetwork, setLaunchNetwork] = useState<string>("Select A Network...");
-  const [contractNetwork, setContractNetwork] = useState<string>("Select A Network...");
+  const [launchNetwork, setLaunchNetwork] = useState<string>("mainnet");
+  const [contractNetwork, setContractNetwork] = useState<string>("mainnet");
   const [contractAddress, setContractAddress] = useState<string>("");
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastLaunchedContract, setLastLaunchedContract] = useState<string>("");
@@ -162,7 +162,13 @@ const App: React.FC = (): ReactElement => {
         {lastLaunchedContract && <LastLaunchedContract lastLaunchedContract={lastLaunchedContract} />}
       </div>
       <div id="wallet">
-        <h1>The George Cloney</h1>
+        <div className="title-group">
+          <h1>The George Cloney</h1>
+          <h4>
+            George Cloney, what a guy, will take any Tezos Smart Contract and copy it for you to any network. He even
+            allows you to edit the cloned contracts storage state! Great for testing and exploring.
+          </h4>
+        </div>
         <SnackbarGroup
           launchNetwork={launchNetwork}
           txnAddress={txnAddress}
@@ -193,13 +199,7 @@ const App: React.FC = (): ReactElement => {
             network={launchNetwork}
           />
         </div>
-        <WizardControls
-          setCurrentStep={setCurrentStep}
-          currentStep={currentStep}
-          signer={signer}
-          code={code}
-          launchNetwork={launchNetwork}
-        />
+        <WizardControls setCurrentStep={setCurrentStep} currentStep={currentStep} signer={signer} code={code} />
         <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
     </>

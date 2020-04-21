@@ -11,6 +11,12 @@ h1 {
   color: #35636e;
 }
 
+.title-group {
+  width: 630px;
+  margin: 0 auto;
+  line-height: 2em;
+}
+
 #wallet {
   margin: -20px auto;
   text-align: center;

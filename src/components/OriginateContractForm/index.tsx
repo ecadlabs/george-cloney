@@ -67,11 +67,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
         <div id="content">
           <div id="contract-launch-form">
             <form onSubmit={handleSubmit(handleLaunchSubmit)}>
-              <input
-                disabled={loading || network === "Select A Network..." || !chosenSigner ? true : false}
-                id="show-balance-button"
-                type="submit"
-              />
+              <input disabled={loading || !chosenSigner ? true : false} id="show-balance-button" type="submit" />
             </form>
           </div>
         </div>
