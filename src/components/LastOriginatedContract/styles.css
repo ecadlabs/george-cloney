@@ -12,3 +12,8 @@
   background: #35636e;
   margin-top: 10px;
 }
+
+.reset-button {
+  background-color: red !important;
+  border: 1px solid red !important;
+}

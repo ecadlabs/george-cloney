@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { WizardControlsProps } from "./types";
 import "./styles.css";
 
-const Dots = (props: WizardControlsProps): ReactElement => {
+const WizardControls = (props: WizardControlsProps): ReactElement => {
   const { code, signer, currentStep, setCurrentStep, txnAddress } = props;
 
   const handleStepClick = (e: any) => {
@@ -53,4 +53,4 @@ const Dots = (props: WizardControlsProps): ReactElement => {
   );
 };
 
-export default Dots;
+export default WizardControls;

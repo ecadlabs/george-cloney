@@ -46,6 +46,24 @@ const App: React.FC = (): ReactElement => {
     showSnackbar(true);
   };
 
+  const resetGeorgeCloney = (): void => {
+    // Set entire application back to initial state
+    setCurrentStep(1);
+    setLoading(false);
+    setLoadingMessage("");
+    setError("");
+    showSnackbar(false);
+    setSigner("");
+    setProvider("");
+    setCode([]);
+    setStorage("");
+    setLaunchNetwork("mainnet");
+    setContractNetwork("mainnet");
+    setContractAddress("");
+    setTxnAddress("");
+    setLastLaunchedContract("");
+  };
+
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {
     // Empty provider if network is sandbox so that user can provide a local node address
     if (network !== "sandbox") {
@@ -197,10 +215,12 @@ const App: React.FC = (): ReactElement => {
           />
           <ContractResultForm txnAddress={txnAddress} currentStep={currentStep} launchNetwork={launchNetwork} />
         </div>
-        {lastLaunchedContract && (
-          <LastOriginatedContract launchNetwork={launchNetwork} lastLaunchedContract={lastLaunchedContract} />
-        )}
         <Editor currentStep={currentStep} code={code} storage={storage} />
+        <LastOriginatedContract
+          reset={resetGeorgeCloney}
+          launchNetwork={launchNetwork}
+          lastLaunchedContract={lastLaunchedContract}
+        />
       </div>
       <div className="built-with-taquito-logo">
         <img height="56" width="128" alt="Built with Taquito logo" src="built-with-taquito.png" />

@@ -3,14 +3,19 @@ import { LastLaunchedContractProps } from "./types";
 import "./styles.css";
 
 const LastOriginatedContract = (props: LastLaunchedContractProps): ReactElement => {
-  const { lastLaunchedContract, launchNetwork } = props;
+  const { lastLaunchedContract, launchNetwork, reset } = props;
 
   return (
     <>
       <div className="last-originated-contract-div">
-        <a href={`https://${launchNetwork}.tzstats.com/${lastLaunchedContract}`}>
-          <button>View Last Originated Contract</button>
-        </a>
+        {lastLaunchedContract && (
+          <a href={`https://${launchNetwork}.tzstats.com/${lastLaunchedContract}`}>
+            <button>View Last Originated Contract</button>
+          </a>
+        )}
+        <button onClick={reset} className="reset-button">
+          Reset George Cloney
+        </button>
       </div>
     </>
   );
