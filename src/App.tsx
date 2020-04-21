@@ -202,6 +202,9 @@ const App: React.FC = (): ReactElement => {
         <WizardControls setCurrentStep={setCurrentStep} currentStep={currentStep} signer={signer} code={code} />
         <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
+      <div className="built-with-taquito-logo">
+        <img height="45" width="150" alt="Built with Taquito logo" src="built-with-taquito.png" />
+      </div>
     </>
   );
 };

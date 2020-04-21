@@ -199,6 +199,10 @@ li {
   background-image: url("/assets/built-with-taquito.png");
 }
 
+.built-with-taquito-logo {
+  margin-top: 15px;
+}
+
 .show {
   display: flex;
 }
