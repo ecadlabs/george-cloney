@@ -99,6 +99,7 @@ const App: React.FC = (): ReactElement => {
           return originationOp.contract();
         })
         .then((contract) => {
+          console.log(contract);
           // Remove contract launch snackbar message
           setLoading(false);
           showSnackbar(false);
