@@ -16,7 +16,7 @@ const Dots = (props: WizardControlsProps): ReactElement => {
         if (code.length > 0) return setCurrentStep(3);
         break;
       case "4":
-        if (code.length > 0) return setCurrentStep(4);
+        if (txnAddress) return setCurrentStep(4);
         break;
     }
   };
