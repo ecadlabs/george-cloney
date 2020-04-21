@@ -2,7 +2,6 @@ import React, { useState, ReactElement, useEffect } from "react";
 import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import Editor from "./components/Editor";
-import Provider from "./components/Provider";
 import ContractCodeForm from "./components/ContractCodeForm";
 import LaunchContractForm from "./components/OriginateContractForm";
 import SnackbarGroup from "./components/SnackbarGroup";
@@ -139,11 +138,6 @@ const App: React.FC = (): ReactElement => {
     showSnackbar(false);
   };
 
-  const updateProvider = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-    // Update provider node to use to push/pull data from the blockchain
-    setProvider(event.target.value);
-  };
-
   const updateContractAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
     // Update the contract address that we'll be pulling data from
     setContractAddress(event.target.value);
@@ -157,8 +151,7 @@ const App: React.FC = (): ReactElement => {
   return (
     <>
       <Navbar />
-      <div id="top-header">
-        <Provider loading={loading} provider={provider} updateProvider={updateProvider} />
+      <div className="top-header">
         {lastLaunchedContract && <LastLaunchedContract lastLaunchedContract={lastLaunchedContract} />}
       </div>
       <div id="wallet">

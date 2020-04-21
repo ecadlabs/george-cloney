@@ -59,9 +59,11 @@ h1 {
   color: white;
 }
 
-#top-header {
+.top-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+  margin-left: 20px;
 }
 
 #main-forms {

@@ -2,6 +2,9 @@
   .last-launched-contract-div {
     display: none;
   }
+  .top-header {
+    margin-top: 95px;
+  }
 }
 
 #last-launched-contract {
