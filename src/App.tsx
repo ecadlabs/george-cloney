@@ -217,6 +217,7 @@ const App: React.FC = (): ReactElement => {
         </div>
         <Editor currentStep={currentStep} code={code} storage={storage} />
         <LastOriginatedContract
+          currentStep={currentStep}
           reset={resetGeorgeCloney}
           launchNetwork={launchNetwork}
           lastLaunchedContract={lastLaunchedContract}

@@ -3,7 +3,7 @@ import { LastLaunchedContractProps } from "./types";
 import "./styles.css";
 
 const LastOriginatedContract = (props: LastLaunchedContractProps): ReactElement => {
-  const { lastLaunchedContract, launchNetwork, reset } = props;
+  const { lastLaunchedContract, launchNetwork, reset, currentStep } = props;
 
   return (
     <>
@@ -13,9 +13,11 @@ const LastOriginatedContract = (props: LastLaunchedContractProps): ReactElement 
             <button>View Last Originated Contract</button>
           </a>
         )}
-        <button onClick={reset} className="reset-button">
-          Reset George Cloney
-        </button>
+        {currentStep > 1 && (
+          <button onClick={reset} className="reset-button">
+            Reset George Cloney
+          </button>
+        )}
       </div>
     </>
   );
