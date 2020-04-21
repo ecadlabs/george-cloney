@@ -48,7 +48,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
                 className={chosenSigner === "ephemeral" ? "signer-button-selected" : "signer-button"}
                 htmlFor="ephemeral"
               >
-                Ephemeral Key
+                Let Us Sign
               </label>
             </>
           )}

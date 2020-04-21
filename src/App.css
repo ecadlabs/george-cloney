@@ -172,8 +172,8 @@ li {
 #show-balance-button:disabled,
 #show-balance-button-hovered:disabled {
   opacity: 0.6 !important;
-  background-color: #4caf50 !important;
-  border: 1px solid #4caf50 !important;
+  background-color: #776a6a !important;
+  border: 1px solid #776a6a !important;
   color: white !important;
 }
 
@@ -203,6 +203,7 @@ li {
 .built-with-taquito-logo {
   display: flex;
   margin-top: 60px;
+  margin-bottom: 30px;
 }
 
 .built-with-taquito-logo img {
