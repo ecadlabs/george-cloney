@@ -18,3 +18,16 @@
 .network-select > div > div > div {
   color: black;
 }
+
+.address-validation {
+  color: red;
+  font-size: 13px;
+  font-weight: bold;
+  display: block;
+  margin-left: -220px;
+  margin-bottom: -63px;
+}
+
+#contract-code-form .fetch-contract-button {
+  margin-top: 47px !important;
+}

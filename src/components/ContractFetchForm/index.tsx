@@ -13,6 +13,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
     loading,
     currentStep,
     contractAddress,
+    validationError,
   } = props;
   const { register, handleSubmit } = useForm();
 
@@ -45,8 +46,10 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
                 name="address"
                 ref={register}
               />
+              {validationError !== "" && <span className="address-validation">Invalid Contract Address</span>}
               <br />
               <input
+                className="fetch-contract-button"
                 disabled={loading || !contractAddress ? true : false}
                 id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`}
                 type="submit"

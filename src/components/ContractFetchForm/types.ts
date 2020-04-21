@@ -5,5 +5,6 @@ export interface ContractFormProps {
   currentStep: number;
   contractAddress: string;
   network: string;
+  validationError: string;
   loading: boolean;
 }

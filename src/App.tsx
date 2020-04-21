@@ -1,8 +1,9 @@
 import React, { useState, ReactElement, useEffect } from "react";
 import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
+import { ValidationResult, validateKeyHash } from "@taquito/utils";
 import Editor from "./components/Editor";
-import ContractCodeForm from "./components/ContractCodeForm";
+import ContractFetchForm from "./components/ContractFetchForm";
 import ContractOriginationForm from "./components/ContractOriginationForm";
 import ContractResultForm from "./components/ContractResultForm";
 import SnackbarGroup from "./components/SnackbarGroup";
@@ -19,6 +20,7 @@ const App: React.FC = (): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingMessage, setLoadingMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [validationError, setValidationError] = useState<string>("");
   const [snackbar, showSnackbar] = useState<boolean>(false);
   const [signer, setSigner] = useState<string>("");
   const [provider, setProvider] = useState<string>("");
@@ -159,8 +161,11 @@ const App: React.FC = (): ReactElement => {
   };
 
   const updateContractAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    // Update the contract address that we'll be pulling data from
-    setContractAddress(event.target.value);
+    const isValid = validateKeyHash(event.target.value) === ValidationResult.VALID || false;
+    // Update the contract address that we'll be pulling data from if it's valid
+    if (isValid) return setContractAddress(event.target.value.trim());
+    if (event.target.value === "") return setValidationError("");
+    setValidationError("Contract addresses need to be 36 characters");
   };
 
   const updateSigner = async (event: React.MouseEvent<HTMLInputElement>): Promise<any> => {
@@ -194,7 +199,8 @@ const App: React.FC = (): ReactElement => {
           code={code}
         />
         <div id="main-forms">
-          <ContractCodeForm
+          <ContractFetchForm
+            validationError={validationError}
             contractAddress={contractAddress}
             currentStep={currentStep}
             loading={loading}
