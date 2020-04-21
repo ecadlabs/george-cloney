@@ -3,7 +3,8 @@ import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import Editor from "./components/Editor";
 import ContractCodeForm from "./components/ContractCodeForm";
-import LaunchContractForm from "./components/OriginateContractForm";
+import ContractOriginationForm from "./components/ContractOriginationForm";
+import ContractResultForm from "./components/ContractResultForm";
 import SnackbarGroup from "./components/SnackbarGroup";
 import LastLaunchedContract from "./components/LastLaunchedContract";
 import WizardControls from "./components/WizardControls";
@@ -99,14 +100,13 @@ const App: React.FC = (): ReactElement => {
           return originationOp.contract();
         })
         .then((contract) => {
-          console.log(contract);
           // Remove contract launch snackbar message
           setLoading(false);
           showSnackbar(false);
           // Add block explorer snackbar message
           setLoadingMessage("");
           setTxnAddress(contract.address);
-          showSnackbar(true);
+          setCurrentStep(4);
         })
         .catch((error) => {
           setLoading(false);
@@ -165,8 +165,6 @@ const App: React.FC = (): ReactElement => {
           </h4>
         </div>
         <SnackbarGroup
-          launchNetwork={launchNetwork}
-          txnAddress={txnAddress}
           snackbar={snackbar}
           closeSnackbar={closeSnackbar}
           error={error}
@@ -190,7 +188,7 @@ const App: React.FC = (): ReactElement => {
             handleNetworkChange={handleContractNetworkChange}
             network={contractNetwork}
           />
-          <LaunchContractForm
+          <ContractOriginationForm
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             loading={loading}
@@ -200,6 +198,7 @@ const App: React.FC = (): ReactElement => {
             handleNetworkChange={handleLaunchNetworkChange}
             network={launchNetwork}
           />
+          <ContractResultForm txnAddress={txnAddress} currentStep={currentStep} launchNetwork={launchNetwork} />
         </div>
         <Editor currentStep={currentStep} code={code} storage={storage} />
       </div>
