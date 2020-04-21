@@ -164,7 +164,9 @@ const App: React.FC = (): ReactElement => {
     const isValid = validateKeyHash(event.target.value) === ValidationResult.VALID || false;
     // Update the contract address that we'll be pulling data from if it's valid
     if (isValid) return setContractAddress(event.target.value.trim());
+    // Clear error if the invalid address is erased
     if (event.target.value === "") return setValidationError("");
+    // Set validation error if address is invalid
     setValidationError("Contract addresses need to be 36 characters");
   };
 
@@ -178,7 +180,7 @@ const App: React.FC = (): ReactElement => {
       <Navbar />
       <div id="wallet">
         <div className="title-group">
-          <h1>The George Cloney</h1>
+          <img alt="George Cloney signature in cursive" src="george-cloney-title.png" />
           <h4>
             George Cloney, being the gentleman he is, will take any Tezos Smart Contract and clone it for you. Great for
             testing and exploring.
