@@ -1,7 +1,7 @@
 import React, { useState, ReactElement, useEffect } from "react";
 import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
-import { ValidationResult, validateKeyHash } from "@taquito/utils";
+import { ValidationResult, validateContractAddress } from "@taquito/utils";
 import Editor from "./components/Editor";
 import ContractFetchForm from "./components/ContractFetchForm";
 import ContractOriginationForm from "./components/ContractOriginationForm";
@@ -161,9 +161,12 @@ const App: React.FC = (): ReactElement => {
   };
 
   const updateContractAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isValid = validateKeyHash(event.target.value) === ValidationResult.VALID || false;
+    const isValid = validateContractAddress(event.target.value) === ValidationResult.VALID || false;
     // Update the contract address that we'll be pulling data from if it's valid
-    if (isValid) return setContractAddress(event.target.value.trim());
+    if (isValid) {
+      setValidationError("");
+      return setContractAddress(event.target.value.trim());
+    }
     // Clear error if the invalid address is erased
     if (event.target.value === "") return setValidationError("");
     // Set validation error if address is invalid

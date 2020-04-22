@@ -28,6 +28,19 @@
   margin-bottom: -63px;
 }
 
+.validation-error {
+  box-shadow: 0 0 5px red;
+  border: 1px solid red !important;
+  border-radius: 3px !important;
+}
+
+.validation-error:focus {
+  box-shadow: 0 0 5px red;
+  border: 1px solid red !important;
+  border-radius: 3px !important;
+  outline: red;
+}
+
 #contract-code-form .fetch-contract-button {
   margin-top: 47px !important;
 }

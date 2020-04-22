@@ -40,6 +40,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
           <div id="contract-code-form">
             <form onSubmit={handleSubmit(handleContractSubmit)}>
               <input
+                className={validationError && "validation-error"}
                 onChange={updateContractAddress}
                 placeholder="Contract Address"
                 id="address-input"
