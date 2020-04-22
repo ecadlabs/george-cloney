@@ -24,7 +24,7 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
             <button className="contract-result-button">Arronax</button>
           </a>
           <a target="_blank" rel="noopener noreferrer" href={`https://${launchNetwork}.tzstats.com/${txnAddress}`}>
-            <button className="contract-result-button">TzKt</button>
+            <button className="contract-result-button">Better Call Dev</button>
           </a>
           <a target="_blank" rel="noopener noreferrer" href={`https://${launchNetwork}.tzstats.com/${txnAddress}`}>
             <button className="contract-result-button">TezBlock</button>

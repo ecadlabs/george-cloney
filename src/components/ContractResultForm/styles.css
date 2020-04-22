@@ -1,5 +1,5 @@
 .newly-originated-contract {
-  border: 1px solid black;
+  border: 2px solid #35636e;
   padding: 10px;
   border-radius: 3px;
   width: 85%;
@@ -10,20 +10,21 @@
 }
 
 .contract-result-button {
-  border: 1px solid #35636e;
+  border: 1px solid #4caf50;
   border-radius: 3px;
   font-size: 11px;
   padding: 10px;
   margin-bottom: 8px;
   margin-right: 10px;
   text-transform: uppercase;
-  background-color: #35636e;
+  background-color: #4caf50;
   color: white;
 }
 
 .contract-result-button:hover {
   background-color: white;
-  color: #35636e;
+  color: #4caf50;
+  border: 1px solid #4caf50;
   cursor: pointer;
 }
 
