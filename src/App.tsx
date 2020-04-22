@@ -228,6 +228,7 @@ const App: React.FC = (): ReactElement => {
         </div>
         <Editor currentStep={currentStep} code={code} storage={storage} />
         <LastOriginatedContract
+          code={code}
           currentStep={currentStep}
           reset={resetGeorgeCloney}
           launchNetwork={launchNetwork}
@@ -235,7 +236,9 @@ const App: React.FC = (): ReactElement => {
         />
       </div>
       <div className="built-with-taquito-logo">
-        <img height="56" width="128" alt="Built with Taquito logo" src="built-with-taquito.png" />
+        <a href="https://github.com/ecadlabs/taquito" target="_blank">
+            <img height="56" width="128" alt="Built with Taquito logo" src="built-with-taquito.png" />
+        </a>
       </div>
     </>
   );

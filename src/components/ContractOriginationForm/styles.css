@@ -46,6 +46,7 @@
 .signer-button:hover {
   background: #35636e;
   color: white;
+  cursor: pointer;
 }
 
 .signer-toolbar input[type="radio"] {
