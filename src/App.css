@@ -34,14 +34,17 @@ h1 {
   .title-group img {
     width: 300px;
   }
-  .built-with-taquito-logo {
-    margin-top: 6vh !important;
+  .built-with-taquito-logo img {
+    transform: translateY(200%) !important;
   }
 }
 
 @media only screen and (max-width: 500px) {
   .title-group {
     width: 300px;
+  }
+  .built-with-taquito-logo img {
+    transform: translateY(150%) !important;
   }
 }
 
@@ -218,9 +221,12 @@ li {
 }
 
 .built-with-taquito-logo {
-  margin-top: 15vh;
-  margin-right: 30px;
-  margin-left: 80vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.built-with-taquito-logo img {
+  transform: translateY(240%);
 }
 
 .show {
