@@ -244,15 +244,6 @@ li {
   margin-bottom: 20px;
 }
 
-.left {
-  cursor: pointer;
-  display: inline-block;
-  width: 3em;
-  height: 3em;
-  margin-right: 1.5em;
-  margin: auto 0;
-}
-
 .left-arrow-hidden,
 .right-arrow-hidden {
   cursor: pointer;
@@ -262,6 +253,40 @@ li {
   margin-right: 1.5em;
   margin: auto 0;
   opacity: 0 !important;
+}
+
+.right-next-step {
+  cursor: pointer;
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  margin-left: 1.5em;
+  margin: auto 0;
+  -webkit-animation: bounceRight 2s infinite;
+  animation: bounceRight 2s infinite;
+}
+
+.right-next-step:after {
+  content: "";
+  display: inline-block;
+  margin-top: 1.05em;
+  margin-left: -0.6em;
+  width: 1em;
+  height: 1em;
+  border-top: 0.5em solid #4caf50;
+  border-right: 0.5em solid #4caf50;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.left {
+  cursor: pointer;
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  margin-right: 1.5em;
+  margin: auto 0;
 }
 
 .left:after {
@@ -294,9 +319,63 @@ li {
   margin-left: -0.6em;
   width: 1em;
   height: 1em;
-  border-top: 0.5em solid #333;
-  border-right: 0.5em solid #333;
+  border-top: 0.5em solid #aaa;
+  border-right: 0.5em solid #aaa;
   -moz-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+/* Right Bounce effect on arrow-next-step */
+
+/* right bounce */
+@-webkit-keyframes bounceRight {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  40% {
+    -webkit-transform: translateX(-30px);
+    transform: translateX(-30px);
+  }
+  60% {
+    -webkit-transform: translateX(-15px);
+    transform: translateX(-15px);
+  }
+}
+@-moz-keyframes bounceRight {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-30px);
+  }
+  60% {
+    transform: translateX(-15px);
+  }
+}
+@keyframes bounceRight {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+  40% {
+    -ms-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+  60% {
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+  }
 }

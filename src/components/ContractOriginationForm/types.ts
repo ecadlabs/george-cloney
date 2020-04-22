@@ -5,6 +5,7 @@ export interface ContractOriginationFormProps {
   handleNetworkChange: (network: string) => void;
   handleLaunchSubmit: () => void;
   setCurrentStep: Dispatch<SetStateAction<number>>;
+  txnAddress: string;
   currentStep: number;
   signer: string;
   network: string;

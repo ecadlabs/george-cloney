@@ -15,6 +15,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
     setCurrentStep,
     contractAddress,
     validationError,
+    code,
   } = props;
   const { register, handleSubmit } = useForm();
 
@@ -62,7 +63,11 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
           </div>
         </div>
       </div>
-      <span onClick={() => setCurrentStep(2)} className="right"></span>
+      {code.length > 0 ? (
+        <span onClick={() => setCurrentStep(2)} className="right-next-step"></span>
+      ) : (
+        <span className="right"></span>
+      )}
     </>
   );
 };

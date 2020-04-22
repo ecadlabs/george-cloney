@@ -32,7 +32,11 @@ const Editor = (props: EditorProps): ReactElement | null => {
           editorProps={{ $blockScrolling: true }}
         />
       </div>
-      <span onClick={() => setCurrentStep(3)} className="right"></span>
+      {code.length > 0 ? (
+        <span onClick={() => setCurrentStep(3)} className="right-next-step"></span>
+      ) : (
+        <span className="right"></span>
+      )}
     </div>
   );
 };

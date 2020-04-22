@@ -201,6 +201,7 @@ const App: React.FC = (): ReactElement => {
         <WizardControls txnAddress={txnAddress} currentStep={currentStep} signer={signer} code={code} />
         <div id="main-forms">
           <ContractFetchForm
+            code={code}
             validationError={validationError}
             contractAddress={contractAddress}
             currentStep={currentStep}
@@ -212,6 +213,7 @@ const App: React.FC = (): ReactElement => {
             network={contractNetwork}
           />
           <ContractOriginationForm
+            txnAddress={txnAddress}
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             loading={loading}
