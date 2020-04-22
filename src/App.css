@@ -35,11 +35,7 @@ h1 {
     width: 300px;
   }
   .built-with-taquito-logo {
-    display: flex !important;
-    justify-content: center !important;
-    margin: 0 auto !important;
-    /* margin: 0 auto !important;*/
-    margin-bottom: 1-00px !important;
+    margin-top: 6vh !important;
   }
 }
 
@@ -222,8 +218,7 @@ li {
 }
 
 .built-with-taquito-logo {
-  margin-top: 14vw;
-  margin-bottom: -10vw;
+  margin-top: 15vh;
   margin-right: 30px;
   margin-left: 80vw;
 }
