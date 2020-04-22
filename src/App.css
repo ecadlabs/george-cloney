@@ -35,7 +35,8 @@ h1 {
     width: 300px;
   }
   .built-with-taquito-logo img {
-    transform: translateY(200%) !important;
+    transform: translateY(120%) !important;
+    margin-right: 20px;
   }
 }
 
@@ -44,7 +45,7 @@ h1 {
     width: 300px;
   }
   .built-with-taquito-logo img {
-    transform: translateY(150%) !important;
+    transform: translateY(80%) !important;
   }
 }
 
@@ -226,7 +227,8 @@ li {
 }
 
 .built-with-taquito-logo img {
-  transform: translateY(240%);
+  transform: translateY(120%);
+  margin-right: 20px;
 }
 
 .show {
