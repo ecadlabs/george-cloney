@@ -181,8 +181,8 @@ const App: React.FC = (): ReactElement => {
 
   return (
     <>
-      <Navbar />
       {currentStep === 4 && !confettiShown && <Confetti setConfettiShown={setConfettiShown} />}
+      <Navbar />
       <div id="wallet">
         <div className="title-group">
           <img alt="George Cloney signature in cursive" src="george-cloney-title.png" />
