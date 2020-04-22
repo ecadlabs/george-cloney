@@ -10,6 +10,7 @@ import SnackbarGroup from "./components/SnackbarGroup";
 import LastOriginatedContract from "./components/LastOriginatedContract";
 import WizardControls from "./components/WizardControls";
 import Navbar from "./components/Navbar";
+import Confetti from "./components/Confetti";
 import setSignerMethod from "./utils/set-signer-method";
 import "./App.css";
 import "ace-builds/src-noconflict/mode-json";
@@ -184,6 +185,7 @@ const App: React.FC = (): ReactElement => {
   return (
     <>
       <Navbar />
+      {currentStep === 1 && <Confetti />}
       <div id="wallet">
         <div className="title-group">
           <img alt="George Cloney signature in cursive" src="george-cloney-title.png" />
