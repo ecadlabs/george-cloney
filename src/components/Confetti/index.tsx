@@ -13,7 +13,7 @@ const Confetti = (props: ConfettiProps): ReactElement | null => {
     setTimeout(() => {
       setShow(!showRef);
       setConfettiShown(true);
-    }, 2850);
+    }, 2800);
   }, [setConfettiShown]);
 
   if (!show) return null;
