@@ -7,11 +7,16 @@ const LastOriginatedContract = (props: LastOriginatedContractProps): ReactElemen
   const networkAndContractInfo = lastOriginatedContract.split(",");
   const lastOriginatedAddress = networkAndContractInfo[0];
   const lastOriginatedNetwork = networkAndContractInfo[1];
+
   return (
     <>
       <div className="last-originated-contract-div">
         {lastOriginatedContract && (
-          <a href={`https://${lastOriginatedNetwork}.tzstats.com/${lastOriginatedAddress}`}>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://${lastOriginatedNetwork}.tzstats.com/${lastOriginatedAddress}`}
+          >
             <button>View Last Originated Contract</button>
           </a>
         )}
