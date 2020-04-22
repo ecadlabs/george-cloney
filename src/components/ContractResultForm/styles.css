@@ -24,6 +24,7 @@
 .contract-result-button:hover {
   background-color: white;
   color: #35636e;
+  cursor: pointer;
 }
 
 .contract-result-explorers {
