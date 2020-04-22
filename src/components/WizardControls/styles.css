@@ -26,11 +26,6 @@
   transition: all 0.1s ease-in-out;
 }
 
-.step:hover {
-  opacity: 1;
-  box-shadow: 0 5px 15px #776a6a;
-}
-
 .active {
   opacity: 1 !important;
 }
@@ -42,7 +37,7 @@
 
 .wizard-steps div {
   font-weight: bold;
-  cursor: pointer;
+  cursor: default;
   width: 120px;
   margin-right: 20px;
   margin-left: 20px;

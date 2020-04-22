@@ -1,19 +1,11 @@
 import React, { ReactElement, useState } from "react";
-import { LaunchFormProps } from "./types";
+import { ContractOriginationFormProps } from "./types";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import "./styles.css";
 
-const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
-  const {
-    updateSigner,
-    handleNetworkChange,
-    network,
-    handleLaunchSubmit,
-    loading,
-    currentStep,
-    setCurrentStep,
-  } = props;
+const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElement | null => {
+  const { setSigner, handleNetworkChange, network, handleLaunchSubmit, loading, currentStep, setCurrentStep } = props;
   const { register, handleSubmit } = useForm();
   const [chosenSigner, setChosenSigner] = useState<string>("");
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
@@ -29,8 +21,10 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
   };
 
   const locallyUpdateSigner = (e: React.MouseEvent<HTMLInputElement>) => {
+    // Update local state for button CSS effects
     setChosenSigner(e.currentTarget.value);
-    updateSigner(e);
+    // Update app state
+    setSigner(e.currentTarget.value);
   };
 
   if (currentStep !== 3) return null;
@@ -86,4 +80,4 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
   );
 };
 
-export default LaunchForm;
+export default ContractOriginationForm;

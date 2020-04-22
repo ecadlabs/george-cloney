@@ -179,11 +179,6 @@ const App: React.FC = (): ReactElement => {
     setValidationError("Contract addresses need to be 36 characters");
   };
 
-  const updateSigner = async (event: React.MouseEvent<HTMLInputElement>): Promise<any> => {
-    // Update the signer method
-    setSigner(event.currentTarget.value);
-  };
-
   return (
     <>
       <Navbar />
@@ -227,7 +222,7 @@ const App: React.FC = (): ReactElement => {
             setCurrentStep={setCurrentStep}
             loading={loading}
             signer={signer}
-            updateSigner={updateSigner}
+            setSigner={setSigner}
             handleLaunchSubmit={handleContractLaunchSubmit}
             handleNetworkChange={handleLaunchNetworkChange}
             network={launchNetwork}

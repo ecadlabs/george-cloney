@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface LaunchFormProps {
-  updateSigner: (event: React.MouseEvent<HTMLInputElement>) => void;
+export interface ContractOriginationFormProps {
+  setSigner: Dispatch<SetStateAction<string>>;
   handleNetworkChange: (network: string) => void;
   handleLaunchSubmit: () => void;
   setCurrentStep: Dispatch<SetStateAction<number>>;
