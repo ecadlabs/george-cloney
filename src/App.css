@@ -229,7 +229,7 @@ li {
 .built-with-taquito-logo img {
   transform: translateY(120%);
   margin-right: 20px;
-  margin-bottom: 15px;
+  padding-bottom: 20px;
 }
 
 .show {
