@@ -198,13 +198,7 @@ const App: React.FC = (): ReactElement => {
           loading={loading}
           loadingMessage={loadingMessage}
         />
-        <WizardControls
-          txnAddress={txnAddress}
-          setCurrentStep={setCurrentStep}
-          currentStep={currentStep}
-          signer={signer}
-          code={code}
-        />
+        <WizardControls txnAddress={txnAddress} currentStep={currentStep} signer={signer} code={code} />
         <div id="main-forms">
           <ContractFetchForm
             validationError={validationError}

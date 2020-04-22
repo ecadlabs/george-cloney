@@ -27,7 +27,19 @@
 }
 
 .active {
+  opacity: 1;
+}
+
+.active-completed {
   opacity: 1 !important;
+  box-shadow: 0 0 10px green;
+  background-color: #4caf50 !important;
+}
+
+.active-incomplete {
+  opacity: 1 !important;
+  box-shadow: 0 0 10px #aaa;
+  background-color: #aaa !important;
 }
 
 .wizard-steps {
