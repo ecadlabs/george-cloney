@@ -69,6 +69,7 @@ const App: React.FC = (): ReactElement => {
     setContractAddress("");
     setTxnAddress("");
     setLastOriginatedContract("");
+    setConfettiShown(false);
   };
 
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {

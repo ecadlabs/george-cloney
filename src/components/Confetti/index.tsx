@@ -14,7 +14,7 @@ const Confetti = (props: ConfettiProps): ReactElement | null => {
       setShow(!showRef);
       setConfettiShown(true);
     }, 2850);
-  });
+  }, [setConfettiShown]);
 
   if (!show) return null;
   return (
