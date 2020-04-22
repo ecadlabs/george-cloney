@@ -30,15 +30,18 @@ const App: React.FC = (): ReactElement => {
   const [contractNetwork, setContractNetwork] = useState<string>("mainnet");
   const [contractAddress, setContractAddress] = useState<string>("");
   const [txnAddress, setTxnAddress] = useState<string>("");
-  const [lastLaunchedContract, setLastLaunchedContract] = useState<string>("");
+  const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
 
   useEffect(() => {
     if (txnAddress) {
-      localStorage.setItem("lastLaunchedContract", txnAddress);
+      localStorage.setItem("lastLaunchedContract", `${txnAddress},${launchNetwork}`);
+      setLastOriginatedContract(`${txnAddress},${launchNetwork}`);
     }
-    const lastLaunchedContract = localStorage.getItem("lastLaunchedContract") as string;
-    setLastLaunchedContract(lastLaunchedContract);
-  }, [txnAddress]);
+    if (!txnAddress) {
+      const lastLaunchedContract = localStorage.getItem("lastLaunchedContract") as string;
+      setLastOriginatedContract(lastLaunchedContract);
+    }
+  }, [launchNetwork, txnAddress]);
 
   const handleError = (error: any): void => {
     setLoading(false);
@@ -63,7 +66,7 @@ const App: React.FC = (): ReactElement => {
     setContractNetwork("mainnet");
     setContractAddress("");
     setTxnAddress("");
-    setLastLaunchedContract("");
+    setLastOriginatedContract("");
   };
 
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {
@@ -231,8 +234,7 @@ const App: React.FC = (): ReactElement => {
           code={code}
           currentStep={currentStep}
           reset={resetGeorgeCloney}
-          launchNetwork={launchNetwork}
-          lastLaunchedContract={lastLaunchedContract}
+          lastOriginatedContract={lastOriginatedContract}
         />
       </div>
       <div className="built-with-taquito-logo">

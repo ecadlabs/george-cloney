@@ -1,9 +1,8 @@
 import { MichelsonV1Expression } from "@taquito/rpc";
 
-export interface LastLaunchedContractProps {
+export interface LastOriginatedContractProps {
   reset: () => void;
-  lastLaunchedContract: string;
-  launchNetwork: string;
+  lastOriginatedContract: string;
   currentStep: number;
   code: MichelsonV1Expression[];
 }

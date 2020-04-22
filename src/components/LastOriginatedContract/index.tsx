@@ -1,16 +1,17 @@
-/* eslint-disable no-mixed-operators */
 import React, { ReactElement } from "react";
-import { LastLaunchedContractProps } from "./types";
+import { LastOriginatedContractProps } from "./types";
 import "./styles.css";
 
-const LastOriginatedContract = (props: LastLaunchedContractProps): ReactElement => {
-  const { lastLaunchedContract, launchNetwork, reset, currentStep, code } = props;
-
+const LastOriginatedContract = (props: LastOriginatedContractProps): ReactElement => {
+  const { lastOriginatedContract, reset, currentStep, code } = props;
+  const networkAndContractInfo = lastOriginatedContract.split(",");
+  const lastOriginatedAddress = networkAndContractInfo[0];
+  const lastOriginatedNetwork = networkAndContractInfo[1];
   return (
     <>
       <div className="last-originated-contract-div">
-        {lastLaunchedContract && (
-          <a href={`https://${launchNetwork}.tzstats.com/${lastLaunchedContract}`}>
+        {lastOriginatedContract && (
+          <a href={`https://${lastOriginatedNetwork}.tzstats.com/${lastOriginatedAddress}`}>
             <button>View Last Originated Contract</button>
           </a>
         )}
