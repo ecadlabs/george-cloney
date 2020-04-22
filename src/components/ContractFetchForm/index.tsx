@@ -12,6 +12,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
     handleContractSubmit,
     loading,
     currentStep,
+    setCurrentStep,
     contractAddress,
     validationError,
   } = props;
@@ -31,6 +32,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
   if (currentStep !== 1) return null;
   return (
     <>
+      <span className="left-arrow-hidden"></span>
       <div id="dialog">
         <h2>Fetch Contract Code</h2>
         <label id="react-select-label">Choose Network</label>
@@ -60,6 +62,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
           </div>
         </div>
       </div>
+      <span onClick={() => setCurrentStep(2)} className="right"></span>
     </>
   );
 };

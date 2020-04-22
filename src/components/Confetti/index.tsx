@@ -1,7 +1,9 @@
 import React, { ReactElement, useState, useEffect, useRef } from "react";
+import { ConfettiProps } from "./types";
 import "./styles.css";
 
-const Confetti = (): ReactElement | null => {
+const Confetti = (props: ConfettiProps): ReactElement | null => {
+  const { setConfettiShown } = props;
   const [show, setShow] = useState<boolean>(true);
 
   const showRef = useRef(show);
@@ -9,8 +11,8 @@ const Confetti = (): ReactElement | null => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log("turning off");
       setShow(!showRef);
+      setConfettiShown(true);
     }, 2850);
   });
 

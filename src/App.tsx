@@ -32,6 +32,7 @@ const App: React.FC = (): ReactElement => {
   const [contractAddress, setContractAddress] = useState<string>("");
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
+  const [confettiShown, setConfettiShown] = useState<boolean>(false);
 
   useEffect(() => {
     if (txnAddress) {
@@ -185,7 +186,7 @@ const App: React.FC = (): ReactElement => {
   return (
     <>
       <Navbar />
-      {currentStep === 1 && <Confetti />}
+      {currentStep === 4 && !confettiShown && <Confetti setConfettiShown={setConfettiShown} />}
       <div id="wallet">
         <div className="title-group">
           <img alt="George Cloney signature in cursive" src="george-cloney-title.png" />
@@ -213,6 +214,7 @@ const App: React.FC = (): ReactElement => {
             validationError={validationError}
             contractAddress={contractAddress}
             currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
             loading={loading}
             handleContractSubmit={handleContractCodeSubmit}
             updateContractAddress={updateContractAddress}
@@ -229,9 +231,14 @@ const App: React.FC = (): ReactElement => {
             handleNetworkChange={handleLaunchNetworkChange}
             network={launchNetwork}
           />
-          <ContractResultForm txnAddress={txnAddress} currentStep={currentStep} launchNetwork={launchNetwork} />
+          <ContractResultForm
+            txnAddress={txnAddress}
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+            launchNetwork={launchNetwork}
+          />
         </div>
-        <Editor currentStep={currentStep} code={code} storage={storage} />
+        <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
         <LastOriginatedContract
           code={code}
           currentStep={currentStep}

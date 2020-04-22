@@ -3,10 +3,11 @@ import { ContractResultFormProps } from "./types";
 import "./styles.css";
 
 const ContractResultForm = (props: ContractResultFormProps): ReactElement | null => {
-  const { currentStep, txnAddress, launchNetwork } = props;
+  const { currentStep, txnAddress, launchNetwork, setCurrentStep } = props;
   if (currentStep !== 4) return null;
   return (
     <>
+      <span onClick={() => setCurrentStep(3)} className="left"></span>
       <div id="dialog">
         <h2>New Originated Contract</h2>
         <label id="react-select-signer-label">Contract Address:</label>
@@ -34,6 +35,7 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
           </a>
         </div>
       </div>
+      <span className="right-arrow-hidden"></span>
     </>
   );
 };

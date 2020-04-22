@@ -5,7 +5,15 @@ import { useForm } from "react-hook-form";
 import "./styles.css";
 
 const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
-  const { updateSigner, handleNetworkChange, network, handleLaunchSubmit, loading, currentStep } = props;
+  const {
+    updateSigner,
+    handleNetworkChange,
+    network,
+    handleLaunchSubmit,
+    loading,
+    currentStep,
+    setCurrentStep,
+  } = props;
   const { register, handleSubmit } = useForm();
   const [chosenSigner, setChosenSigner] = useState<string>("");
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
@@ -28,6 +36,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
   if (currentStep !== 3) return null;
   return (
     <>
+      <span onClick={() => setCurrentStep(2)} className="left"></span>
       <div id="dialog">
         <h2>Originate Contract</h2>
         <label id="react-select-label">Choose Network</label>
@@ -72,6 +81,7 @@ const LaunchForm = (props: LaunchFormProps): ReactElement | null => {
           </div>
         </div>
       </div>
+      <span onClick={() => setCurrentStep(4)} className="right"></span>
     </>
   );
 };

@@ -243,3 +243,60 @@ li {
 #contract-code-editor {
   margin-bottom: 20px;
 }
+
+.left {
+  cursor: pointer;
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  margin-right: 1.5em;
+  margin: auto 0;
+}
+
+.left-arrow-hidden,
+.right-arrow-hidden {
+  cursor: pointer;
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  margin-right: 1.5em;
+  margin: auto 0;
+  opacity: 0 !important;
+}
+
+.left:after {
+  content: "";
+  display: inline-block;
+  margin-top: 1.05em;
+  margin-left: 0.6em;
+  width: 1em;
+  height: 1em;
+  border-top: 0.5em solid #333;
+  border-right: 0.5em solid #333;
+  -moz-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.right {
+  cursor: pointer;
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  margin-left: 1.5em;
+  margin: auto 0;
+}
+
+.right:after {
+  content: "";
+  display: inline-block;
+  margin-top: 1.05em;
+  margin-left: -0.6em;
+  width: 1em;
+  height: 1em;
+  border-top: 0.5em solid #333;
+  border-right: 0.5em solid #333;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
