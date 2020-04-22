@@ -15,11 +15,11 @@ h1 {
   width: 630px;
   margin: 0 auto;
   line-height: 2em;
-  margin-top: 70px;
+  margin-top: 50px;
 }
 
 .title-group h4 {
-  margin-top: 0px;
+  margin-top: -15px;
 }
 
 #wallet {
