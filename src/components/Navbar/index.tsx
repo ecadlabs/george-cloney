@@ -8,7 +8,7 @@ const Navbar = (): ReactElement => {
         <img height="55" width="60" alt="George Cloney logo" src="george-cloney.png" />
       </div>
       <div className="right-container">
-        <a href="https://github.com/ecadlabs/george-cloney">
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/ecadlabs/george-cloney">
           <img alt="Github logo" height="55" width="100" src="github.jpg" />
         </a>
       </div>
