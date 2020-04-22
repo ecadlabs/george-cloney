@@ -34,6 +34,14 @@ h1 {
   .title-group img {
     width: 0px;
   }
+  .built-with-taquito-logo {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    /* margin: 0 auto !important;*/
+    margin-top: 90px !important;
+    margin-bottom: -10px !important;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -215,12 +223,10 @@ li {
 }
 
 .built-with-taquito-logo {
-  margin-top: 60px;
-  margin-bottom: 30px;
+  margin-top: 14vw;
+  margin-bottom: -10vw;
   margin-right: 30px;
-  position: fixed;
-  bottom: 0;
-  right: 0;
+  margin-left: 80vw;
 }
 
 .show {
