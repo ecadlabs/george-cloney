@@ -1248,12 +1248,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/george-cloney/ff7acf7df3cdb56d704a5bd29f08fd55.js"
   },
   {
-    "revision": "5bf5b1897de84e4c1d8cc1ab98195881",
+    "revision": "f3f159af24309a05d1019ab6964dbba5",
     "url": "/george-cloney/index.html"
   },
   {
-    "revision": "6d0af80d39adb367de5c",
-    "url": "/george-cloney/static/css/main.8187a94c.chunk.css"
+    "revision": "401598a1d8a785eb3a0e",
+    "url": "/george-cloney/static/css/main.2fa81fca.chunk.css"
   },
   {
     "revision": "94abd313593229145317",
@@ -1264,7 +1264,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/george-cloney/static/js/2.8c847c2b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6d0af80d39adb367de5c",
+    "revision": "401598a1d8a785eb3a0e",
     "url": "/george-cloney/static/js/main.b567c41b.chunk.js"
   },
   {
