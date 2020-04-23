@@ -178,8 +178,6 @@ const App: React.FC = (): ReactElement => {
   };
 
   const updateContractAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    alert("contract address changed");
-    alert(event.target.value);
     const isValid = validateContractAddress(event.target.value) === ValidationResult.VALID || false;
     // Update the contract address that we'll be pulling data from if it's valid
     if (isValid) {
