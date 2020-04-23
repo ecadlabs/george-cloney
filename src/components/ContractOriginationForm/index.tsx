@@ -84,7 +84,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
           </div>
         </div>
       </div>
-      {txnAddress ? (
+      {txnAddress.length > 0 ? (
         <span onClick={() => setCurrentStep(4)} className="right-next-step"></span>
       ) : (
         <span className="right"></span>

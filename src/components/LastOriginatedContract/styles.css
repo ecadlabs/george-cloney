@@ -14,8 +14,16 @@
   margin-top: 10px;
 }
 
+.last-originated-contract-div button:focus {
+  outline: none;
+}
+
 .reset-button {
   background-color: red !important;
   border: 1px solid red !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.reset-button:focus {
+  outline: none;
 }

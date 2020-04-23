@@ -28,11 +28,11 @@ const WizardControls = (props: WizardControlsProps): ReactElement => {
           return "step";
         }
       case 3:
-        if (signer && currentStep === 3) {
+        if (txnAddress && currentStep === 3) {
           return "step active-completed";
-        } else if (signer && currentStep !== 3) {
+        } else if (txnAddress && currentStep !== 3) {
           return "step completed";
-        } else if (!signer && currentStep === 3) {
+        } else if (!txnAddress && currentStep === 3) {
           return "step active";
         } else {
           return "step";
