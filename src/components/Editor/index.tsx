@@ -1,10 +1,13 @@
 import React, { ReactElement } from "react";
 import { EditorProps } from "./types";
 import { split as SplitEditor } from "react-ace";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+
 import "./styles.css";
 
 const Editor = (props: EditorProps): ReactElement | null => {
   const { code, storage, currentStep, setCurrentStep } = props;
+  const { width } = useWindowDimensions();
 
   const initialCodeValue = code.length > 0 ? "// Contract Code \n" + JSON.stringify(code, null, 2) : "// Contract Code";
   const initialStorageValue = storage
@@ -12,6 +15,7 @@ const Editor = (props: EditorProps): ReactElement | null => {
     : "// Initial Storage Code ";
 
   if (currentStep !== 2) return null;
+
   return (
     <div className="editor-container" style={{ display: "flex", justifyContent: "center" }}>
       <span onClick={() => setCurrentStep(1)} className="left"></span>
@@ -19,14 +23,14 @@ const Editor = (props: EditorProps): ReactElement | null => {
         {/* This is because of a types issue on Ace SplitEditor 
             // @ts-ignore */}
         <SplitEditor
-          width="700px"
+          width={width >= 800 ? "700px" : width >= 600 ? "500px" : "350px"}
           height="300px"
           mode="json"
           theme="monokai"
-          tabSize={2}
+          tabSize={1}
           splits={2}
           style={{ borderRadius: "5px", margin: "0 auto" }}
-          orientation="beside"
+          orientation={width >= 800 ? "beside" : "below"}
           value={[initialCodeValue, initialStorageValue]}
           name="contract-code-editor"
           editorProps={{ $blockScrolling: true }}
