@@ -38,17 +38,14 @@ h1 {
     justify-content: center !important;
   }
   .built-with-taquito-logo img {
-    padding-bottom: 0px;
-    padding-top: 10px;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
   }
 }
 
 @media only screen and (max-width: 500px) {
   .title-group {
     width: 300px;
-  }
-  .built-with-taquito-logo img {
-    padding-top: 0px;
   }
 }
 
