@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import Creatable from "react-select/creatable";
+import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
 import { useForm } from "react-hook-form";
@@ -99,7 +100,11 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         <div id="content">
           <div id="contract-launch-form">
             <form onSubmit={handleSubmit(handleLaunchSubmit)}>
-              <input disabled={loading || !chosenSigner ? true : false} id="show-balance-button" type="submit" />
+              {loading ? (
+                <LoadingSpinner className="loading-spinner-origination" />
+              ) : (
+                <input disabled={!chosenSigner ? true : false} id="show-balance-button" type="submit" />
+              )}
             </form>
           </div>
         </div>

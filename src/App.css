@@ -35,7 +35,7 @@ h1 {
     width: 300px;
   }
   .built-with-taquito-logo {
-    justify-content: center;
+    justify-content: center !important;
   }
 }
 
@@ -365,4 +365,31 @@ li {
     -ms-transform: translateX(0px);
     transform: translateX(0px);
   }
+}
+
+.loading-spinner {
+  display: flex;
+  width: 54px;
+  border: 1px solid#4caf50;
+  margin-top: 47px;
+  height: 32px;
+  border-radius: 3px;
+  background-color: #4caf50;
+}
+
+.loading-spinner-origination {
+  display: flex;
+  width: 54px;
+  border: 1px solid#4caf50;
+  height: 32px;
+  border-radius: 3px;
+  background-color: #4caf50;
+}
+
+.loading-spinner-origination div {
+  margin: 9px auto !important;
+}
+
+.loading-spinner div {
+  margin: 9px auto !important;
 }
