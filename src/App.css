@@ -42,12 +42,12 @@ h1 {
     padding-top: 0px !important;
   }
   .right-next-step:after,
-  .left-next-step:after {
-    margin-left: -0.8em !important;
+  .right:after {
+    margin-left: -0.6em !important;
   }
-  .right:after,
-  .left:after {
-    margin-left: -0.8em !important;
+  .left:after,
+  .left-next-step:after {
+    margin-left: -0.6em !important;
   }
 }
 
