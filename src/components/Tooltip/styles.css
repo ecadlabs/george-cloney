@@ -1,0 +1,21 @@
+.tooltip {
+  display: inline-flex;
+  background-color: #aaa;
+  color: white;
+  font-size: 18px;
+  border-radius: 50%;
+  padding-top: 6px !important;
+  padding-right: 6px;
+  padding-left: 6px;
+  padding-bottom: 2px;
+  margin-left: 4px;
+}
+
+.tooltip:hover {
+  cursor: pointer;
+}
+
+.tooltip span {
+  margin-top: -4px;
+  margin-bottom: -2px;
+}

@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import ToolTipComponent from "../Tooltip";
 import { ContractFetchFormProps } from "./types";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
@@ -18,8 +19,8 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
     validationError,
     code,
   } = props;
-  const { register, handleSubmit, errors } = useForm();
-  console.log(errors);
+  const { register, handleSubmit } = useForm();
+
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
   const options = [
     { value: "mainnet", label: "Mainnet" },
@@ -36,7 +37,19 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
     <>
       <span className="left-arrow-hidden"></span>
       <div id="dialog">
-        <h2>Fetch Contract Code</h2>
+        <h2>
+          Fetch Contract Code{" "}
+          <ToolTipComponent
+            title={
+              <>
+                <h5>Step 1: Fetch Smart Contract Code</h5>
+                <p>{"In this step, George Cloney will fetch you any smart contract code from any Tezos network."}</p>
+                <p>{"From here, you'll be able to inspect the Smart Contract code and initial storage next."}</p>
+              </>
+            }
+            placement="bottom"
+          />
+        </h2>
         <label id="react-select-label">Choose Network</label>
         <Select className="network-select" options={options} value={selectValue} onChange={handleChange} />
         <div id="content">
