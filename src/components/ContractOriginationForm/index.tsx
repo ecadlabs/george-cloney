@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react";
+import Creatable from "react-select/creatable";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
-import Select from "react-select";
 import { useForm } from "react-hook-form";
 import "./styles.css";
 
@@ -18,12 +18,15 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
   } = props;
   const { register, handleSubmit } = useForm();
   const [chosenSigner, setChosenSigner] = useState<string>("");
-  const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
+  const selectValue = {
+    value: network,
+    label: network.includes("http") ? network : network.charAt(0).toUpperCase() + network.slice(1),
+  };
 
   const options = [
     { value: "mainnet", label: "Mainnet" },
     { value: "carthagenet", label: "Carthagenet" },
-    { value: "sandbox", label: "Sandbox" },
+    { value: "http://localhost:9999", label: "Custom" },
   ];
 
   const handleChange = (selectedOption: any) => {
@@ -60,7 +63,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
           />
         </h2>
         <label id="react-select-label">Choose Network</label>
-        <Select
+        <Creatable
           name="address"
           ref={register}
           className="network-select"

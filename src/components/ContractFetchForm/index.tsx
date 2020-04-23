@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import ToolTipComponent from "../Tooltip";
 import { ContractFetchFormProps } from "./types";
-import Select from "react-select";
+import Creatable from "react-select/creatable";
 import { useForm } from "react-hook-form";
 import "./styles.css";
 
@@ -21,11 +21,14 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
   } = props;
   const { register, handleSubmit } = useForm();
 
-  const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
+  const selectValue = {
+    value: network,
+    label: network.includes("http") ? network : network.charAt(0).toUpperCase() + network.slice(1),
+  };
   const options = [
     { value: "mainnet", label: "Mainnet" },
     { value: "carthagenet", label: "Carthagenet" },
-    { value: "sandbox", label: "Sandbox" },
+    { value: "https://localhost:9999", label: "Custom" },
   ];
 
   const handleChange = (selectedOption: any) => {
@@ -50,8 +53,8 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
             placement="bottom"
           />
         </h2>
-        <label id="react-select-label">Choose Network</label>
-        <Select className="network-select" options={options} value={selectValue} onChange={handleChange} />
+        <label id="react-select-label">Choose Network or Insert Custom Network</label>
+        <Creatable className="network-select" options={options} value={selectValue} onChange={handleChange} />
         <div id="content">
           <label id="react-select-lookup-label">Enter Contract Address</label>
           <div id="contract-code-form">

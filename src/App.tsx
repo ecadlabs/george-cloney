@@ -34,10 +34,12 @@ const App: React.FC = (): ReactElement => {
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
 
   useEffect(() => {
+    // If new contract is deployed update localStorage and Last Originated Contract button
     if (txnAddress) {
       localStorage.setItem("lastLaunchedContract", `${txnAddress},${launchNetwork}`);
       setLastOriginatedContract(`${txnAddress},${launchNetwork}`);
     }
+    // If there's no contract deployed yet check local storage to see if we have a past deployed one
     if (!txnAddress) {
       const lastLaunchedContract = localStorage.getItem("lastLaunchedContract") as string;
       setLastOriginatedContract(lastLaunchedContract);
@@ -45,7 +47,7 @@ const App: React.FC = (): ReactElement => {
   }, [launchNetwork, txnAddress]);
 
   const handleError = (error: any): void => {
-    console.log(error);
+    // Get state ready for Snackbar displays
     setLoading(false);
     showSnackbar(false);
     setLoadingMessage("");
@@ -55,6 +57,8 @@ const App: React.FC = (): ReactElement => {
       setError(error?.message ?? error);
     }
     showSnackbar(true);
+    // Remove error after 5 seconds
+    setTimeout(() => setError(""), 5000);
   };
 
   const resetGeorgeCloney = (): void => {
