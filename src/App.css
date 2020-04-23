@@ -37,6 +37,10 @@ h1 {
   .built-with-taquito-logo {
     justify-content: center !important;
   }
+  .built-with-taquito-logo img {
+    padding-bottom: 0px;
+    padding-top: 10px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
