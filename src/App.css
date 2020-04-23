@@ -262,8 +262,8 @@ li {
   height: 3em;
   margin-left: 1.5em;
   margin: auto 0;
-  -webkit-animation: bounceRight 2s infinite;
-  animation: bounceRight 2s infinite;
+  -webkit-animation: bounceRight 1.5s infinite;
+  animation: bounceRight 1.5s infinite;
 }
 
 .right-next-step:after {
