@@ -45,6 +45,10 @@ h1 {
   .left-next-step:after {
     margin-left: -0.8em !important;
   }
+  .right:after,
+  .left:after {
+    margin-left: -0.8em !important;
+  }
 }
 
 @media only screen and (max-width: 500px) {
