@@ -178,6 +178,8 @@ const App: React.FC = (): ReactElement => {
   };
 
   const updateContractAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    alert("contract address changed");
+    alert(event.target.value);
     const isValid = validateContractAddress(event.target.value) === ValidationResult.VALID || false;
     // Update the contract address that we'll be pulling data from if it's valid
     if (isValid) {
@@ -188,6 +190,7 @@ const App: React.FC = (): ReactElement => {
     if (event.target.value === "") return setValidationError("");
     // Set validation error if address is invalid
     setValidationError("Contract addresses need to be 36 characters");
+    setContractAddress(event.target.value.trim());
   };
 
   return (

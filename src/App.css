@@ -45,9 +45,8 @@ h1 {
   .right:after {
     margin-left: -0.6em !important;
   }
-  .left:after,
-  .left-next-step:after {
-    margin-left: -0.6em !important;
+  .left:after {
+    margin-right: -0.6em !important;
   }
 }
 
