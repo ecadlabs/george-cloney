@@ -3,7 +3,7 @@ import { WizardControlsProps } from "./types";
 import "./styles.css";
 
 const WizardControls = (props: WizardControlsProps): ReactElement => {
-  const { code, signer, currentStep, txnAddress } = props;
+  const { code, currentStep, txnAddress } = props;
 
   const generateClasses = (step: number) => {
     switch (step) {
