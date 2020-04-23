@@ -90,9 +90,9 @@ const App: React.FC = (): ReactElement => {
   };
 
   const handleContractNetworkChange = (network: string): void => {
-    // Empty provider if network is sandbox so that user can provide a local node address
-    if (network === "sandbox") {
-      setProvider("");
+    // If network is a custom network update accordingly
+    if (network !== "mainnet" && network !== "carthagenet") {
+      setProvider(network);
     }
     setProvider(`https://api.tez.ie/rpc/${network}`);
     setContractNetwork(network);

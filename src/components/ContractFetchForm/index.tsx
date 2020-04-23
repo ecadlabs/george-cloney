@@ -16,7 +16,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
     loading,
     currentStep,
     setCurrentStep,
-    contractAddress,
+    // contractAddress,
     validationError,
     code,
   } = props;
@@ -79,7 +79,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
               {/* : (
                 <input
                   className="fetch-contract-button"
-                  disabled={loading || !contractAddress ? true : false}
+                  disabled={loading || !contractAddress || !validationError ? true : false}
                   id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`}
                   type="submit"
                   value="Fetch"
