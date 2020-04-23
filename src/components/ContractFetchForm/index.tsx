@@ -13,7 +13,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
     network,
     updateContractAddress,
     handleContractSubmit,
-    loading,
+    // loading,
     currentStep,
     setCurrentStep,
     // contractAddress,
@@ -71,12 +71,12 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
               />
               {validationError !== "" && <span className="address-validation">Invalid Contract Address</span>}
               <br />
-              {loading && (
+              {
                 <div className="fetch-contract-button">
                   <LoadingSpinner />
                 </div>
-              )}
-              {/* : (
+              }
+              {/* : (loading &&
                 <input
                   className="fetch-contract-button"
                   disabled={loading || !contractAddress || !validationError ? true : false}
