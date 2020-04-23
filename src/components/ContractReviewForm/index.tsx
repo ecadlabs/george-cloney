@@ -3,12 +3,12 @@ import { split as SplitEditor } from "react-ace";
 import "ace-builds/webpack-resolver";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
-import { EditorProps } from "./types";
+import { ContractReviewFormProps } from "./types";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 import "./styles.css";
 
-const Editor = (props: EditorProps): ReactElement | null => {
+const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null => {
   const { code, storage, currentStep, setCurrentStep } = props;
   const { width } = useWindowDimensions();
 
@@ -48,4 +48,4 @@ const Editor = (props: EditorProps): ReactElement | null => {
   );
 };
 
-export default Editor;
+export default ContractReviewForm;

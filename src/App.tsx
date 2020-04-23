@@ -2,7 +2,7 @@ import React, { useState, ReactElement, useEffect } from "react";
 import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { ValidationResult, validateContractAddress } from "@taquito/utils";
-import Editor from "./components/Editor";
+import ContractReviewForm from "./components/ContractReviewForm";
 import ContractFetchForm from "./components/ContractFetchForm";
 import ContractOriginationForm from "./components/ContractOriginationForm";
 import ContractResultForm from "./components/ContractResultForm";
@@ -242,7 +242,7 @@ const App: React.FC = (): ReactElement => {
             launchNetwork={launchNetwork}
           />
         </div>
-        <Editor setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
+        <ContractReviewForm setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
         <LastOriginatedContract
           code={code}
           currentStep={currentStep}
