@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import { split as SplitEditor } from "react-ace";
-import "ace-builds/webpack-resolver";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 import { ContractReviewFormProps } from "./types";
@@ -12,10 +11,11 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
   const { code, storage, currentStep, setCurrentStep } = props;
   const { width } = useWindowDimensions();
 
-  const initialCodeValue = code.length > 0 ? "// Contract Code \n" + JSON.stringify(code, null, 2) : "// Contract Code";
+  const initialCodeValue =
+    code.length > 0 ? "/* Contract Code */ \n" + JSON.stringify(code, null, 2) : "/* Contract Code */";
   const initialStorageValue = storage
-    ? "// Initial Storage Code \n" + JSON.stringify(storage, null, 2)
-    : "// Initial Storage Code ";
+    ? "/* Initial Storage Code */ \n" + JSON.stringify(storage, null, 2)
+    : "/* Initial Storage Code */";
 
   if (currentStep !== 2) return null;
 

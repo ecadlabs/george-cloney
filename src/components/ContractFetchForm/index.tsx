@@ -21,7 +21,6 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
     code,
   } = props;
   const { register, handleSubmit } = useForm();
-
   const selectValue = {
     value: network,
     label: network.includes("http") ? network : network.charAt(0).toUpperCase() + network.slice(1),
@@ -29,10 +28,12 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
   const options = [
     { value: "mainnet", label: "Mainnet" },
     { value: "carthagenet", label: "Carthagenet" },
-    { value: "https://localhost:9999", label: "Custom" },
+    { value: "http://localhost:9999", label: "Flextesa Default" },
+    { value: "", label: "Custom" },
   ];
 
   const handleChange = (selectedOption: any) => {
+    console.log(selectedOption);
     handleNetworkChange(selectedOption.value);
   };
 
@@ -55,7 +56,13 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
           />
         </h2>
         <label id="react-select-label">Choose Network or Insert Custom Network</label>
-        <Creatable className="network-select" options={options} value={selectValue} onChange={handleChange} />
+        <Creatable
+          className="network-select"
+          options={options}
+          value={selectValue}
+          onChange={handleChange}
+          formatCreateLabel={() => "Add Custom Network"}
+        />
         <div id="content">
           <label id="react-select-lookup-label">Enter Contract Address</label>
           <div id="contract-code-form">
