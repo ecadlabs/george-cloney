@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import ToolTipComponent from "../Tooltip";
+import LoadingSpinner from "../LoadingSpinner";
 import { ContractFetchFormProps } from "./types";
 import Creatable from "react-select/creatable";
 import { useForm } from "react-hook-form";
@@ -70,13 +71,19 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
               />
               {validationError !== "" && <span className="address-validation">Invalid Contract Address</span>}
               <br />
-              <input
-                className="fetch-contract-button"
-                disabled={loading || !contractAddress ? true : false}
-                id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`}
-                type="submit"
-                value="Fetch"
-              />
+              {loading ? (
+                <div className="fetch-contract-button">
+                  <LoadingSpinner />
+                </div>
+              ) : (
+                <input
+                  className="fetch-contract-button"
+                  disabled={loading || !contractAddress ? true : false}
+                  id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`}
+                  type="submit"
+                  value="Fetch"
+                />
+              )}
             </form>
           </div>
         </div>
