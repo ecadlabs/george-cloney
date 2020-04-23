@@ -11,6 +11,7 @@ import LastOriginatedContract from "./components/LastOriginatedContract";
 import WizardControls from "./components/WizardControls";
 import Navbar from "./components/Navbar";
 import Confetti from "./components/Confetti";
+import ErrorBoundary from "react-error-boundary";
 import setSignerMethod from "./utils/set-signer-method";
 import "./App.css";
 
@@ -44,10 +45,15 @@ const App: React.FC = (): ReactElement => {
   }, [launchNetwork, txnAddress]);
 
   const handleError = (error: any): void => {
+    console.log(error);
     setLoading(false);
     showSnackbar(false);
     setLoadingMessage("");
-    setError(error?.message ?? error);
+    if (error && error.status === 404) {
+      setError(error.message + "\n This typically means the contract was not found on this network.");
+    } else {
+      setError(error?.message ?? error);
+    }
     showSnackbar(true);
   };
 
@@ -143,19 +149,23 @@ const App: React.FC = (): ReactElement => {
   };
 
   const handleContractCodeSubmit = async (): Promise<any> => {
-    // Grab contracts code from the blockchain and add code to the editors
-    setLoading(true);
-    setLoadingMessage("Loading contract code...");
-    showSnackbar(true);
-    await Tezos.setProvider({ rpc: provider });
+    try {
+      // Grab contracts code from the blockchain and add code to the editors
+      setLoading(true);
+      setLoadingMessage("Loading contract code...");
+      showSnackbar(true);
+      await Tezos.setProvider({ rpc: provider });
 
-    // Call contract and get code
-    const newContract = await Tezos.contract.at(contractAddress);
-    setCode(newContract.script.code);
-    setStorage(newContract.script.storage);
-    setCurrentStep(2);
-    setLoadingMessage("");
-    setLoading(false);
+      // Call contract and get code
+      const newContract = await Tezos.contract.at(contractAddress);
+      setCode(newContract.script.code);
+      setStorage(newContract.script.storage);
+      setCurrentStep(2);
+      setLoadingMessage("");
+      setLoading(false);
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   const closeSnackbar = (): void => {
@@ -177,7 +187,7 @@ const App: React.FC = (): ReactElement => {
   };
 
   return (
-    <>
+    <ErrorBoundary onError={handleError}>
       {currentStep === 4 && !confettiShown && <Confetti setConfettiShown={setConfettiShown} />}
       <Navbar />
       <div id="wallet">
@@ -198,6 +208,7 @@ const App: React.FC = (): ReactElement => {
         <WizardControls txnAddress={txnAddress} currentStep={currentStep} code={code} />
         <div id="main-forms">
           <ContractFetchForm
+            handleError={handleError}
             code={code}
             validationError={validationError}
             contractAddress={contractAddress}
@@ -240,7 +251,7 @@ const App: React.FC = (): ReactElement => {
           <img height="56" width="128" alt="Built with Taquito logo" src="built-with-taquito.png" />
         </a>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

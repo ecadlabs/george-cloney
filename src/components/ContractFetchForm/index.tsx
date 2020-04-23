@@ -1,12 +1,13 @@
 import React, { ReactElement } from "react";
-import { ContractFormProps } from "./types";
+import { ContractFetchFormProps } from "./types";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import "./styles.css";
 
-const ContractForm = (props: ContractFormProps): ReactElement | null => {
+const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null => {
   const {
     handleNetworkChange,
+    handleError,
     network,
     updateContractAddress,
     handleContractSubmit,
@@ -17,8 +18,8 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
     validationError,
     code,
   } = props;
-  const { register, handleSubmit } = useForm();
-
+  const { register, handleSubmit, errors } = useForm();
+  console.log(errors);
   const selectValue = { value: network, label: network.charAt(0).toUpperCase() + network.slice(1) };
   const options = [
     { value: "mainnet", label: "Mainnet" },
@@ -48,8 +49,8 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
                 placeholder="Contract Address"
                 id="address-input"
                 name="address"
-                value={contractAddress}
                 ref={register}
+                onErrorCapture={handleError}
               />
               {validationError !== "" && <span className="address-validation">Invalid Contract Address</span>}
               <br />
@@ -73,4 +74,4 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
   );
 };
 
-export default ContractForm;
+export default ContractFetchForm;

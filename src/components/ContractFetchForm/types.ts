@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { MichelsonV1Expression } from "@taquito/rpc";
 
-export interface ContractFormProps {
+export interface ContractFetchFormProps {
+  handleError: (error: any) => void;
   handleNetworkChange: (network: string) => void;
   updateContractAddress: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleContractSubmit: () => void;
