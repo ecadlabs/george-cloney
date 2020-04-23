@@ -4,9 +4,9 @@ import "./styles.css";
 
 const LastOriginatedContract = (props: LastOriginatedContractProps): ReactElement => {
   const { lastOriginatedContract, reset, currentStep, code } = props;
-  const networkAndContractInfo = lastOriginatedContract.split(",");
-  const lastOriginatedAddress = networkAndContractInfo[0];
-  const lastOriginatedNetwork = networkAndContractInfo[1];
+  const networkAndContractInfo = lastOriginatedContract ? lastOriginatedContract.split(",") : "";
+  const lastOriginatedAddress = networkAndContractInfo[0] ? networkAndContractInfo[0] : "";
+  const lastOriginatedNetwork = networkAndContractInfo[1] ? networkAndContractInfo[1] : "";
 
   return (
     <>

@@ -6,25 +6,24 @@
   margin-left: 20px;
   margin-top: 0px;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .contract-result-button {
-  border: 1px solid #4caf50;
+  border: 2px solid #35636e;
   border-radius: 3px;
   font-size: 11px;
   padding: 10px;
   margin-bottom: 8px;
   margin-right: 10px;
   text-transform: uppercase;
-  background-color: #4caf50;
-  color: white;
+  background-color: white;
+  color: #35636e;
 }
 
 .contract-result-button:hover {
-  background-color: white;
-  color: #4caf50;
-  border: 1px solid #4caf50;
+  background-color: #35636e;
+  color: white;
   cursor: pointer;
 }
 

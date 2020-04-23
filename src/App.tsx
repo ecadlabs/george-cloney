@@ -13,8 +13,6 @@ import Navbar from "./components/Navbar";
 import Confetti from "./components/Confetti";
 import setSignerMethod from "./utils/set-signer-method";
 import "./App.css";
-import "ace-builds/src-noconflict/mode-json";
-import "ace-builds/src-noconflict/theme-monokai";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -156,7 +154,6 @@ const App: React.FC = (): ReactElement => {
     setCode(newContract.script.code);
     setStorage(newContract.script.storage);
     setCurrentStep(2);
-    setContractAddress("");
     setLoadingMessage("");
     setLoading(false);
   };

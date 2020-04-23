@@ -1,6 +1,9 @@
 import React, { ReactElement } from "react";
-import { EditorProps } from "./types";
 import { split as SplitEditor } from "react-ace";
+import "ace-builds/webpack-resolver";
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/theme-monokai";
+import { EditorProps } from "./types";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 import "./styles.css";

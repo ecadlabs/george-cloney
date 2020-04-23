@@ -48,6 +48,7 @@ const ContractForm = (props: ContractFormProps): ReactElement | null => {
                 placeholder="Contract Address"
                 id="address-input"
                 name="address"
+                value={contractAddress}
                 ref={register}
               />
               {validationError !== "" && <span className="address-validation">Invalid Contract Address</span>}
