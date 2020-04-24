@@ -16,7 +16,7 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
   const initialStorageValue = storage
     ? "/* Initial Storage Code */ \n" + JSON.stringify(storage, null, 2)
     : "/* Initial Storage Code */";
-
+  const editorWidth = width >= 800 ? `${width - 200}px` : width >= 600 ? "500px" : "350px";
   if (currentStep !== 2) return null;
 
   return (
@@ -26,7 +26,7 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
         {/* This is because of a types issue on Ace SplitEditor 
             // @ts-ignore */}
         <SplitEditor
-          width={width >= 800 ? `${width - 200}px` : width >= 600 ? "500px" : "350px"}
+          width={editorWidth}
           height="300px"
           mode="json"
           theme="monokai"
