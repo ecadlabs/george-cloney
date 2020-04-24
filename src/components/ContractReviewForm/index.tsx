@@ -26,7 +26,7 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
         {/* This is because of a types issue on Ace SplitEditor 
             // @ts-ignore */}
         <SplitEditor
-          width={width >= 800 ? "700px" : width >= 600 ? "500px" : "350px"}
+          width={width >= 800 ? `${width - 200}px` : width >= 600 ? "500px" : "350px"}
           height="300px"
           mode="json"
           theme="monokai"
