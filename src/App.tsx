@@ -99,6 +99,35 @@ const App: React.FC = (): ReactElement => {
     setContractNetwork(network);
   };
 
+  const handleContractCodeSubmit = async (): Promise<any> => {
+    try {
+      // Make sure state on steps 2-4 is reset
+      setCurrentStep(1);
+      setSigner("");
+      setProvider("");
+      setCode([]);
+      setStorage("");
+      setError("");
+      setLaunchNetwork("mainnet");
+      setTxnAddress("");
+      // Grab contracts code from the blockchain and add code to the editors
+      setLoading(true);
+      setLoadingMessage("Loading contract code...");
+      showSnackbar(true);
+      await Tezos.setProvider({ rpc: provider ? provider : `https://api.tez.ie/rpc/${contractNetwork}` });
+      console.log(provider);
+      // Call contract and get code
+      const newContract = await Tezos.contract.at(contractAddress);
+      setCode(newContract.script.code);
+      setStorage(newContract.script.storage);
+      setCurrentStep(2);
+      setLoadingMessage("");
+      setLoading(false);
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   const handleContractLaunchSubmit = async (): Promise<void> => {
     // Set snackbar
     setLoading(true);
@@ -144,35 +173,6 @@ const App: React.FC = (): ReactElement => {
           setError(error?.message ?? error);
           showSnackbar(true);
         });
-    }
-  };
-
-  const handleContractCodeSubmit = async (): Promise<any> => {
-    try {
-      // Make sure state on steps 2-4 is reset
-      setCurrentStep(1);
-      setSigner("");
-      setProvider("");
-      setCode([]);
-      setStorage("");
-      setError("");
-      setLaunchNetwork("mainnet");
-      setTxnAddress("");
-      // Grab contracts code from the blockchain and add code to the editors
-      setLoading(true);
-      setLoadingMessage("Loading contract code...");
-      showSnackbar(true);
-      await Tezos.setProvider({ rpc: provider });
-
-      // Call contract and get code
-      const newContract = await Tezos.contract.at(contractAddress);
-      setCode(newContract.script.code);
-      setStorage(newContract.script.storage);
-      setCurrentStep(2);
-      setLoadingMessage("");
-      setLoading(false);
-    } catch (error) {
-      handleError(error);
     }
   };
 
