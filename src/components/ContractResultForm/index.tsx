@@ -21,7 +21,7 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
       case "mainnet":
         return `https://tezblock.io/account/${address}`;
       case "carthagenet":
-        return `https://carthagenet.tezblock.io/${address}`;
+        return `https://carthagenet.tezblock.io/account/${address}`;
       default:
         break;
     }
