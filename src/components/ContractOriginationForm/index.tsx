@@ -1,6 +1,10 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import Creatable from "react-select/creatable";
-import { generateSelectValue, selectOptions, selectStyles } from "../../utils/custom-network-select";
+import {
+  generateNetworkSelectValue,
+  networkSelectOptions,
+  networkSelectStyles,
+} from "../../utils/custom-network-select";
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
@@ -62,12 +66,12 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         </h2>
         <label id="react-select-label">Choose Network</label>
         <Creatable
-          styles={selectStyles}
+          styles={networkSelectStyles}
           name="address"
           ref={register}
           className="network-select"
-          options={selectOptions}
-          value={generateSelectValue(network)}
+          options={networkSelectOptions}
+          value={generateNetworkSelectValue(network)}
           onChange={handleChange}
         />
         <label id="react-select-signer-label">Choose Signer</label>
