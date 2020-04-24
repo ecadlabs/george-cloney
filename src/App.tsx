@@ -28,7 +28,7 @@ const App: React.FC = (): ReactElement => {
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
   const [launchNetwork, setLaunchNetwork] = useState<string>("mainnet");
   const [contractNetwork, setContractNetwork] = useState<string>("mainnet");
-  const [contractAddress, setContractAddress] = useState<string>("");
+  const [contractAddress, setContractAddress] = useState<string>("Insert contract address");
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
@@ -74,7 +74,7 @@ const App: React.FC = (): ReactElement => {
     setStorage("");
     setLaunchNetwork("mainnet");
     setContractNetwork("mainnet");
-    setContractAddress("");
+    setContractAddress("Insert contract address");
     setTxnAddress("");
     setLastOriginatedContract("");
     setConfettiShown(false);
@@ -181,18 +181,22 @@ const App: React.FC = (): ReactElement => {
     showSnackbar(false);
   };
 
-  const updateContractAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const isValid = validateContractAddress(event.target.value) === ValidationResult.VALID || false;
+  const updateContractAddress = (newContractAddress: string): void => {
+    const isValid =
+      validateContractAddress(newContractAddress) === ValidationResult.VALID ||
+      newContractAddress === "Insert contract address" ||
+      false;
+
     // Update the contract address that we'll be pulling data from if it's valid
     if (isValid) {
       setValidationError("");
-      return setContractAddress(event.target.value.trim());
+      return setContractAddress(newContractAddress.trim());
     }
     // Clear error if the invalid address is erased
-    if (event.target.value === "") return setValidationError("");
+    if (newContractAddress === "") return setValidationError("");
     // Set validation error if address is invalid
     setValidationError("Contract addresses need to be 36 characters");
-    setContractAddress(event.target.value.trim());
+    setContractAddress(newContractAddress.trim());
   };
 
   return (

@@ -2,6 +2,11 @@ import React, { ReactElement } from "react";
 import ToolTipComponent from "../Tooltip";
 import LoadingSpinner from "../LoadingSpinner";
 import { generateSelectValue, selectOptions, selectStyles } from "../../utils/custom-network-select";
+import {
+  generateContractSelectValue,
+  generateContractSelectOptions,
+  contractSelectStyles,
+} from "../../utils/custom-contract-select";
 import { ContractFetchFormProps } from "./types";
 import Creatable from "react-select/creatable";
 import { useForm } from "react-hook-form";
@@ -10,7 +15,6 @@ import "./styles.css";
 const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null => {
   const {
     handleNetworkChange,
-    handleError,
     network,
     updateContractAddress,
     handleContractSubmit,
@@ -25,6 +29,10 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
 
   const handleChange = (selectedOption: any) => {
     handleNetworkChange(selectedOption.value);
+  };
+
+  const handleContractChange = (selectedOption: any) => {
+    updateContractAddress(selectedOption.value);
   };
 
   if (currentStep !== 1) return null;
@@ -47,6 +55,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
         </h2>
         <label id="react-select-label">Choose Network or Insert Custom Network</label>
         <Creatable
+          placeholder="Insert Contract"
           styles={selectStyles}
           className="network-select"
           options={selectOptions}
@@ -58,14 +67,14 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
           <label id="react-select-lookup-label">Enter Contract Address</label>
           <div id="contract-code-form">
             <form onSubmit={handleSubmit(handleContractSubmit)}>
-              <input
-                className={validationError && "validation-error"}
-                onChange={updateContractAddress}
-                placeholder="Contract Address"
-                id="address-input"
-                name="address"
+              <Creatable
                 ref={register}
-                onErrorCapture={handleError}
+                styles={contractSelectStyles}
+                className="contract-select"
+                options={generateContractSelectOptions(network)}
+                value={generateContractSelectValue(contractAddress)}
+                onChange={handleContractChange}
+                formatCreateLabel={() => "Add Contract"}
               />
               {validationError !== "" && <span className="address-validation">Invalid Contract Address</span>}
               <br />
@@ -74,7 +83,11 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
               ) : (
                 <input
                   className="fetch-contract-button"
-                  disabled={loading || !contractAddress || validationError ? true : false}
+                  disabled={
+                    loading || !contractAddress || validationError || contractAddress === "Insert contract address"
+                      ? true
+                      : false
+                  }
                   id={`${loading ? "show-balance-button-hovered" : "show-balance-button"}`}
                   type="submit"
                   value="Fetch"

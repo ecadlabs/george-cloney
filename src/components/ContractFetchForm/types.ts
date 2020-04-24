@@ -4,7 +4,7 @@ import { MichelsonV1Expression } from "@taquito/rpc";
 export interface ContractFetchFormProps {
   handleError: (error: any) => void;
   handleNetworkChange: (network: string) => void;
-  updateContractAddress: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  updateContractAddress: (newContractAddress: string) => void;
   handleContractSubmit: () => void;
   setCurrentStep: Dispatch<SetStateAction<number>>;
   code: MichelsonV1Expression[];

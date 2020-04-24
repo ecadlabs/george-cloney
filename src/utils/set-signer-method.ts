@@ -23,17 +23,13 @@ const setSignerMethod = async (
       try {
         const httpClient = new HttpBackend();
         const { id, pkh } = await httpClient.createRequest({
-          url: `https://api.tez.ie/keys/${launchNetwork ? launchNetwork : contractNetwork}/ephemeral`,
+          url: `https://api.tez.ie/keys/carthagenet/ephemeral`,
           method: "POST",
           headers: { Authorization: "Bearer taquito-example" },
         });
-        const signer = new RemoteSigner(
-          pkh,
-          `https://api.tez.ie/keys/${launchNetwork ? launchNetwork : contractNetwork}/ephemeral/${id}/`,
-          {
-            headers: { Authorization: "Bearer taquito-example" },
-          }
-        );
+        const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/carthagenet/ephemeral/${id}/`, {
+          headers: { Authorization: "Bearer taquito-example" },
+        });
         await Tezos.setSignerProvider(signer);
       } catch (e) {
         handleError && handleError(e.message);

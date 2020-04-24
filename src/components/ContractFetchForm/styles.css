@@ -19,13 +19,27 @@
   color: black;
 }
 
+.contract-select {
+  width: 90%;
+  padding-left: 0px;
+}
+
+.contract-select > div {
+  border: 2px solid #35636e !important;
+}
+
+.contract-select > div > div > div {
+  color: black;
+}
+
 .address-validation {
   color: red;
   font-size: 13px;
   font-weight: bold;
   display: block;
   margin-left: -220px;
-  margin-bottom: -63px;
+  margin-top: 2px;
+  margin-bottom: -14px;
 }
 
 .validation-error {
@@ -39,12 +53,4 @@
   border: 1px solid red !important;
   border-radius: 3px !important;
   outline: red;
-}
-
-#contract-code-form .fetch-contract-button {
-  margin-top: 47px !important;
-}
-
-.stuff {
-  color: orange !important;
 }
