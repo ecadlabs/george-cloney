@@ -72,7 +72,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         />
         <label id="react-select-signer-label">Choose Signer</label>
         <label className="signer-toolbar">
-          {network !== "mainnet" && (
+          {network === "carthagenet" && (
             <>
               <input onClick={locallyUpdateSigner} value="ephemeral" id="ephemeral" type="radio" />
               <label

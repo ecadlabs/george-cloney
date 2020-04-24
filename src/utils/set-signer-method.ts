@@ -42,7 +42,11 @@ const setSignerMethod = async (
 
     case "tezbridge":
       Tezos.setProvider({
-        rpc: `https://api.tez.ie/rpc/${launchNetwork ? launchNetwork : contractNetwork}`,
+        rpc: `${
+          launchNetwork.includes("http")
+            ? launchNetwork
+            : `https://api.tez.ie/keys/${launchNetwork ? launchNetwork : contractNetwork}/ephemeral`
+        }`,
         signer: new TezBridgeSigner(),
       });
       // Originate a new contract

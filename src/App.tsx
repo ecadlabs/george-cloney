@@ -82,9 +82,9 @@ const App: React.FC = (): ReactElement => {
 
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {
     // Empty provider if network is sandbox so that user can provide a local node address
-    if (network !== "sandbox") {
-      await Tezos.setProvider({ rpc: `https://api.tez.ie/rpc/${network}` });
-      setProvider(`https://api.tez.ie/rpc/${network}`);
+    if (network !== "mainnet" && network !== "carthagenet") {
+      await Tezos.setProvider({ rpc: network });
+      setProvider(network);
     }
     setLaunchNetwork(network);
   };
@@ -93,6 +93,7 @@ const App: React.FC = (): ReactElement => {
     // If network is a custom network update accordingly
     if (network !== "mainnet" && network !== "carthagenet") {
       setProvider(network);
+      return setContractNetwork(network);
     }
     setProvider(`https://api.tez.ie/rpc/${network}`);
     setContractNetwork(network);
@@ -103,13 +104,7 @@ const App: React.FC = (): ReactElement => {
     setLoading(true);
     setLoadingMessage("Launching contract...");
     showSnackbar(true);
-    // Make sure provider is updated to reflect launch network in the UI
-    setProvider(`https://api.tez.ie/rpc/${launchNetwork}`);
-    // Ensure provider is set to Launch Contract div's desired network
-    await Tezos.setProvider({
-      config: { confirmationPollingTimeoutSecond: 60 },
-      rpc: `https://api.tez.ie/rpc/${launchNetwork}`,
-    });
+
     await setSignerMethod(
       signer,
       contractNetwork,
