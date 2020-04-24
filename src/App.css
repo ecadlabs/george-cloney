@@ -134,9 +134,12 @@ li {
   margin-top: 10px;
   margin-bottom: 5px;
 }
+
 #address-input::placeholder {
   color: #aaa;
+  font-family: sans-serif;
 }
+
 #address-input {
   float: left;
   padding: 10px;
@@ -145,6 +148,7 @@ li {
   border: 2px solid #35636e;
   border-radius: 3px;
   width: 85%;
+  font-family: sans-serif;
 }
 
 #show-balance-button {
