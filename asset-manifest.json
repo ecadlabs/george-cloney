@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/george-cloney/static/css/main.1e273f15.chunk.css",
+    "main.css": "/george-cloney/static/css/main.30c04b28.chunk.css",
     "main.js": "/george-cloney/static/js/main.92d05e2f.chunk.js",
     "main.js.map": "/george-cloney/static/js/main.92d05e2f.chunk.js.map",
     "runtime-main.js": "/george-cloney/static/js/runtime-main.bea24db2.js",
@@ -8,15 +8,15 @@
     "static/js/2.f7845537.chunk.js": "/george-cloney/static/js/2.f7845537.chunk.js",
     "static/js/2.f7845537.chunk.js.map": "/george-cloney/static/js/2.f7845537.chunk.js.map",
     "index.html": "/george-cloney/index.html",
-    "precache-manifest.ad661a027a4a5935c38ec8526cd18100.js": "/george-cloney/precache-manifest.ad661a027a4a5935c38ec8526cd18100.js",
+    "precache-manifest.3735523fc71d83b842243b747a0ea6aa.js": "/george-cloney/precache-manifest.3735523fc71d83b842243b747a0ea6aa.js",
     "service-worker.js": "/george-cloney/service-worker.js",
-    "static/css/main.1e273f15.chunk.css.map": "/george-cloney/static/css/main.1e273f15.chunk.css.map",
+    "static/css/main.30c04b28.chunk.css.map": "/george-cloney/static/css/main.30c04b28.chunk.css.map",
     "static/js/2.f7845537.chunk.js.LICENSE.txt": "/george-cloney/static/js/2.f7845537.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.bea24db2.js",
     "static/js/2.f7845537.chunk.js",
-    "static/css/main.1e273f15.chunk.css",
+    "static/css/main.30c04b28.chunk.css",
     "static/js/main.92d05e2f.chunk.js"
   ]
 }
