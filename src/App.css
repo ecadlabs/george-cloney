@@ -310,6 +310,10 @@ li {
   margin: auto 0;
 }
 
+.right:hover {
+  cursor: default;
+}
+
 .right:after {
   content: "";
   display: inline-block;
@@ -390,7 +394,7 @@ li {
 
 .loading-spinner-origination {
   display: flex;
-  width: 56px;
+  width: 58px;
   border: 1px solid#4caf50;
   height: 32px;
   border-radius: 3px;
@@ -399,6 +403,7 @@ li {
 
 .loading-spinner-origination div {
   margin: 9px auto !important;
+  padding-right: 1px;
 }
 
 .loading-spinner div {

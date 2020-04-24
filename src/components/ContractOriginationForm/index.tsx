@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import Creatable from "react-select/creatable";
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
@@ -23,6 +23,12 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     value: network,
     label: network.includes("http") ? network : network.charAt(0).toUpperCase() + network.slice(1),
   };
+
+  useEffect(() => {
+    return () => {
+      setChosenSigner("");
+    };
+  }, [handleSubmit]);
 
   const options = [
     { value: "mainnet", label: "Mainnet" },

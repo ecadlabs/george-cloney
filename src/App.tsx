@@ -146,6 +146,7 @@ const App: React.FC = (): ReactElement => {
           setLoading(false);
           showSnackbar(false);
           setLoadingMessage("");
+          console.log(error);
           setError(error?.message ?? error);
           showSnackbar(true);
         });
@@ -154,6 +155,15 @@ const App: React.FC = (): ReactElement => {
 
   const handleContractCodeSubmit = async (): Promise<any> => {
     try {
+      // Make sure state on steps 2-4 is reset
+      setCurrentStep(1);
+      setSigner("");
+      setProvider("");
+      setCode([]);
+      setStorage("");
+      setError("");
+      setLaunchNetwork("mainnet");
+      setTxnAddress("");
       // Grab contracts code from the blockchain and add code to the editors
       setLoading(true);
       setLoadingMessage("Loading contract code...");
@@ -162,6 +172,7 @@ const App: React.FC = (): ReactElement => {
 
       // Call contract and get code
       const newContract = await Tezos.contract.at(contractAddress);
+      console.log(newContract.script);
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
