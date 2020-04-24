@@ -146,7 +146,6 @@ const App: React.FC = (): ReactElement => {
           setLoading(false);
           showSnackbar(false);
           setLoadingMessage("");
-          console.log(error);
           setError(error?.message ?? error);
           showSnackbar(true);
         });
@@ -172,7 +171,6 @@ const App: React.FC = (): ReactElement => {
 
       // Call contract and get code
       const newContract = await Tezos.contract.at(contractAddress);
-      console.log(newContract.script);
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
