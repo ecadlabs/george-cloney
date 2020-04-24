@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import ToolTipComponent from "../Tooltip";
 import LoadingSpinner from "../LoadingSpinner";
+import { generateSelectValue, selectOptions, selectStyles } from "../../utils/custom-network-select";
 import { ContractFetchFormProps } from "./types";
 import Creatable from "react-select/creatable";
 import { useForm } from "react-hook-form";
@@ -21,19 +22,8 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
     code,
   } = props;
   const { register, handleSubmit } = useForm();
-  const selectValue = {
-    value: network,
-    label: network.includes("http") ? network : network.charAt(0).toUpperCase() + network.slice(1),
-  };
-  const options = [
-    { value: "mainnet", label: "Mainnet" },
-    { value: "carthagenet", label: "Carthagenet" },
-    { value: "http://localhost:9999", label: "Flextesa Default" },
-    { value: "", label: "Custom" },
-  ];
 
   const handleChange = (selectedOption: any) => {
-    console.log(selectedOption);
     handleNetworkChange(selectedOption.value);
   };
 
@@ -57,9 +47,10 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
         </h2>
         <label id="react-select-label">Choose Network or Insert Custom Network</label>
         <Creatable
+          styles={selectStyles}
           className="network-select"
-          options={options}
-          value={selectValue}
+          options={selectOptions}
+          value={generateSelectValue(network)}
           onChange={handleChange}
           formatCreateLabel={() => "Add Custom Network"}
         />

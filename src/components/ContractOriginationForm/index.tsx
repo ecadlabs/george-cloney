@@ -1,5 +1,6 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import Creatable from "react-select/creatable";
+import { generateSelectValue, selectOptions, selectStyles } from "../../utils/custom-network-select";
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
@@ -19,22 +20,12 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
   } = props;
   const { register, handleSubmit } = useForm();
   const [chosenSigner, setChosenSigner] = useState<string>("");
-  const selectValue = {
-    value: network,
-    label: network.includes("http") ? network : network.charAt(0).toUpperCase() + network.slice(1),
-  };
 
   useEffect(() => {
     return () => {
       setChosenSigner("");
     };
   }, [handleSubmit]);
-
-  const options = [
-    { value: "mainnet", label: "Mainnet" },
-    { value: "carthagenet", label: "Carthagenet" },
-    { value: "http://localhost:9999", label: "Custom" },
-  ];
 
   const handleChange = (selectedOption: any) => {
     handleNetworkChange(selectedOption.value);
@@ -71,11 +62,12 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         </h2>
         <label id="react-select-label">Choose Network</label>
         <Creatable
+          styles={selectStyles}
           name="address"
           ref={register}
           className="network-select"
-          options={options}
-          value={selectValue}
+          options={selectOptions}
+          value={generateSelectValue(network)}
           onChange={handleChange}
         />
         <label id="react-select-signer-label">Choose Signer</label>

@@ -134,7 +134,9 @@ li {
   margin-top: 10px;
   margin-bottom: 5px;
 }
-
+#address-input::placeholder {
+  color: #aaa;
+}
 #address-input {
   float: left;
   padding: 10px;
