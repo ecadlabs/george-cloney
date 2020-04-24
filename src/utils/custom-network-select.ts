@@ -1,5 +1,5 @@
 // React Select constants
-export const generateSelectValue = (network: string) => {
+export const generateNetworkSelectValue = (network: string) => {
   return {
     value: network,
     label: network.includes("http") ? network : network.charAt(0).toUpperCase() + network.slice(1),
@@ -7,7 +7,7 @@ export const generateSelectValue = (network: string) => {
 };
 
 // React Select constants
-export const selectOptions = [
+export const networkSelectOptions = [
   { value: "mainnet", label: "Mainnet" },
   { value: "carthagenet", label: "Carthagenet" },
   { value: "http://localhost:9999", label: "Flextesa Default" },
@@ -15,7 +15,7 @@ export const selectOptions = [
 ];
 
 // React Select styles
-export const selectStyles = {
+export const networkSelectStyles = {
   singleValue: (provided: any, state: any) => {
     const color = state.data.label === "Start typing Custom Network" ? "#aaa !important" : "#333 !important";
     return { ...provided, color };

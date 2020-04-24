@@ -1,7 +1,11 @@
 import React, { ReactElement } from "react";
 import ToolTipComponent from "../Tooltip";
 import LoadingSpinner from "../LoadingSpinner";
-import { generateSelectValue, selectOptions, selectStyles } from "../../utils/custom-network-select";
+import {
+  generateNetworkSelectValue,
+  networkSelectOptions,
+  networkSelectStyles,
+} from "../../utils/custom-network-select";
 import {
   generateContractSelectValue,
   generateContractSelectOptions,
@@ -56,10 +60,10 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
         <label id="react-select-label">Choose Network or Insert Custom Network</label>
         <Creatable
           placeholder="Insert Contract"
-          styles={selectStyles}
+          styles={networkSelectStyles}
           className="network-select"
-          options={selectOptions}
-          value={generateSelectValue(network)}
+          options={networkSelectOptions}
+          value={generateNetworkSelectValue(network)}
           onChange={handleChange}
           formatCreateLabel={() => "Add Custom Network"}
         />
