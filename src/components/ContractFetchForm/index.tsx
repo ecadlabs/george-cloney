@@ -59,7 +59,6 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
         </h2>
         <label id="react-select-label">Choose Network or Insert Custom Network</label>
         <Creatable
-          placeholder="Insert Contract"
           styles={networkSelectStyles}
           className="network-select"
           options={networkSelectOptions}
@@ -78,7 +77,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
                 options={generateContractSelectOptions(network)}
                 value={generateContractSelectValue(contractAddress)}
                 onChange={handleContractChange}
-                formatCreateLabel={() => "Add Contract"}
+                formatCreateLabel={() => "Add Contract Address"}
               />
               {validationError !== "" && <span className="address-validation">Invalid Contract Address</span>}
               <br />

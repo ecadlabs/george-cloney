@@ -11,7 +11,7 @@ export const networkSelectOptions = [
   { value: "mainnet", label: "Mainnet" },
   { value: "carthagenet", label: "Carthagenet" },
   { value: "http://localhost:9999", label: "Flextesa Default" },
-  { value: "Start typing Custom Network", label: "Custom" },
+  { value: "Start typing Custom Network", label: "Add Custom Network" },
 ];
 
 // React Select styles

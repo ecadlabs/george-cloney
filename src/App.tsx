@@ -13,6 +13,8 @@ import Navbar from "./components/Navbar";
 import Confetti from "./components/Confetti";
 import ErrorBoundary from "react-error-boundary";
 import setSignerMethod from "./utils/set-signer-method";
+import georgeCloneyTitleImg from "./assets/george-cloney-title.png";
+import builtWithTaquitoImg from "./assets/built-with-taquito.png";
 import "./App.css";
 
 const App: React.FC = (): ReactElement => {
@@ -28,7 +30,7 @@ const App: React.FC = (): ReactElement => {
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
   const [launchNetwork, setLaunchNetwork] = useState<string>("mainnet");
   const [contractNetwork, setContractNetwork] = useState<string>("mainnet");
-  const [contractAddress, setContractAddress] = useState<string>("Insert contract address");
+  const [contractAddress, setContractAddress] = useState<string>("Add Contract Address");
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
@@ -74,7 +76,7 @@ const App: React.FC = (): ReactElement => {
     setStorage("");
     setLaunchNetwork("mainnet");
     setContractNetwork("mainnet");
-    setContractAddress("Insert contract address");
+    setContractAddress("Add contract address");
     setTxnAddress("");
     setLastOriginatedContract("");
     setConfettiShown(false);
@@ -184,7 +186,7 @@ const App: React.FC = (): ReactElement => {
   const updateContractAddress = (newContractAddress: string): void => {
     const isValid =
       validateContractAddress(newContractAddress) === ValidationResult.VALID ||
-      newContractAddress === "Insert contract address" ||
+      newContractAddress === "Insert Contract Address" ||
       false;
 
     // Update the contract address that we'll be pulling data from if it's valid
@@ -205,7 +207,7 @@ const App: React.FC = (): ReactElement => {
       <Navbar />
       <div id="wallet">
         <div className="title-group">
-          <img alt="George Cloney signature in cursive" src="george-cloney-title.png" />
+          <img alt="George Cloney signature in cursive" src={georgeCloneyTitleImg} />
           <h4>
             George Cloney, being the gentleman he is, will take any Tezos Smart Contract and clone it for you. Great for
             testing and exploring.
@@ -261,7 +263,7 @@ const App: React.FC = (): ReactElement => {
       </div>
       <div className="built-with-taquito-logo">
         <a href="https://github.com/ecadlabs/taquito" target="_blank" rel="noopener noreferrer">
-          <img height="56" width="128" alt="Built with Taquito logo" src="built-with-taquito.png" />
+          <img height="56" width="128" alt="Built with Taquito logo" src={builtWithTaquitoImg} />
         </a>
       </div>
     </ErrorBoundary>
