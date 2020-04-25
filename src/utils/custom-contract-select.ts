@@ -11,16 +11,16 @@ export const generateContractSelectOptions = (network: string) => {
   if (network === "mainnet") {
     return [
       { value: "KT1PWx2mnDueood7fEmfbBDKx1D9BAnnXitn", label: "tzBTC Contract" },
-      { value: "Contract Address", label: "Contract Address" },
+      { value: "Contract Address", label: "Add Contract Address" },
     ];
   } else if (network === "carthagenet") {
     return [
       //   { value: "KT1PWx2mnDueood7fEmfbBDKx1D9BAnnXitn", label: "tzBTC Contract" },
       { value: "KT1X19MnXuWhwzyHdEa5RHcw7XDVK1rF3G86", label: "Simple Oracle Contract" },
-      { value: "Contract Address", label: "Contract Address" },
+      { value: "Contract Address", label: "Add Contract Address" },
     ];
   } else {
-    return [{ value: "Contract Address", label: "Contract Address" }];
+    return [{ value: "Contract Address", label: "Add Contract Address" }];
   }
 };
 
