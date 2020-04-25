@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import Snackbar from "../Snackbar/Snackbar";
+import Snackbar from "../Snackbar";
 import { SnackbarGroupProps } from "./types";
 
 const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
