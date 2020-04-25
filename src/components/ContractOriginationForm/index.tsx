@@ -32,6 +32,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
   }, [handleSubmit]);
 
   const handleChange = (selectedOption: any) => {
+    console.log(selectedOption);
     handleNetworkChange(selectedOption.value);
   };
 

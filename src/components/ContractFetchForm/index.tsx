@@ -14,6 +14,7 @@ import {
 import { ContractFetchFormProps } from "./types";
 import Creatable from "react-select/creatable";
 import { useForm } from "react-hook-form";
+import { InitialState } from "../../utils/initial-app-state";
 import "./styles.css";
 
 const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null => {
@@ -87,7 +88,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
                 <input
                   className="fetch-contract-button"
                   disabled={
-                    loading || !contractAddress || validationError || contractAddress === "Insert contract address"
+                    loading || !contractAddress || validationError || contractAddress === InitialState.CONTRACT_ADDRESS
                       ? true
                       : false
                   }

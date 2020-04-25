@@ -15,6 +15,7 @@ import ErrorBoundary from "react-error-boundary";
 import setSignerMethod from "./utils/set-signer-method";
 import georgeCloneyTitleImg from "./assets/george-cloney-title.png";
 import builtWithTaquitoImg from "./assets/built-with-taquito.png";
+import { InitialState } from "./utils/initial-app-state";
 import "./App.css";
 
 const App: React.FC = (): ReactElement => {
@@ -28,9 +29,9 @@ const App: React.FC = (): ReactElement => {
   const [provider, setProvider] = useState<string>("");
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
-  const [launchNetwork, setLaunchNetwork] = useState<string>("mainnet");
-  const [contractNetwork, setContractNetwork] = useState<string>("mainnet");
-  const [contractAddress, setContractAddress] = useState<string>("Add Contract Address");
+  const [launchNetwork, setLaunchNetwork] = useState<string>(InitialState.LAUNCH_NETWORK);
+  const [contractNetwork, setContractNetwork] = useState<string>(InitialState.CONTRACT_NETWORK);
+  const [contractAddress, setContractAddress] = useState<string>(InitialState.CONTRACT_ADDRESS);
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
@@ -74,29 +75,34 @@ const App: React.FC = (): ReactElement => {
     setProvider("");
     setCode([]);
     setStorage("");
-    setLaunchNetwork("mainnet");
-    setContractNetwork("mainnet");
-    setContractAddress("Add contract address");
+    setLaunchNetwork(InitialState.LAUNCH_NETWORK);
+    setContractNetwork(InitialState.CONTRACT_NETWORK);
+    setContractAddress(InitialState.CONTRACT_ADDRESS);
     setTxnAddress("");
     setLastOriginatedContract("");
     setConfettiShown(false);
   };
 
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {
-    // Empty provider if network is sandbox so that user can provide a local node address
     if (network !== "mainnet" && network !== "carthagenet") {
+      // Set custom node as provider
       await Tezos.setProvider({ rpc: network });
-      setProvider(network);
+      setLaunchNetwork(network);
+      return setProvider(network);
     }
+    // Set provider and network to be used whenever signing txn or retrieving data
+    setProvider(`https://api.tez.ie/rpc/${network}`);
     setLaunchNetwork(network);
   };
 
-  const handleContractNetworkChange = (network: string): void => {
-    // If network is a custom network update accordingly
+  const handleContractNetworkChange = async (network: string): Promise<void> => {
     if (network !== "mainnet" && network !== "carthagenet") {
+      // Set custom node as provider
+      await Tezos.setProvider({ rpc: network });
       setProvider(network);
       return setContractNetwork(network);
     }
+    // Set provider and network to be used whenever signing txn or retrieving data
     setProvider(`https://api.tez.ie/rpc/${network}`);
     setContractNetwork(network);
   };
@@ -116,8 +122,10 @@ const App: React.FC = (): ReactElement => {
       setLoading(true);
       setLoadingMessage("Loading contract code...");
       showSnackbar(true);
-      await Tezos.setProvider({ rpc: provider ? provider : `https://api.tez.ie/rpc/${contractNetwork}` });
-      console.log(provider);
+      // Redundancy measure to make sure provider is set
+      await Tezos.setProvider({
+        rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
+      });
       // Call contract and get code
       const newContract = await Tezos.contract.at(contractAddress);
       setCode(newContract.script.code);
@@ -135,7 +143,10 @@ const App: React.FC = (): ReactElement => {
     setLoading(true);
     setLoadingMessage("Launching contract...");
     showSnackbar(true);
-
+    // Redundancy measure to make sure provider is set
+    await Tezos.setProvider({
+      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
+    });
     await setSignerMethod(
       signer,
       contractNetwork,
@@ -148,6 +159,7 @@ const App: React.FC = (): ReactElement => {
       setTxnAddress,
       handleError
     );
+
     // Tezbridge is originated in setSignerMethod function
     if (signer !== "tezbridge") {
       // Originate a new contract
@@ -184,9 +196,10 @@ const App: React.FC = (): ReactElement => {
   };
 
   const updateContractAddress = (newContractAddress: string): void => {
+    // Validate address input on step 1
     const isValid =
       validateContractAddress(newContractAddress) === ValidationResult.VALID ||
-      newContractAddress === "Insert Contract Address" ||
+      newContractAddress === InitialState.CONTRACT_ADDRESS ||
       false;
 
     // Update the contract address that we'll be pulling data from if it's valid
