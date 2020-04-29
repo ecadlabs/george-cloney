@@ -275,7 +275,7 @@ const App: React.FC = (): ReactElement => {
         />
       </div>
       <div className="built-with-taquito-logo">
-        <a href="https://github.com/ecadlabs/taquito" target="_blank" rel="noopener noreferrer">
+        <a href="https://tezostaquito.io/" target="_blank" rel="noopener noreferrer">
           <img height="56" width="128" alt="Built with Taquito logo" src={builtWithTaquitoImg} />
         </a>
       </div>
