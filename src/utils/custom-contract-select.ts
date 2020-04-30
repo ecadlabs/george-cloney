@@ -26,6 +26,10 @@ export const generateContractSelectOptions = (network: string) => {
 
 // React Select styles
 export const contractSelectStyles = {
+  menu: (provided: any) => ({
+    ...provided,
+    width: "95%",
+  }),
   singleValue: (provided: any, state: any) => {
     const color = state.data.label === "Contract Address" ? "#aaa !important" : "#333 !important";
     return { ...provided, color };

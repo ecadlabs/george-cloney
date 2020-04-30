@@ -16,6 +16,10 @@ export const networkSelectOptions = [
 
 // React Select styles
 export const networkSelectStyles = {
+  menu: (provided: any) => ({
+    ...provided,
+    width: "95%",
+  }),
   singleValue: (provided: any, state: any) => {
     const color = state.data.label === "Start typing Custom Network" ? "#aaa !important" : "#333 !important";
     return { ...provided, color };
