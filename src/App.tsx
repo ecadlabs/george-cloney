@@ -102,6 +102,8 @@ const App: React.FC = (): ReactElement => {
       setProvider(network);
       return setContractNetwork(network);
     }
+    // Set contract address to default so it's cleared when a user changes neteworks
+    setContractAddress("");
     // Set provider and network to be used whenever signing txn or retrieving data
     setProvider(`https://api.tez.ie/rpc/${network}`);
     setContractNetwork(network);

@@ -1,5 +1,8 @@
 // React Select constants
 export const generateContractSelectValue = (contract: string) => {
+  // Return default placeholder value if there's no contract address added
+  // Clears input when a user fetches contract code on 1 network and then switches to another network
+  if (!contract) return { value: "Contract Address", label: "Contract Address" };
   return {
     value: contract,
     label: contract,
