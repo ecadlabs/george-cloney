@@ -1,10 +1,13 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import Creatable from "react-select/creatable";
+import { BeaconWallet } from "@taquito/beacon-wallet";
 import {
   generateNetworkSelectValue,
   networkSelectOptions,
   networkSelectStyles,
 } from "../../utils/custom-network-select";
+import { Tezos } from "@taquito/taquito";
+
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
@@ -35,7 +38,28 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     handleNetworkChange(selectedOption.value);
   };
 
-  const locallyUpdateSigner = (e: React.MouseEvent<HTMLInputElement>) => {
+  const locallyUpdateSigner = async (e: React.MouseEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value === "beacon") {
+      enum NetworkType {
+        MAINNET = "mainnet",
+        CARTHAGENET = "carthagenet",
+        CUSTOM = "custom",
+      }
+
+      const wallet = new BeaconWallet({
+        name: "test",
+      });
+      await wallet.client.init();
+      await wallet.client.removeAllPeers();
+      await wallet.requestPermissions({
+        network: {
+          type: NetworkType.CARTHAGENET,
+          name: "Carthagenet",
+          rpcUrl: "https://api.tez.ie/rpc/carthagenet",
+        },
+      });
+      await Tezos.setProvider({ wallet });
+    }
     // Update local state for button CSS effects
     setChosenSigner(e.currentTarget.value);
     // Update app state
