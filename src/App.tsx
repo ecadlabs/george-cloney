@@ -130,6 +130,7 @@ const App: React.FC = (): ReactElement => {
       });
       // Call contract and get code
       const newContract = await Tezos.contract.at(contractAddress);
+      console.log(newContract.script.code);
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
@@ -147,6 +148,7 @@ const App: React.FC = (): ReactElement => {
     showSnackbar(true);
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
+      config: { confirmationPollingIntervalSecond: 5 },
       rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
     });
     await setSignerMethod(
