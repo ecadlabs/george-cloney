@@ -7,7 +7,6 @@ import {
   networkSelectStyles,
 } from "../../utils/custom-network-select";
 import { Tezos } from "@taquito/taquito";
-
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
@@ -40,6 +39,8 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
 
   const locallyUpdateSigner = async (e: React.MouseEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === "beacon") {
+      setChosenSigner(e.currentTarget.value);
+
       enum NetworkType {
         MAINNET = "mainnet",
         CARTHAGENET = "carthagenet",
@@ -58,8 +59,12 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
           rpcUrl: "https://api.tez.ie/rpc/carthagenet",
         },
       });
+      // Update app state
+      setSigner(e.currentTarget.value);
       await Tezos.setProvider({ wallet });
+      return;
     }
+
     // Update local state for button CSS effects
     setChosenSigner(e.currentTarget.value);
     // Update app state
