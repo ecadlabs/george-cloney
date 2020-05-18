@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface ContractOriginationFormProps {
+  setupSigner: (signer: string) => Promise<void>;
   setSigner: Dispatch<SetStateAction<string>>;
   handleNetworkChange: (network: string) => void;
   handleLaunchSubmit: () => void;

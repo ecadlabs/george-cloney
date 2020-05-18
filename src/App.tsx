@@ -9,12 +9,15 @@ import ContractResultForm from "./components/ContractResultForm";
 import SnackbarGroup from "./components/SnackbarGroup";
 import LastOriginatedContract from "./components/LastOriginatedContract";
 import WizardControls from "./components/WizardControls";
+import { HttpBackend } from "@taquito/http-utils";
+import { RemoteSigner } from "@taquito/remote-signer";
 import Navbar from "./components/Navbar";
 import Confetti from "./components/Confetti";
 import ErrorBoundary from "react-error-boundary";
-import setSignerMethod from "./utils/set-signer-method";
+import { TezBridgeWallet } from "@taquito/tezbridge-wallet";
 import georgeCloneyTitleImg from "./assets/george-cloney-title.png";
 import builtWithTaquitoImg from "./assets/built-with-taquito.png";
+import { BeaconWallet } from "@taquito/beacon-wallet";
 import { InitialState } from "./utils/initial-app-state";
 import "./App.css";
 
@@ -35,6 +38,12 @@ const App: React.FC = (): ReactElement => {
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
+
+  enum NetworkType {
+    MAINNET = "mainnet",
+    CARTHAGENET = "carthagenet",
+    CUSTOM = "custom",
+  }
 
   useEffect(() => {
     // If new contract is deployed update localStorage and Last Originated Contract button
@@ -130,7 +139,6 @@ const App: React.FC = (): ReactElement => {
       });
       // Call contract and get code
       const newContract = await Tezos.contract.at(contractAddress);
-      console.log(newContract.script.code);
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
@@ -138,6 +146,41 @@ const App: React.FC = (): ReactElement => {
       setLoading(false);
     } catch (error) {
       handleError(error);
+    }
+  };
+
+  const setupSigner = async (signer: string): Promise<void> => {
+    if (signer === "beacon") {
+      const beaconWallet = new BeaconWallet({
+        name: "georgeCloneyWallet",
+      });
+      await beaconWallet.client.init();
+      await beaconWallet.client.removeAllPeers();
+      await beaconWallet.requestPermissions({
+        network: {
+          type: NetworkType.CARTHAGENET,
+          name: "Carthagenet",
+          rpcUrl: "https://api.tez.ie/rpc/carthagenet",
+        },
+      });
+      // callback to app.tsx to set a provider
+      Tezos.setWalletProvider(beaconWallet);
+      //   console.log("ayyy");
+    }
+    if (signer === "tezbridge") {
+      Tezos.setWalletProvider(new TezBridgeWallet());
+    }
+    if (signer === "ephemeral") {
+      const httpClient = new HttpBackend();
+      const { id, pkh } = await httpClient.createRequest({
+        url: `https://api.tez.ie/keys/carthagenet/ephemeral`,
+        method: "POST",
+        headers: { Authorization: "Bearer taquito-example" },
+      });
+      const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/carthagenet/ephemeral/${id}/`, {
+        headers: { Authorization: "Bearer taquito-example" },
+      });
+      await Tezos.setSignerProvider(signer);
     }
   };
 
@@ -151,46 +194,39 @@ const App: React.FC = (): ReactElement => {
       config: { confirmationPollingIntervalSecond: 5 },
       rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
     });
-    await setSignerMethod(
-      signer,
-      contractNetwork,
-      launchNetwork,
-      code,
-      storage,
-      setLoading,
-      showSnackbar,
-      setLoadingMessage,
-      setTxnAddress,
-      handleError
-    );
+
+    console.log("shits sending bro");
+    Tezos.wallet
+      .originate({
+        code: code as MichelsonV1Expression[],
+        init: storage as MichelsonV1Expression,
+      })
+      .send()
+      .then((originationOp) => {
+        console.log("shits sending braaaa");
+        return originationOp.contract();
+      })
+      .then((contract) => {
+        console.log(contract);
+        // Remove contract launch snackbar message
+        setLoading(false);
+        showSnackbar(false);
+        // Add block explorer snackbar message
+        setLoadingMessage("");
+        setTxnAddress(contract.address);
+        setCurrentStep(4);
+      })
+      .catch((error) => {
+        setLoading(false);
+        showSnackbar(false);
+        setLoadingMessage("");
+        setError(error?.message ?? error);
+        showSnackbar(true);
+      });
 
     // Tezbridge is originated in setSignerMethod function
     if (signer !== "tezbridge") {
       // Originate a new contract
-      Tezos.contract
-        .originate({
-          code: code as MichelsonV1Expression[],
-          init: storage as MichelsonV1Expression,
-        })
-        .then((originationOp) => {
-          return originationOp.contract();
-        })
-        .then((contract) => {
-          // Remove contract launch snackbar message
-          setLoading(false);
-          showSnackbar(false);
-          // Add block explorer snackbar message
-          setLoadingMessage("");
-          setTxnAddress(contract.address);
-          setCurrentStep(4);
-        })
-        .catch((error) => {
-          setLoading(false);
-          showSnackbar(false);
-          setLoadingMessage("");
-          setError(error?.message ?? error);
-          showSnackbar(true);
-        });
     }
   };
 
@@ -259,6 +295,7 @@ const App: React.FC = (): ReactElement => {
             loading={loading}
             signer={signer}
             setSigner={setSigner}
+            setupSigner={setupSigner}
             handleLaunchSubmit={handleContractLaunchSubmit}
             handleNetworkChange={handleLaunchNetworkChange}
             network={launchNetwork}

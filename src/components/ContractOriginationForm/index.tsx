@@ -1,12 +1,10 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import Creatable from "react-select/creatable";
-import { BeaconWallet } from "@taquito/beacon-wallet";
 import {
   generateNetworkSelectValue,
   networkSelectOptions,
   networkSelectStyles,
 } from "../../utils/custom-network-select";
-import { Tezos } from "@taquito/taquito";
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
@@ -15,7 +13,7 @@ import "./styles.css";
 
 const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElement | null => {
   const {
-    setSigner,
+    setupSigner,
     handleNetworkChange,
     txnAddress,
     network,
@@ -39,36 +37,21 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
 
   const locallyUpdateSigner = async (e: React.MouseEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === "beacon") {
-      setChosenSigner(e.currentTarget.value);
-
-      enum NetworkType {
-        MAINNET = "mainnet",
-        CARTHAGENET = "carthagenet",
-        CUSTOM = "custom",
-      }
-
-      const wallet = new BeaconWallet({
-        name: "test",
-      });
-      await wallet.client.init();
-      await wallet.client.removeAllPeers();
-      await wallet.requestPermissions({
-        network: {
-          type: NetworkType.CARTHAGENET,
-          name: "Carthagenet",
-          rpcUrl: "https://api.tez.ie/rpc/carthagenet",
-        },
-      });
-      // Update app state
-      setSigner(e.currentTarget.value);
-      await Tezos.setProvider({ wallet });
-      return;
+      setChosenSigner("beacon");
+      setupSigner("beacon");
+      // setSigner
     }
-
-    // Update local state for button CSS effects
-    setChosenSigner(e.currentTarget.value);
-    // Update app state
-    setSigner(e.currentTarget.value);
+    if (e.currentTarget.value === "tezbridge") {
+      setChosenSigner("tezbridge");
+      setupSigner("tezbridge");
+      // setSigner
+    }
+    if (e.currentTarget.value === "ephemeral") {
+      setChosenSigner("ephemeral");
+      setupSigner("ephemeral");
+      // setSigner
+    }
+    return;
   };
 
   if (currentStep !== 3) return null;
