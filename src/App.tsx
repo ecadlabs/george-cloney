@@ -196,18 +196,26 @@ const App: React.FC = (): ReactElement => {
     });
 
     console.log("shits sending bro");
+    console.log(code);
+    console.log(
+      await Tezos.wallet.originate({
+        code: code as MichelsonV1Expression[],
+        storage: storage as MichelsonV1Expression,
+        balance: "1",
+      })
+    );
     Tezos.wallet
       .originate({
         code: code as MichelsonV1Expression[],
-        init: storage as MichelsonV1Expression,
+        storage: storage as MichelsonV1Expression,
+        balance: "1",
       })
       .send()
       .then((originationOp) => {
-        console.log("shits sending braaaa");
         return originationOp.contract();
       })
       .then((contract) => {
-        console.log(contract);
+        alert(contract);
         // Remove contract launch snackbar message
         setLoading(false);
         showSnackbar(false);
