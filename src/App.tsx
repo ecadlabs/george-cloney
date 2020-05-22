@@ -111,8 +111,8 @@ const App: React.FC = (): ReactElement => {
       setProvider(network);
       return setContractNetwork(network);
     }
-    // Set contract address to default so it's cleared when a user changes neteworks
-    setContractAddress("");
+    // Make sure state on steps 2-4 is reset
+    resetGeorgeCloney();
     // Set provider and network to be used whenever signing txn or retrieving data
     setProvider(`https://api.tez.ie/rpc/${network}`);
     setContractNetwork(network);
@@ -120,7 +120,7 @@ const App: React.FC = (): ReactElement => {
 
   const handleContractCodeSubmit = async (): Promise<any> => {
     try {
-      // Make sure state on steps 2-4 is reset
+      // Reset steps 2-4
       setCurrentStep(1);
       setSigner("");
       setProvider("");
@@ -129,7 +129,7 @@ const App: React.FC = (): ReactElement => {
       setError("");
       setLaunchNetwork("mainnet");
       setTxnAddress("");
-      // Grab contracts code from the blockchain and add code to the editors
+      // Set loading state and snackbar
       setLoading(true);
       setLoadingMessage("Loading contract code...");
       showSnackbar(true);
@@ -137,7 +137,7 @@ const App: React.FC = (): ReactElement => {
       await Tezos.setProvider({
         rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
       });
-      // Call contract and get code
+      // Grab contracts code from the blockchain and add code to the editors
       const newContract = await Tezos.contract.at(contractAddress);
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
@@ -208,7 +208,6 @@ const App: React.FC = (): ReactElement => {
       .originate({
         code: code as MichelsonV1Expression[],
         storage: storage as MichelsonV1Expression,
-        balance: "1",
       })
       .send()
       .then((originationOp) => {
@@ -225,6 +224,7 @@ const App: React.FC = (): ReactElement => {
         setCurrentStep(4);
       })
       .catch((error) => {
+        console.log(error);
         setLoading(false);
         showSnackbar(false);
         setLoadingMessage("");
