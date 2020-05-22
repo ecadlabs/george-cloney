@@ -52,6 +52,7 @@ const App: React.FC = (): ReactElement => {
       setLastOriginatedContract(`${txnAddress},${launchNetwork}`);
     }
     // If there's no contract deployed yet check local storage to see if we have a past deployed one
+    // If we do add the Last Originated Contract button below the wizard
     if (!txnAddress) {
       const lastLaunchedContract = localStorage.getItem("lastLaunchedContract") as string;
       setLastOriginatedContract(lastLaunchedContract);
@@ -163,12 +164,10 @@ const App: React.FC = (): ReactElement => {
           rpcUrl: "https://api.tez.ie/rpc/carthagenet",
         },
       });
-      // callback to app.tsx to set a provider
-      Tezos.setWalletProvider(beaconWallet);
-      //   console.log("ayyy");
+      Tezos.setProvider({ wallet: beaconWallet });
     }
     if (signer === "tezbridge") {
-      Tezos.setWalletProvider(new TezBridgeWallet());
+      Tezos.setProvider({ wallet: new TezBridgeWallet() });
     }
     if (signer === "ephemeral") {
       const httpClient = new HttpBackend();
@@ -195,7 +194,6 @@ const App: React.FC = (): ReactElement => {
       rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
     });
 
-    console.log("shits sending bro");
     console.log(code);
     console.log(
       await Tezos.wallet.originate({
