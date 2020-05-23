@@ -140,6 +140,7 @@ const App: React.FC = (): ReactElement => {
       });
       // Grab contracts code from the blockchain and add code to the editors
       const newContract = await Tezos.contract.at(contractAddress);
+      console.log(newContract);
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
@@ -179,7 +180,7 @@ const App: React.FC = (): ReactElement => {
       const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/carthagenet/ephemeral/${id}/`, {
         headers: { Authorization: "Bearer taquito-example" },
       });
-      await Tezos.setSignerProvider(signer);
+      await Tezos.setProvider({ signer });
     }
   };
 
@@ -193,15 +194,7 @@ const App: React.FC = (): ReactElement => {
       config: { confirmationPollingIntervalSecond: 5 },
       rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
     });
-
-    console.log(code);
-    console.log(
-      await Tezos.wallet.originate({
-        code: code as MichelsonV1Expression[],
-        storage: storage as MichelsonV1Expression,
-        balance: "1",
-      })
-    );
+    console.log(storage);
     Tezos.wallet
       .originate({
         code: code as MichelsonV1Expression[],
@@ -229,11 +222,6 @@ const App: React.FC = (): ReactElement => {
         setError(error?.message ?? error);
         showSnackbar(true);
       });
-
-    // Tezbridge is originated in setSignerMethod function
-    if (signer !== "tezbridge") {
-      // Originate a new contract
-    }
   };
 
   const closeSnackbar = (): void => {

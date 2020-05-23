@@ -20,6 +20,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     handleLaunchSubmit,
     loading,
     currentStep,
+    setSigner,
     setCurrentStep,
   } = props;
   const { register, handleSubmit } = useForm();
@@ -39,17 +40,17 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     if (e.currentTarget.value === "beacon") {
       setChosenSigner("beacon");
       setupSigner("beacon");
-      // setSigner
+      setSigner("beacon");
     }
     if (e.currentTarget.value === "tezbridge") {
       setChosenSigner("tezbridge");
       setupSigner("tezbridge");
-      // setSigner
+      setSigner("tezbridge");
     }
     if (e.currentTarget.value === "ephemeral") {
       setChosenSigner("ephemeral");
       setupSigner("ephemeral");
-      // setSigner
+      setSigner("ephemeral");
     }
     return;
   };
