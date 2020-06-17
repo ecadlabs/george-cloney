@@ -1,5 +1,5 @@
 import React, { useState, ReactElement, useEffect } from "react";
-import { Tezos } from "@taquito/taquito";
+import { Tezos, MichelsonMap } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { ValidationResult, validateContractAddress } from "@taquito/utils";
 import ContractReviewForm from "./components/ContractReviewForm";
@@ -140,7 +140,6 @@ const App: React.FC = (): ReactElement => {
       });
       // Grab contracts code from the blockchain and add code to the editors
       const newContract = await Tezos.contract.at(contractAddress);
-      console.log(newContract);
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
@@ -194,18 +193,16 @@ const App: React.FC = (): ReactElement => {
       config: { confirmationPollingIntervalSecond: 5 },
       rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
     });
-    console.log(storage);
     Tezos.wallet
       .originate({
         code: code as MichelsonV1Expression[],
-        storage: storage as MichelsonV1Expression,
+        init: storage as MichelsonV1Expression,
       })
       .send()
       .then((originationOp) => {
         return originationOp.contract();
       })
       .then((contract) => {
-        alert(contract);
         // Remove contract launch snackbar message
         setLoading(false);
         showSnackbar(false);

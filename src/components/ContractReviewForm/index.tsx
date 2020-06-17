@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { split as SplitEditor } from "react-ace";
+import { Parser, emitMicheline } from "@taquito/michel-codec";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 import { ContractReviewFormProps } from "./types";
@@ -11,14 +12,29 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
   const { code, storage, currentStep, setCurrentStep } = props;
   const { width } = useWindowDimensions();
 
+  let michelsonCode;
+  let michelsonStorage;
+
+  if (code.length > 0) {
+    const parser = new Parser();
+    michelsonCode = parser.parseJSON(code as JSON[]);
+    michelsonStorage = parser.parseJSON(storage as JSON);
+
+    console.log("Pretty print Michelson smart contract:");
+    // console.log(emitMicheline(michelsonCode, { indent: "    ", newline: "\n" }));
+
+    console.log("Pretty print Storage:");
+    // console.log(emitMicheline(michelsonStorage, { indent: "    ", newline: "\n" }));
+  }
+
   const initialCodeValue =
     code.length > 0 ? "/* Contract Code */ \n" + JSON.stringify(code, null, 2) : "/* Contract Code */";
   const initialStorageValue = storage
     ? "/* Initial Storage Code */ \n" + JSON.stringify(storage, null, 2)
     : "/* Initial Storage Code */";
   const editorWidth = width >= 800 ? `${width - 200}px` : width >= 600 ? "500px" : "350px";
-  if (currentStep !== 2) return null;
 
+  if (currentStep !== 2) return null;
   return (
     <div className="editor-container" style={{ display: "flex", justifyContent: "center" }}>
       <span onClick={() => setCurrentStep(1)} className="left"></span>
