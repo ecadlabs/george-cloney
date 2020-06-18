@@ -17,14 +17,14 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
 
   if (code.length > 0) {
     const parser = new Parser();
-    michelsonCode = parser.parseJSON(code as JSON[]);
+    michelsonCode = parser.parseJSON(code);
     michelsonStorage = parser.parseJSON(storage as JSON);
 
     console.log("Pretty print Michelson smart contract:");
-    // console.log(emitMicheline(michelsonCode, { indent: "    ", newline: "\n" }));
+    console.log(emitMicheline(michelsonCode, { indent: "    ", newline: "\n" }));
 
     console.log("Pretty print Storage:");
-    // console.log(emitMicheline(michelsonStorage, { indent: "    ", newline: "\n" }));
+    console.log(emitMicheline(michelsonStorage, { indent: "    ", newline: "\n" }));
   }
 
   const initialCodeValue =
