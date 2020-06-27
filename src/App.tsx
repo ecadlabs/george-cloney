@@ -1,5 +1,5 @@
 import React, { useState, ReactElement, useEffect } from "react";
-import { Tezos, MichelsonMap } from "@taquito/taquito";
+import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { ValidationResult, validateContractAddress } from "@taquito/utils";
 import ContractReviewForm from "./components/ContractReviewForm";
