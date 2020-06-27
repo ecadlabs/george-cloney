@@ -1380,6 +1380,10 @@
   version "6.3.1-beta.0"
   resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-6.3.1-beta.0.tgz#ac41efbd729364ead927bad31aee751345117d39"
 
+"@taquito/michel-codec@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-6.3.2-beta.0.tgz#97c92c207175ba407fb5032c71af4951d87b5a09"
+
 "@taquito/michelson-encoder@^6.3.1-beta.0":
   version "6.3.1-beta.0"
   resolved "https://registry.yarnpkg.com/@taquito/michelson-encoder/-/michelson-encoder-6.3.1-beta.0.tgz#710e057bf817e129e89a8a7d9a6f18cdc2e1d123"

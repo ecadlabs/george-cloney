@@ -11,27 +11,17 @@ import "./styles.css";
 const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null => {
   const { code, storage, currentStep, setCurrentStep } = props;
   const { width } = useWindowDimensions();
-
-  let michelsonCode;
-  let michelsonStorage;
-
-  if (code.length > 0) {
-    const parser = new Parser();
-    michelsonCode = parser.parseJSON(code);
-    michelsonStorage = parser.parseJSON(storage as JSON);
-
-    console.log("Pretty print Michelson smart contract:");
-    console.log(emitMicheline(michelsonCode, { indent: "    ", newline: "\n" }));
-
-    console.log("Pretty print Storage:");
-    console.log(emitMicheline(michelsonStorage, { indent: "    ", newline: "\n" }));
-  }
+  const parser = new Parser();
 
   const initialCodeValue =
-    code.length > 0 ? "/* Contract Code */ \n" + JSON.stringify(code, null, 2) : "/* Contract Code */";
+    code.length > 0
+      ? "/* Contract Code */ \n" + emitMicheline(parser.parseJSON(code), { indent: "    ", newline: "\n" })
+      : "/* Contract Code */";
   const initialStorageValue = storage
-    ? "/* Initial Storage Code */ \n" + JSON.stringify(storage, null, 2)
-    : "/* Initial Storage Code */";
+    ? "/* Initial Storage Code */ \n" +
+      emitMicheline(parser.parseJSON(storage as Object), { indent: "    ", newline: "\n" })
+    : //
+      "/* Initial Storage Code */";
   const editorWidth = width >= 800 ? `${width - 200}px` : width >= 600 ? "500px" : "350px";
 
   if (currentStep !== 2) return null;
