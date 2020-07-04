@@ -20,6 +20,7 @@ export const generateContractSelectOptions = (network: string) => {
   } else if (network === "carthagenet") {
     return [
       { value: "KT1X19MnXuWhwzyHdEa5RHcw7XDVK1rF3G86", label: "Simple Oracle Contract" },
+      { value: "KT1McL1e8UgHUMxxW9B8jxifcLKP11Pyv1wC", label: "Simple BigMap Contract" },
       { value: "Contract Address", label: "Add Contract Address" },
     ];
   } else {

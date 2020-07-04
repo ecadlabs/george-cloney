@@ -89,17 +89,6 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         />
         <label id="react-select-signer-label">Choose Signer</label>
         <label className="signer-toolbar">
-          {network === "carthagenet" && (
-            <>
-              <input onClick={locallyUpdateSigner} value="ephemeral" id="ephemeral" type="radio" />
-              <label
-                className={chosenSigner === "ephemeral" ? "signer-button-selected" : "signer-button"}
-                htmlFor="ephemeral"
-              >
-                Let Us Sign
-              </label>
-            </>
-          )}
           <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
           <label className={chosenSigner === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
             Beacon

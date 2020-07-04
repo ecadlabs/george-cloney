@@ -211,12 +211,12 @@ const App: React.FC = (): ReactElement => {
         setTxnAddress(contract.address);
         setCurrentStep(4);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(async (error) => {
         setLoading(false);
         showSnackbar(false);
         setLoadingMessage("");
-        setError(error?.message ?? error);
+        setSigner("");
+        setError(await error);
         showSnackbar(true);
       });
   };
