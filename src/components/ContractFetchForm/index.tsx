@@ -52,7 +52,11 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
               <>
                 <h5>Step 1: Fetch Smart Contract Code</h5>
                 <p>{"In this step, George Cloney will fetch you any smart contract code from any Tezos network."}</p>
-                <p>{"From here, you'll be able to inspect the Smart Contract code and initial storage next."}</p>
+                <p>
+                  {
+                    "From here, you'll be able to see the contract's code and initial storage in Michelson in the next step."
+                  }
+                </p>
               </>
             }
             placement="bottom"
