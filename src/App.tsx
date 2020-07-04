@@ -9,8 +9,6 @@ import ContractResultForm from "./components/ContractResultForm";
 import SnackbarGroup from "./components/SnackbarGroup";
 import LastOriginatedContract from "./components/LastOriginatedContract";
 import WizardControls from "./components/WizardControls";
-import { HttpBackend } from "@taquito/http-utils";
-import { RemoteSigner } from "@taquito/remote-signer";
 import Navbar from "./components/Navbar";
 import Confetti from "./components/Confetti";
 import ErrorBoundary from "react-error-boundary";
