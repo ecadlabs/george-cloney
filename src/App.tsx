@@ -169,18 +169,6 @@ const App: React.FC = (): ReactElement => {
     if (signer === "tezbridge") {
       Tezos.setProvider({ wallet: new TezBridgeWallet() });
     }
-    if (signer === "ephemeral") {
-      const httpClient = new HttpBackend();
-      const { id, pkh } = await httpClient.createRequest({
-        url: `https://api.tez.ie/keys/carthagenet/ephemeral`,
-        method: "POST",
-        headers: { Authorization: "Bearer taquito-example" },
-      });
-      const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/carthagenet/ephemeral/${id}/`, {
-        headers: { Authorization: "Bearer taquito-example" },
-      });
-      await Tezos.setProvider({ signer });
-    }
   };
 
   const handleContractLaunchSubmit = async (): Promise<void> => {

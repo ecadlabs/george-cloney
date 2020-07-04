@@ -47,11 +47,6 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
       setupSigner("tezbridge");
       setSigner("tezbridge");
     }
-    if (e.currentTarget.value === "ephemeral") {
-      setChosenSigner("ephemeral");
-      setupSigner("ephemeral");
-      setSigner("ephemeral");
-    }
     return;
   };
 
