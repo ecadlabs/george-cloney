@@ -1362,61 +1362,57 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@taquito/beacon-wallet@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/beacon-wallet/-/beacon-wallet-6.3.1-beta.0.tgz#276a8251a8c66f211f5bb83ae7797db927eb6220"
+"@taquito/beacon-wallet@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/beacon-wallet/-/beacon-wallet-6.3.2-beta.0.tgz#61b596a0c722335ff900d5ea940b5ade511df609"
   dependencies:
     "@airgap/beacon-sdk" "1.1.0"
-    "@taquito/taquito" "^6.3.1-beta.0"
-    "@taquito/utils" "^6.3.1-beta.0"
+    "@taquito/taquito" "^6.3.2-beta.0"
+    "@taquito/utils" "^6.3.2-beta.0"
 
-"@taquito/http-utils@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/http-utils/-/http-utils-6.3.1-beta.0.tgz#c3c5948660269ebc514ea15b1cca70085de61eaf"
+"@taquito/http-utils@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/http-utils/-/http-utils-6.3.2-beta.0.tgz#c315c090ccf9ee15291354071ca622d58f844fcd"
   dependencies:
     xhr2-cookies "^1.1.0"
-
-"@taquito/michel-codec@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-6.3.1-beta.0.tgz#ac41efbd729364ead927bad31aee751345117d39"
 
 "@taquito/michel-codec@^6.3.2-beta.0":
   version "6.3.2-beta.0"
   resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-6.3.2-beta.0.tgz#97c92c207175ba407fb5032c71af4951d87b5a09"
 
-"@taquito/michelson-encoder@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/michelson-encoder/-/michelson-encoder-6.3.1-beta.0.tgz#710e057bf817e129e89a8a7d9a6f18cdc2e1d123"
+"@taquito/michelson-encoder@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/michelson-encoder/-/michelson-encoder-6.3.2-beta.0.tgz#cb0f403cdc09c4f025bbc0deb10b53ecc02667aa"
   dependencies:
-    "@taquito/utils" "^6.3.1-beta.0"
+    "@taquito/utils" "^6.3.2-beta.0"
     bignumber.js "^9.0.0"
     fast-json-stable-stringify "^2.1.0"
 
-"@taquito/remote-signer@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/remote-signer/-/remote-signer-6.3.1-beta.0.tgz#5d2d986ba13a1a4ca5234dfe220bb04f07f1aa50"
+"@taquito/remote-signer@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/remote-signer/-/remote-signer-6.3.2-beta.0.tgz#6f5a202fe79f2fde5663339933fda3a27120e8bf"
   dependencies:
-    "@taquito/http-utils" "^6.3.1-beta.0"
-    "@taquito/taquito" "^6.3.1-beta.0"
-    "@taquito/utils" "^6.3.1-beta.0"
+    "@taquito/http-utils" "^6.3.2-beta.0"
+    "@taquito/taquito" "^6.3.2-beta.0"
+    "@taquito/utils" "^6.3.2-beta.0"
     "@types/jest" "^25.2.2"
     elliptic "^6.5.2"
     libsodium-wrappers "^0.7.6"
     typedarray-to-buffer "^3.1.5"
 
-"@taquito/rpc@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/rpc/-/rpc-6.3.1-beta.0.tgz#ba770c12487b8ce69dd365ad57a70ac7c75e0e6d"
+"@taquito/rpc@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/rpc/-/rpc-6.3.2-beta.0.tgz#a6b839ce284a93a47b75b94bf1f7c5c1eba79e86"
   dependencies:
-    "@taquito/http-utils" "^6.3.1-beta.0"
+    "@taquito/http-utils" "^6.3.2-beta.0"
     bignumber.js "^9.0.0"
     lodash "^4.17.15"
 
-"@taquito/signer@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/signer/-/signer-6.3.1-beta.0.tgz#cf39a494fa86cc54cdc03b0002a52627b0319a78"
+"@taquito/signer@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/signer/-/signer-6.3.2-beta.0.tgz#f89aa817925834fdb8b42ca07117acac04260a16"
   dependencies:
-    "@taquito/utils" "^6.3.1-beta.0"
+    "@taquito/utils" "^6.3.2-beta.0"
     bignumber.js "^9.0.0"
     bip39 "^3.0.2"
     elliptic "^6.5.2"
@@ -1424,29 +1420,29 @@
     pbkdf2 "^3.0.17"
     typedarray-to-buffer "^3.1.5"
 
-"@taquito/taquito@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/taquito/-/taquito-6.3.1-beta.0.tgz#d860e7ca5483f4d9871c48920fb7b2af332f1969"
+"@taquito/taquito@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/taquito/-/taquito-6.3.2-beta.0.tgz#81247535063f84fda0831f4fe13a7da539343f4e"
   dependencies:
-    "@taquito/http-utils" "^6.3.1-beta.0"
-    "@taquito/michel-codec" "^6.3.1-beta.0"
-    "@taquito/michelson-encoder" "^6.3.1-beta.0"
-    "@taquito/rpc" "^6.3.1-beta.0"
-    "@taquito/signer" "^6.3.1-beta.0"
-    "@taquito/utils" "^6.3.1-beta.0"
+    "@taquito/http-utils" "^6.3.2-beta.0"
+    "@taquito/michel-codec" "^6.3.2-beta.0"
+    "@taquito/michelson-encoder" "^6.3.2-beta.0"
+    "@taquito/rpc" "^6.3.2-beta.0"
+    "@taquito/signer" "^6.3.2-beta.0"
+    "@taquito/utils" "^6.3.2-beta.0"
     bignumber.js "^9.0.0"
     rx-sandbox "^1.0.3"
     rxjs "^6.5.5"
 
-"@taquito/tezbridge-wallet@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/tezbridge-wallet/-/tezbridge-wallet-6.3.1-beta.0.tgz#2fe26df544e834894c6544741632075e7f0ad79b"
+"@taquito/tezbridge-wallet@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/tezbridge-wallet/-/tezbridge-wallet-6.3.2-beta.0.tgz#5f22bbe6d13f57492b693f1f950170c3f3460650"
   dependencies:
-    "@taquito/taquito" "^6.3.1-beta.0"
+    "@taquito/taquito" "^6.3.2-beta.0"
 
-"@taquito/utils@^6.3.1-beta.0":
-  version "6.3.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-6.3.1-beta.0.tgz#edd8fb8f9b83cb27a4b99d7f9a1e4e5b08007cac"
+"@taquito/utils@^6.3.2-beta.0":
+  version "6.3.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-6.3.2-beta.0.tgz#f73bb479ac0a9f92bdd620322e7735fa0a0a07bb"
   dependencies:
     blakejs "^1.1.0"
     bs58check "^2.1.2"
