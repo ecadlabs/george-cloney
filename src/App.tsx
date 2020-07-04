@@ -212,11 +212,12 @@ const App: React.FC = (): ReactElement => {
         setCurrentStep(4);
       })
       .catch(async (error) => {
+        const errorMessage = await error;
         setLoading(false);
         showSnackbar(false);
         setLoadingMessage("");
         setSigner("");
-        setError(await error);
+        setError(errorMessage);
         showSnackbar(true);
       });
   };
