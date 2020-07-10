@@ -1,5 +1,5 @@
 import React, { useState, ReactElement, useEffect } from "react";
-import { Tezos } from "@taquito/taquito";
+import { Tezos, BigMapAbstraction } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { ValidationResult, validateContractAddress } from "@taquito/utils";
 import ContractReviewForm from "./components/ContractReviewForm";
@@ -18,6 +18,8 @@ import builtWithTaquitoImg from "./assets/built-with-taquito.png";
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { InitialState } from "./utils/initial-app-state";
 import "./App.css";
+import { Schema } from "@taquito/michelson-encoder";
+import generateDefaultStorage from "./utils/generate-default-storage";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -136,8 +138,10 @@ const App: React.FC = (): ReactElement => {
       await Tezos.setProvider({
         rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
       });
+
       // Grab contracts code from the blockchain and add code to the editors
       const newContract = await Tezos.contract.at(contractAddress);
+
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
@@ -174,15 +178,19 @@ const App: React.FC = (): ReactElement => {
     setLoading(true);
     setLoadingMessage("Launching contract...");
     showSnackbar(true);
+
+    const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork);
+
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
       config: { confirmationPollingIntervalSecond: 5 },
-      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
+      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${launchNetwork}`,
     });
-    Tezos.wallet
+
+    await Tezos.wallet
       .originate({
         code: code as MichelsonV1Expression[],
-        init: storage as MichelsonV1Expression,
+        storage: defaultStorage.msg as MichelsonV1Expression,
       })
       .send()
       .then((originationOp) => {

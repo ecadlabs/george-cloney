@@ -11,6 +11,9 @@ import "./styles.css";
 const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null => {
   const { code, storage, currentStep, setCurrentStep } = props;
   const { width } = useWindowDimensions();
+
+  if (currentStep !== 2) return null;
+
   const parser = new Parser();
 
   const initialCodeValue =
@@ -24,7 +27,6 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
       "/* Initial Storage Code */";
   const editorWidth = width >= 800 ? `${width - 200}px` : width >= 600 ? "500px" : "350px";
 
-  if (currentStep !== 2) return null;
   return (
     <div className="editor-container" style={{ display: "flex", justifyContent: "center" }}>
       <span onClick={() => setCurrentStep(1)} className="left"></span>
@@ -40,7 +42,7 @@ const ContractReviewForm = (props: ContractReviewFormProps): ReactElement | null
           splits={2}
           style={{ borderRadius: "5px", margin: "0 auto" }}
           orientation={width >= 800 ? "beside" : "below"}
-          value={[initialCodeValue, initialStorageValue]}
+          value={code && storage ? [initialCodeValue, initialStorageValue] : ["", ""]}
           name="contract-code-editor"
           editorProps={{ $blockScrolling: true }}
         />

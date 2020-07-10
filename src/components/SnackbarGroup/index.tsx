@@ -4,10 +4,11 @@ import { SnackbarGroupProps } from "./types";
 
 const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
   const { snackbar, closeSnackbar, error, loading, loadingMessage } = props;
-
+  console.log(error);
   return (
     <>
-      {error && !loadingMessage && (
+      <div>Helloooo</div>
+      {/* {error && !loadingMessage && (
         <Snackbar snackbar={snackbar} closeSnackbar={closeSnackbar} type="warning">
           <>{error}</>
         </Snackbar>
@@ -16,7 +17,7 @@ const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
         <Snackbar duration={"none"} snackbar={snackbar} closeSnackbar={closeSnackbar} type="info">
           <>{loadingMessage}</>
         </Snackbar>
-      )}
+      )} */}
     </>
   );
 };
