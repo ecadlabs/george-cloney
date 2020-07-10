@@ -13,7 +13,6 @@ export const generateContractSelectValue = (contract: string) => {
 export const generateContractSelectOptions = (network: string) => {
   if (network === "mainnet") {
     return [
-      { value: "KT1PWx2mnDueood7fEmfbBDKx1D9BAnnXitn", label: "tzBTC Contract" },
       { value: "KT1LN4LPSqTMS7Sd2CJw4bbDGRkMv2t68Fy9", label: "USDtz Contract" },
       { value: "Contract Address", label: "Add Contract Address" },
     ];
