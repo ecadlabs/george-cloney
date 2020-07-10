@@ -44,6 +44,11 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
   };
 
   const locallyUpdateSigner = async (e: React.MouseEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value === "ephemeral") {
+      setChosenSigner("ephemeral");
+      setupSigner("ephemeral");
+      setSigner("ephemeral");
+    }
     if (e.currentTarget.value === "beacon") {
       setChosenSigner("beacon");
       setupSigner("beacon");
@@ -91,6 +96,17 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         />
         <label id="react-select-signer-label">Choose Signer</label>
         <label className="signer-toolbar">
+          {network === "carthagenet" && (
+            <>
+              <input onClick={locallyUpdateSigner} value="ephemeral" id="ephemeral" type="radio" />
+              <label
+                className={chosenSigner === "ephemeral" ? "signer-button-selected" : "signer-button"}
+                htmlFor="ephemeral"
+              >
+                Let Us Sign
+              </label>
+            </>
+          )}
           <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
           <label className={chosenSigner === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
             Beacon

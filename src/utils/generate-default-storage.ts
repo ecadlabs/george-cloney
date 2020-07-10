@@ -32,7 +32,6 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
 
     // loops through schema and populates default storage
     Object.keys(schema).forEach((key: string) => {
-      console.log(new MichelsonMap());
       const value: any = storage[key];
       if (simpleTypes.includes(schema[key])) {
         // simple types
@@ -67,7 +66,6 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
         defaultStorage[key] = new MichelsonMap();
       }
     });
-    console.log(defaultStorage);
     return { status: "success", msg: defaultStorage };
   } catch (err) {
     return { status: "error", msg: err };

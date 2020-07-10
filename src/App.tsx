@@ -17,6 +17,8 @@ import georgeCloneyTitleImg from "./assets/george-cloney-title.png";
 import builtWithTaquitoImg from "./assets/built-with-taquito.png";
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { InitialState } from "./utils/initial-app-state";
+import { HttpBackend } from "@taquito/http-utils";
+import { RemoteSigner } from "@taquito/remote-signer";
 import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
 
@@ -166,6 +168,18 @@ const App: React.FC = (): ReactElement => {
         },
       });
       Tezos.setProvider({ wallet: beaconWallet });
+    }
+    if (signer === "ephemeral") {
+      const httpClient = new HttpBackend();
+      const { id, pkh } = await httpClient.createRequest({
+        url: `https://api.tez.ie/keys/carthagenet/ephemeral`,
+        method: "POST",
+        headers: { Authorization: "Bearer taquito-example" },
+      });
+      const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/carthagenet/ephemeral/${id}/`, {
+        headers: { Authorization: "Bearer taquito-example" },
+      });
+      await Tezos.setProvider({ signer });
     }
     if (signer === "tezbridge") {
       Tezos.setProvider({ wallet: new TezBridgeWallet() });
