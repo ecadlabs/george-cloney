@@ -1,5 +1,5 @@
 import React, { useState, ReactElement, useEffect } from "react";
-import { Tezos, BigMapAbstraction } from "@taquito/taquito";
+import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { ValidationResult, validateContractAddress } from "@taquito/utils";
 import ContractReviewForm from "./components/ContractReviewForm";
@@ -18,7 +18,6 @@ import builtWithTaquitoImg from "./assets/built-with-taquito.png";
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { InitialState } from "./utils/initial-app-state";
 import "./App.css";
-import { Schema } from "@taquito/michelson-encoder";
 import generateDefaultStorage from "./utils/generate-default-storage";
 
 const App: React.FC = (): ReactElement => {
@@ -282,6 +281,8 @@ const App: React.FC = (): ReactElement => {
             signer={signer}
             setSigner={setSigner}
             setupSigner={setupSigner}
+            setLoading={setLoading}
+            setLoadingMessage={setLoadingMessage}
             handleLaunchSubmit={handleContractLaunchSubmit}
             handleNetworkChange={handleLaunchNetworkChange}
             network={launchNetwork}

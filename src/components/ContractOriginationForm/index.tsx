@@ -14,6 +14,8 @@ import "./styles.css";
 const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElement | null => {
   const {
     setupSigner,
+    setLoading,
+    setLoadingMessage,
     handleNetworkChange,
     txnAddress,
     network,
@@ -23,14 +25,19 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     setSigner,
     setCurrentStep,
   } = props;
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const [chosenSigner, setChosenSigner] = useState<string>("");
 
   useEffect(() => {
+    if (errors) {
+      console.log(errors);
+      setLoading(false);
+      setLoadingMessage("");
+    }
     return () => {
       setChosenSigner("");
     };
-  }, [handleSubmit]);
+  }, [handleSubmit, errors, setLoading, setLoadingMessage]);
 
   const handleChange = (selectedOption: any) => {
     handleNetworkChange(selectedOption.value);
