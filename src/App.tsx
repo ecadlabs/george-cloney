@@ -270,7 +270,7 @@ const App: React.FC = (): ReactElement => {
           loading={loading}
           loadingMessage={loadingMessage}
         />
-        <WizardControls txnAddress={txnAddress} currentStep={currentStep} code={code} />
+        <WizardControls signer={signer} txnAddress={txnAddress} currentStep={currentStep} code={code} />
         <div id="main-forms">
           <ContractFetchForm
             handleError={handleError}

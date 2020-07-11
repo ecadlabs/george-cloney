@@ -3,7 +3,7 @@ import { WizardControlsProps } from "./types";
 import "./styles.css";
 
 const WizardControls = (props: WizardControlsProps): ReactElement => {
-  const { code, currentStep, txnAddress } = props;
+  const { code, currentStep, txnAddress, signer } = props;
 
   const generateClasses = (step: number) => {
     switch (step) {
@@ -30,7 +30,7 @@ const WizardControls = (props: WizardControlsProps): ReactElement => {
       case 3:
         if (txnAddress && currentStep === 3) {
           return "step active-completed";
-        } else if (txnAddress && currentStep !== 3) {
+        } else if (signer && currentStep !== 3) {
           return "step completed";
         } else if (!txnAddress && currentStep === 3) {
           return "step active";
