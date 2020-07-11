@@ -51,7 +51,14 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
           // copies map values
           const newMap: any = {};
           value.forEach((_value: string, _key: string) => {
-            newMap[_key] = _value;
+            const newNewMap = {};
+            if (typeof _key === "object") {
+              Object.keys(_key).forEach((k) => {
+                (newNewMap as any)[k] = new MichelsonMap();
+              });
+            } else {
+              newMap[_key] = _value;
+            }
           });
           defaultStorage[key] = MichelsonMap.fromLiteral(newMap);
         }
