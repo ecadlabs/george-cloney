@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import Creatable from "react-select/creatable";
 import {
   generateNetworkSelectValue,
@@ -9,10 +9,12 @@ import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
 import { useForm } from "react-hook-form";
+import { TEST_NETWORK } from "../../utils/constants";
 import "./styles.css";
 
 const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElement | null => {
   const {
+    signer,
     setupSigner,
     setLoading,
     setLoadingMessage,
@@ -26,40 +28,42 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     setCurrentStep,
   } = props;
   const { register, handleSubmit, errors } = useForm();
-  const [chosenSigner, setChosenSigner] = useState<string>("");
 
+  // Handle snackbar on errors
   useEffect(() => {
-    if (errors) {
-      console.log(errors);
+    if (Object.keys(errors).length > 0) {
       setLoading(false);
       setLoadingMessage("");
     }
-    return () => {
-      setChosenSigner("");
-    };
-  }, [handleSubmit, errors, setLoading, setLoadingMessage]);
+  }, [errors, setLoading, setLoadingMessage]);
 
-  const handleChange = (selectedOption: any) => {
+  // Make sure signer is setup for ephemeral automatically for Test Network
+  useEffect(() => {
+    if (network === TEST_NETWORK && signer === "") {
+      setupSigner("ephemeral");
+      setSigner("ephemeral");
+    }
+  }, [network, setSigner, setupSigner, signer]);
+
+  const handleChange = (selectedOption: any): void => {
+    if (loading) return;
     handleNetworkChange(selectedOption.value);
   };
 
-  const locallyUpdateSigner = async (e: React.MouseEvent<HTMLInputElement>) => {
+  const locallyUpdateSigner = (e: React.MouseEvent<HTMLInputElement>): void => {
+    if (loading) return;
     if (e.currentTarget.value === "ephemeral") {
-      setChosenSigner("ephemeral");
       setupSigner("ephemeral");
       setSigner("ephemeral");
     }
     if (e.currentTarget.value === "beacon") {
-      setChosenSigner("beacon");
       setupSigner("beacon");
       setSigner("beacon");
     }
     if (e.currentTarget.value === "tezbridge") {
-      setChosenSigner("tezbridge");
       setupSigner("tezbridge");
       setSigner("tezbridge");
     }
-    return;
   };
 
   if (currentStep !== 3) return null;
@@ -96,11 +100,11 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         />
         <label id="react-select-signer-label">Choose Signer</label>
         <label className="signer-toolbar">
-          {network === "carthagenet" && (
+          {network === TEST_NETWORK && (
             <>
               <input onClick={locallyUpdateSigner} value="ephemeral" id="ephemeral" type="radio" />
               <label
-                className={chosenSigner === "ephemeral" ? "signer-button-selected" : "signer-button"}
+                className={signer === "ephemeral" ? "signer-button-selected" : "signer-button"}
                 htmlFor="ephemeral"
               >
                 Let Us Sign
@@ -108,14 +112,11 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
             </>
           )}
           <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
-          <label className={chosenSigner === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
+          <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
             Beacon
           </label>
           <input onClick={locallyUpdateSigner} value="tezbridge" id="tezbridge" type="radio" />
-          <label
-            className={chosenSigner === "tezbridge" ? "signer-button-selected" : "signer-button"}
-            htmlFor="tezbridge"
-          >
+          <label className={signer === "tezbridge" ? "signer-button-selected" : "signer-button"} htmlFor="tezbridge">
             TezBridge
           </label>
         </label>
@@ -125,7 +126,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
               {loading ? (
                 <LoadingSpinner className="loading-spinner-origination" />
               ) : (
-                <input disabled={!chosenSigner ? true : false} id="show-balance-button" type="submit" />
+                <input disabled={signer === "" || loading ? true : false} id="show-balance-button" type="submit" />
               )}
             </form>
           </div>

@@ -21,6 +21,7 @@ import { HttpBackend } from "@taquito/http-utils";
 import { RemoteSigner } from "@taquito/remote-signer";
 import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
+import { TEST_NETWORK, NetworkType } from "./utils/constants";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -39,12 +40,6 @@ const App: React.FC = (): ReactElement => {
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
-
-  enum NetworkType {
-    MAINNET = "mainnet",
-    CARTHAGENET = "carthagenet",
-    CUSTOM = "custom",
-  }
 
   useEffect(() => {
     // If new contract is deployed update localStorage and Last Originated Contract button
@@ -95,7 +90,7 @@ const App: React.FC = (): ReactElement => {
   };
 
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {
-    if (network !== "mainnet" && network !== "carthagenet") {
+    if (network !== "mainnet" && network !== TEST_NETWORK) {
       // Set custom node as provider
       await Tezos.setProvider({ rpc: network });
       setLaunchNetwork(network);
@@ -107,7 +102,7 @@ const App: React.FC = (): ReactElement => {
   };
 
   const handleContractNetworkChange = async (network: string): Promise<void> => {
-    if (network !== "mainnet" && network !== "carthagenet") {
+    if (network !== "mainnet" && network !== TEST_NETWORK) {
       // Set custom node as provider
       await Tezos.setProvider({ rpc: network });
       setProvider(network);
@@ -164,7 +159,7 @@ const App: React.FC = (): ReactElement => {
         network: {
           type: NetworkType.CARTHAGENET,
           name: "Carthagenet",
-          rpcUrl: "https://api.tez.ie/rpc/carthagenet",
+          rpcUrl: `https://api.tez.ie/rpc/${TEST_NETWORK}`,
         },
       });
       Tezos.setProvider({ wallet: beaconWallet });
@@ -172,11 +167,11 @@ const App: React.FC = (): ReactElement => {
     if (signer === "ephemeral") {
       const httpClient = new HttpBackend();
       const { id, pkh } = await httpClient.createRequest({
-        url: `https://api.tez.ie/keys/carthagenet/ephemeral`,
+        url: `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral`,
         method: "POST",
         headers: { Authorization: "Bearer taquito-example" },
       });
-      const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/carthagenet/ephemeral/${id}/`, {
+      const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral/${id}/`, {
         headers: { Authorization: "Bearer taquito-example" },
       });
       await Tezos.setProvider({ signer });
@@ -219,12 +214,15 @@ const App: React.FC = (): ReactElement => {
         setCurrentStep(4);
       })
       .catch(async (error) => {
-        const errorMessage = await error;
         setLoading(false);
         showSnackbar(false);
         setLoadingMessage("");
         setSigner("");
-        setError(errorMessage);
+        if (error && error.status === 404) {
+          setError(error.message + "\n This typically means the contract was not found on this network.");
+        } else {
+          setError(error?.message ?? error);
+        }
         showSnackbar(true);
       });
   };

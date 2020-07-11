@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { ContractResultFormProps } from "./types";
+import { TEST_NETWORK } from "../../utils/constants";
 import "./styles.css";
 
 const ContractResultForm = (props: ContractResultFormProps): ReactElement | null => {
@@ -9,7 +10,7 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
     switch (network) {
       case "mainnet":
         return `https://tzkt.io/${address}/operations`;
-      case "carthagenet":
+      case TEST_NETWORK:
         return `https://carthage.tzkt.io/${address}/operations`;
       default:
         break;
@@ -20,8 +21,8 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
     switch (network) {
       case "mainnet":
         return `https://tezblock.io/account/${address}`;
-      case "carthagenet":
-        return `https://carthagenet.tezblock.io/account/${address}`;
+      case TEST_NETWORK:
+        return `https://${TEST_NETWORK}.tezblock.io/account/${address}`;
       default:
         break;
     }
@@ -31,8 +32,8 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
     switch (network) {
       case "mainnet":
         return `https://tezos.id/${address}`;
-      case "carthagenet":
-        return `https://carthagenet.tezos.id/${address}`;
+      case TEST_NETWORK:
+        return `https://${TEST_NETWORK}.tezos.id/${address}`;
       default:
         break;
     }

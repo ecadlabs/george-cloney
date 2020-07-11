@@ -47,15 +47,14 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
       ) {
         // maps
         // verifies value is a map
-        // if (MichelsonMap.isMichelsonMap(value)) {
-        // copies map values
-        const newMap: any = {};
-        value.forEach((_value: string, _key: string) => {
-          console.log(key, value);
-          newMap[_key] = _value;
-        });
-        defaultStorage[key] = MichelsonMap.fromLiteral(newMap);
-        // }
+        if (MichelsonMap.isMichelsonMap(value)) {
+          // copies map values
+          const newMap: any = {};
+          value.forEach((_value: string, _key: string) => {
+            newMap[_key] = _value;
+          });
+          defaultStorage[key] = MichelsonMap.fromLiteral(newMap);
+        }
       } else if (
         typeof schema[key] === "object" &&
         schema[key] !== null &&

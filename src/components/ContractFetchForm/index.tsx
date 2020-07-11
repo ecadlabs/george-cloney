@@ -33,10 +33,12 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
   const { register, handleSubmit } = useForm();
 
   const handleChange = (selectedOption: any) => {
+    if (loading) return;
     handleNetworkChange(selectedOption.value);
   };
 
   const handleContractChange = (selectedOption: any) => {
+    if (loading) return;
     updateContractAddress(selectedOption.value);
   };
 
