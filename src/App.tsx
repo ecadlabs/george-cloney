@@ -188,7 +188,7 @@ const App: React.FC = (): ReactElement => {
     showSnackbar(true);
 
     const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork);
-
+    console.log(defaultStorage.msg);
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
       config: { confirmationPollingIntervalSecond: 5 },

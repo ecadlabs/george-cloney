@@ -73,21 +73,25 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
       <span onClick={() => setCurrentStep(2)} className="left"></span>
       <div id="dialog">
         <h2>
-          Originate Contract{" "}
-          <ToolTipComponent
-            title={
-              <>
-                <h5>Step 3: Originate (aka Deploy) a clone of this contract</h5>
-                <p>
-                  {
-                    "In this step, George Cloney will help you clone the fetched and reviewed smart contract to any Tezos network."
-                  }
-                </p>
-                <p>{"Mr. Cloney will also allow you to choose any method to sign the transaction that you please!"}</p>
-              </>
-            }
-            placement="bottom"
-          />
+          <span>
+            <span>Originate Contract</span>
+            <ToolTipComponent
+              title={
+                <>
+                  <h5>Step 3: Originate (aka Deploy) a clone of this contract</h5>
+                  <p>
+                    {
+                      "In this step, George Cloney will help you clone the fetched and reviewed smart contract to any Tezos network."
+                    }
+                  </p>
+                  <p>
+                    {"Mr. Cloney will also allow you to choose any method to sign the transaction that you please!"}
+                  </p>
+                </>
+              }
+              placement="bottom"
+            />
+          </span>
         </h2>
         <label id="react-select-label">Choose Network</label>
         <Creatable

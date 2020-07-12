@@ -6,6 +6,10 @@
   font-weight: bold;
 }
 
+#dialog h2 span {
+  display: inline-flex;
+}
+
 .network-select {
   width: 80%;
   padding-left: 20px;

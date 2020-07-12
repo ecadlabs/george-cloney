@@ -33,6 +33,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
     // loops through schema and populates default storage
     Object.keys(schema).forEach((key: string) => {
       const value: any = storage[key];
+      console.log(key, storage, schema[key]);
       if (simpleTypes.includes(schema[key])) {
         // simple types
         defaultStorage[key] = value;
@@ -51,6 +52,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
           // copies map values
           const newMap: any = {};
           value.forEach((_value: string, _key: string) => {
+            console.log(_value, _key);
             const newNewMap = {};
             if (typeof _key === "object") {
               Object.keys(_key).forEach((k) => {
@@ -70,6 +72,14 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
       ) {
         // Empty BigMaps
         defaultStorage[key] = new MichelsonMap();
+      } else if (
+        typeof schema[key] === "object" &&
+        schema[key] !== null &&
+        Object.keys(schema[key]).length > 1 &&
+        Object.keys(schema[key])[0] !== "map"
+      ) {
+        if (storage[key]) defaultStorage[key] = MichelsonMap.fromLiteral(storage[key]);
+        defaultStorage[key] = MichelsonMap.fromLiteral(storage);
       }
     });
     return { status: "success", msg: defaultStorage };

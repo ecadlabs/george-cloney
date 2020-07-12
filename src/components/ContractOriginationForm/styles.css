@@ -6,6 +6,10 @@
   font-weight: bold;
 }
 
+#dialog h2 span {
+  display: inline-flex;
+}
+
 #react-select-signer-label {
   display: flex;
   padding-left: 20px;

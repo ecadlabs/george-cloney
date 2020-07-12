@@ -48,21 +48,23 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
       <span className="left-arrow-hidden"></span>
       <div id="dialog">
         <h2>
-          Fetch Contract Code{" "}
-          <ToolTipComponent
-            title={
-              <>
-                <h5>Step 1: Fetch Smart Contract Code</h5>
-                <p>{"In this step, George Cloney will fetch you any smart contract code from any Tezos network."}</p>
-                <p>
-                  {
-                    "From here, you'll be able to see the contract's code and initial storage in Michelson in the next step."
-                  }
-                </p>
-              </>
-            }
-            placement="bottom"
-          />
+          <span>
+            <span>Fetch Contract Code</span>
+            <ToolTipComponent
+              title={
+                <>
+                  <h5>Step 1: Fetch Smart Contract Code</h5>
+                  <p>{"In this step, George Cloney will fetch you any smart contract code from any Tezos network."}</p>
+                  <p>
+                    {
+                      "From here, you'll be able to see the contract's code and initial storage in Michelson in the next step."
+                    }
+                  </p>
+                </>
+              }
+              placement="bottom"
+            />
+          </span>
         </h2>
         <label id="react-select-label">Choose Network or Insert Custom Network</label>
         <Creatable
