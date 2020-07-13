@@ -35,36 +35,23 @@ const App: React.FC = (): ReactElement => {
   const [provider, setProvider] = useState<string>("");
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
-  const [launchNetwork, setLaunchNetwork] = useState<string>(
-    InitialState.LAUNCH_NETWORK
-  );
-  const [contractNetwork, setContractNetwork] = useState<string>(
-    InitialState.CONTRACT_NETWORK
-  );
-  const [contractAddress, setContractAddress] = useState<string>(
-    InitialState.CONTRACT_ADDRESS
-  );
+  const [launchNetwork, setLaunchNetwork] = useState<string>(InitialState.LAUNCH_NETWORK);
+  const [contractNetwork, setContractNetwork] = useState<string>(InitialState.CONTRACT_NETWORK);
+  const [contractAddress, setContractAddress] = useState<string>(InitialState.CONTRACT_ADDRESS);
   const [txnAddress, setTxnAddress] = useState<string>("");
-  const [lastOriginatedContract, setLastOriginatedContract] = useState<string>(
-    ""
-  );
+  const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
 
   useEffect(() => {
     // If new contract is deployed update localStorage and Last Originated Contract button
     if (txnAddress) {
-      localStorage.setItem(
-        "lastLaunchedContract",
-        `${txnAddress},${launchNetwork}`
-      );
+      localStorage.setItem("lastLaunchedContract", `${txnAddress},${launchNetwork}`);
       setLastOriginatedContract(`${txnAddress},${launchNetwork}`);
     }
     // If there's no contract deployed yet check local storage to see if we have a past deployed one
     // If we do add the Last Originated Contract button below the wizard
     if (!txnAddress) {
-      const lastLaunchedContract = localStorage.getItem(
-        "lastLaunchedContract"
-      ) as string;
+      const lastLaunchedContract = localStorage.getItem("lastLaunchedContract") as string;
       setLastOriginatedContract(lastLaunchedContract);
     }
   }, [launchNetwork, txnAddress]);
@@ -75,10 +62,7 @@ const App: React.FC = (): ReactElement => {
     showSnackbar(false);
     setLoadingMessage("");
     if (error && error.status === 404) {
-      setError(
-        error.message +
-          "\n This typically means the contract was not found on this network."
-      );
+      setError(error.message + "\n This typically means the contract was not found on this network.");
     } else {
       setError(error?.message ?? error);
     }
@@ -118,9 +102,7 @@ const App: React.FC = (): ReactElement => {
     setLaunchNetwork(network);
   };
 
-  const handleContractNetworkChange = async (
-    network: string
-  ): Promise<void> => {
+  const handleContractNetworkChange = async (network: string): Promise<void> => {
     if (network !== "mainnet" && network !== TEST_NETWORK) {
       // Set custom node as provider
       await Tezos.setProvider({ rpc: network });
@@ -151,9 +133,7 @@ const App: React.FC = (): ReactElement => {
       showSnackbar(true);
       // Redundancy measure to make sure provider is set
       await Tezos.setProvider({
-        rpc: provider.includes("http")
-          ? provider
-          : `https://api.tez.ie/rpc/${contractNetwork}`
+        rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
       });
 
       // Grab contracts code from the blockchain and add code to the editors
@@ -177,41 +157,41 @@ const App: React.FC = (): ReactElement => {
           // To enable your own wallet connection success message
           PERMISSION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               console.log("permission data:", data);
               setLoadingMessage("Wallet connected!");
               showSnackbar(true);
-            }
+            },
           },
           // to enable your own transaction sent message
           OPERATION_REQUEST_SENT: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               console.log("operation sent data:", data);
               setLoading(true);
               setLoadingMessage("Operation successfully sent!");
               showSnackbar(true);
-            }
+            },
           },
           // to enable your own transaction success message
           OPERATION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               console.log("operation success data:", data);
               setLoading(true);
               setLoadingMessage("Operation successful!");
               showSnackbar(true);
-            }
+            },
           },
           OPERATION_REQUEST_ERROR: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               console.log("operation error:", data);
               setError("An error has occurred!");
               showSnackbar(true);
-            }
-          }
-        }
+            },
+          },
+        },
       });
       await beaconWallet.client.init();
       await beaconWallet.client.removeAllPeers();
@@ -223,15 +203,11 @@ const App: React.FC = (): ReactElement => {
       const { id, pkh } = await httpClient.createRequest({
         url: `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral`,
         method: "POST",
-        headers: { Authorization: "Bearer taquito-example" }
+        headers: { Authorization: "Bearer taquito-example" },
       });
-      const signer = new RemoteSigner(
-        pkh,
-        `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral/${id}/`,
-        {
-          headers: { Authorization: "Bearer taquito-example" }
-        }
-      );
+      const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral/${id}/`, {
+        headers: { Authorization: "Bearer taquito-example" },
+      });
       await Tezos.setProvider({ signer });
     }
     if (signer === "tezbridge") {
@@ -245,29 +221,24 @@ const App: React.FC = (): ReactElement => {
     setLoadingMessage("Launching contract...");
     showSnackbar(true);
 
-    const defaultStorage = await generateDefaultStorage(
-      contractAddress,
-      contractNetwork
-    );
+    const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork);
     console.log(defaultStorage.msg);
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
       config: { confirmationPollingIntervalSecond: 5 },
-      rpc: provider.includes("http")
-        ? provider
-        : `https://api.tez.ie/rpc/${launchNetwork}`
+      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${launchNetwork}`,
     });
 
     await Tezos.wallet
       .originate({
         code: code as MichelsonV1Expression[],
-        storage: defaultStorage.msg as MichelsonV1Expression
+        storage: defaultStorage.msg as MichelsonV1Expression,
       })
       .send()
-      .then(originationOp => {
+      .then((originationOp) => {
         return originationOp.contract();
       })
-      .then(contract => {
+      .then((contract) => {
         // Remove contract launch snackbar message
         setLoading(false);
         showSnackbar(false);
@@ -276,16 +247,13 @@ const App: React.FC = (): ReactElement => {
         setTxnAddress(contract.address);
         setCurrentStep(4);
       })
-      .catch(async error => {
+      .catch(async (error) => {
         setLoading(false);
         showSnackbar(false);
         setLoadingMessage("");
         setSigner("");
         if (error && error.status === 404) {
-          setError(
-            error.message +
-              "\n This typically means the contract was not found on this network."
-          );
+          setError(error.message + "\n This typically means the contract was not found on this network.");
         } else {
           setError(error?.message ?? error);
         }
@@ -319,19 +287,14 @@ const App: React.FC = (): ReactElement => {
 
   return (
     <ErrorBoundary onError={handleError}>
-      {currentStep === 4 && !confettiShown && (
-        <Confetti setConfettiShown={setConfettiShown} />
-      )}
+      {currentStep === 4 && !confettiShown && <Confetti setConfettiShown={setConfettiShown} />}
       <Navbar />
       <div id="wallet">
         <div className="title-group">
-          <img
-            alt="George Cloney signature in cursive"
-            src={georgeCloneyTitleImg}
-          />
+          <img alt="George Cloney signature in cursive" src={georgeCloneyTitleImg} />
           <h4>
-            George Cloney will find any Tezos Smart Contract and clone it for
-            you. <br /> Great for testing and exploring.
+            George Cloney will find any Tezos Smart Contract and clone it for you. <br /> Great for testing and
+            exploring.
           </h4>
         </div>
         <SnackbarGroup
@@ -341,12 +304,7 @@ const App: React.FC = (): ReactElement => {
           loading={loading}
           loadingMessage={loadingMessage}
         />
-        <WizardControls
-          signer={signer}
-          txnAddress={txnAddress}
-          currentStep={currentStep}
-          code={code}
-        />
+        <WizardControls signer={signer} txnAddress={txnAddress} currentStep={currentStep} code={code} />
         <div id="main-forms">
           <ContractFetchForm
             handleError={handleError}
@@ -382,12 +340,7 @@ const App: React.FC = (): ReactElement => {
             launchNetwork={launchNetwork}
           />
         </div>
-        <ContractReviewForm
-          setCurrentStep={setCurrentStep}
-          currentStep={currentStep}
-          code={code}
-          storage={storage}
-        />
+        <ContractReviewForm setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
         <LastOriginatedContract
           code={code}
           currentStep={currentStep}
@@ -396,17 +349,8 @@ const App: React.FC = (): ReactElement => {
         />
       </div>
       <div className="built-with-taquito-logo">
-        <a
-          href="https://tezostaquito.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            height="56"
-            width="128"
-            alt="Built with Taquito logo"
-            src={builtWithTaquitoImg}
-          />
+        <a href="https://tezostaquito.io/" target="_blank" rel="noopener noreferrer">
+          <img height="56" width="128" alt="Built with Taquito logo" src={builtWithTaquitoImg} />
         </a>
       </div>
     </ErrorBoundary>
