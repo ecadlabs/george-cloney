@@ -8,12 +8,26 @@ const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
   return (
     <>
       {error && !loadingMessage && (
-        <Snackbar snackbar={snackbar} closeSnackbar={closeSnackbar} type="warning">
+        <Snackbar
+          snackbar={snackbar}
+          closeSnackbar={closeSnackbar}
+          type="warning"
+        >
           <>{error}</>
         </Snackbar>
       )}
       {loading && (
-        <Snackbar duration={"none"} snackbar={snackbar} closeSnackbar={closeSnackbar} type="info">
+        <Snackbar
+          duration={"none"}
+          snackbar={snackbar}
+          closeSnackbar={closeSnackbar}
+          type="info"
+        >
+          <>{loadingMessage}</>
+        </Snackbar>
+      )}
+      {!loading && !error && loadingMessage && (
+        <Snackbar snackbar={snackbar} closeSnackbar={closeSnackbar} type="info">
           <>{loadingMessage}</>
         </Snackbar>
       )}
