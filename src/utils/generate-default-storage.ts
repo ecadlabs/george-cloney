@@ -33,7 +33,6 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
     // loops through schema and populates default storage
     Object.keys(schema).forEach((key: string) => {
       const value: any = storage[key];
-      console.log(key, storage, schema);
       if (simpleTypes.includes(schema[key])) {
         // simple types
         defaultStorage[key] = value;
@@ -52,7 +51,6 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
           // copies map values
           const newMap: any = {};
           value.forEach((_value: string, _key: string) => {
-            console.log(_value, _key);
             const newNewMap = {};
             if (typeof _key === "object") {
               Object.keys(_key).forEach((k) => {

@@ -32,7 +32,6 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
   // Handle snackbar on errors
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
-      console.log(errors);
       setLoading(false);
       setLoadingMessage("");
     }
