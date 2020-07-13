@@ -4,7 +4,6 @@ import { SnackbarGroupProps } from "./types";
 
 const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
   const { snackbar, closeSnackbar, error, loading, loadingMessage } = props;
-  console.log(error);
   return (
     <>
       {error && !loadingMessage && (
