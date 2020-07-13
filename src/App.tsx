@@ -21,7 +21,8 @@ import { HttpBackend } from "@taquito/http-utils";
 import { RemoteSigner } from "@taquito/remote-signer";
 import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
-import { TEST_NETWORK, NetworkType } from "./utils/constants";
+import { TEST_NETWORK } from "./utils/constants";
+import requestBeaconPermissions from "./utils/request-beacon-permissions";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -155,13 +156,7 @@ const App: React.FC = (): ReactElement => {
       });
       await beaconWallet.client.init();
       await beaconWallet.client.removeAllPeers();
-      await beaconWallet.requestPermissions({
-        network: {
-          type: NetworkType.CARTHAGENET,
-          name: "Carthagenet",
-          rpcUrl: `https://api.tez.ie/rpc/${TEST_NETWORK}`,
-        },
-      });
+      await requestBeaconPermissions(beaconWallet, launchNetwork);
       Tezos.setProvider({ wallet: beaconWallet });
     }
     if (signer === "ephemeral") {

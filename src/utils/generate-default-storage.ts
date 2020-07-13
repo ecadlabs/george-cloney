@@ -33,7 +33,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
     // loops through schema and populates default storage
     Object.keys(schema).forEach((key: string) => {
       const value: any = storage[key];
-      console.log(key, storage, schema[key]);
+      console.log(key, storage, schema);
       if (simpleTypes.includes(schema[key])) {
         // simple types
         defaultStorage[key] = value;
