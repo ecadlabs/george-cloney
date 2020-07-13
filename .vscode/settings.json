@@ -1,0 +1,15 @@
+{
+  "prettier.printWidth": 120,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.wordWrapColumn": 150,
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "search.exclude": {
+    "public/github_files": true
+  },
+  "html.format.wrapLineLength": 140
+}
