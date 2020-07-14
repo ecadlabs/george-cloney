@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/george-cloney/static/css/main.b580e080.chunk.css",
+    "main.css": "/george-cloney/static/css/main.99f8c5fd.chunk.css",
     "main.js": "/george-cloney/static/js/main.358bd2fe.chunk.js",
     "main.js.map": "/george-cloney/static/js/main.358bd2fe.chunk.js.map",
     "runtime-main.js": "/george-cloney/static/js/runtime-main.02366c6e.js",
@@ -8,9 +8,9 @@
     "static/js/2.e980d33a.chunk.js": "/george-cloney/static/js/2.e980d33a.chunk.js",
     "static/js/2.e980d33a.chunk.js.map": "/george-cloney/static/js/2.e980d33a.chunk.js.map",
     "index.html": "/george-cloney/index.html",
-    "precache-manifest.8f7051cc8f5e1f486c8018d61e42e705.js": "/george-cloney/precache-manifest.8f7051cc8f5e1f486c8018d61e42e705.js",
+    "precache-manifest.bd32023f33b7d79030f85f174606429a.js": "/george-cloney/precache-manifest.bd32023f33b7d79030f85f174606429a.js",
     "service-worker.js": "/george-cloney/service-worker.js",
-    "static/css/main.b580e080.chunk.css.map": "/george-cloney/static/css/main.b580e080.chunk.css.map",
+    "static/css/main.99f8c5fd.chunk.css.map": "/george-cloney/static/css/main.99f8c5fd.chunk.css.map",
     "static/js/2.e980d33a.chunk.js.LICENSE.txt": "/george-cloney/static/js/2.e980d33a.chunk.js.LICENSE.txt",
     "static/media/george-cloney-title.png": "/george-cloney/static/media/george-cloney-title.b00f5f74.png",
     "static/media/george-cloney.png": "/george-cloney/static/media/george-cloney.399f1c6d.png",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.02366c6e.js",
     "static/js/2.e980d33a.chunk.js",
-    "static/css/main.b580e080.chunk.css",
+    "static/css/main.99f8c5fd.chunk.css",
     "static/js/main.358bd2fe.chunk.js"
   ]
 }
