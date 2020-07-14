@@ -26,11 +26,9 @@ import requestBeaconPermissions from './utils/request-beacon-permissions';
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
   const [loadingMessage, setLoadingMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [validationError, setValidationError] = useState<string>('');
-  const [snackbar, showSnackbar] = useState<boolean>(false);
   const [signer, setSigner] = useState<string>('');
   const [provider, setProvider] = useState<string>('');
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
@@ -69,10 +67,12 @@ const App: React.FC = (): ReactElement => {
     }
   }, [launchNetwork, txnAddress]);
 
+  const closeSnackbar = (): void => {
+    setLoadingMessage('');
+  };
+
   const handleError = (error: any): void => {
     // Get state ready for Snackbar displays
-    setLoading(false);
-    showSnackbar(false);
     setLoadingMessage('');
     if (error && error.status === 404) {
       setError(
@@ -82,7 +82,6 @@ const App: React.FC = (): ReactElement => {
     } else {
       setError(error?.message ?? error);
     }
-    showSnackbar(true);
     // Remove error after 5 seconds
     setTimeout(() => setError(''), 5000);
   };
@@ -90,10 +89,8 @@ const App: React.FC = (): ReactElement => {
   const resetGeorgeCloney = (): void => {
     // Set entire application back to initial state
     setCurrentStep(1);
-    setLoading(false);
     setLoadingMessage('');
     setError('');
-    showSnackbar(false);
     setSigner('');
     setProvider('');
     setCode([]);
@@ -146,9 +143,7 @@ const App: React.FC = (): ReactElement => {
       setLaunchNetwork('mainnet');
       setTxnAddress('');
       // Set loading state and snackbar
-      setLoading(true);
       setLoadingMessage('Loading contract code...');
-      showSnackbar(true);
       // Redundancy measure to make sure provider is set
       await Tezos.setProvider({
         rpc: provider.includes('http')
@@ -163,7 +158,6 @@ const App: React.FC = (): ReactElement => {
       setStorage(newContract.script.storage);
       setCurrentStep(2);
       setLoadingMessage('');
-      setLoading(false);
     } catch (error) {
       handleError(error);
     }
@@ -179,33 +173,30 @@ const App: React.FC = (): ReactElement => {
             // setting up the handler method will disable the default one
             handler: async (data) => {
               setLoadingMessage('Wallet connected!');
-              showSnackbar(true);
             },
           },
           // to enable your own transaction sent message
           OPERATION_REQUEST_SENT: {
             // setting up the handler method will disable the default one
             handler: async (data) => {
-              setLoading(true);
               setLoadingMessage('Operation successfully sent!');
-              showSnackbar(true);
             },
           },
           // to enable your own transaction success message
           OPERATION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
             handler: async (data) => {
-              setLoading(true);
               setLoadingMessage('Operation successful!');
-              showSnackbar(true);
+              setTimeout(
+                () => setLoadingMessage('Injecting contract...'),
+                1000
+              );
             },
           },
           OPERATION_REQUEST_ERROR: {
             // setting up the handler method will disable the default one
             handler: async (data) => {
-              console.log('operation error:', data);
               setError('An error has occurred!');
-              showSnackbar(true);
             },
           },
         },
@@ -238,9 +229,7 @@ const App: React.FC = (): ReactElement => {
 
   const handleContractLaunchSubmit = async (): Promise<void> => {
     // Set snackbar
-    setLoading(true);
     setLoadingMessage('Launching contract...');
-    showSnackbar(true);
 
     const defaultStorage = await generateDefaultStorage(
       contractAddress,
@@ -266,19 +255,15 @@ const App: React.FC = (): ReactElement => {
         return originationOp.contract();
       })
       .then((contract) => {
-        // Remove contract launch snackbar message
-        setLoading(false);
-        showSnackbar(false);
         // Add block explorer snackbar message
         setLoadingMessage('');
         setTxnAddress(contract.address);
         setCurrentStep(4);
       })
       .catch(async (error) => {
-        setLoading(false);
-        showSnackbar(false);
         setLoadingMessage('');
         setSigner('');
+
         if (error && error.status === 404) {
           setError(
             error.message +
@@ -287,13 +272,7 @@ const App: React.FC = (): ReactElement => {
         } else {
           setError(error?.message ?? error);
         }
-        showSnackbar(true);
       });
-  };
-
-  const closeSnackbar = (): void => {
-    // Remove snackbar
-    showSnackbar(false);
   };
 
   const updateContractAddress = (newContractAddress: string): void => {
@@ -333,10 +312,8 @@ const App: React.FC = (): ReactElement => {
           </h4>
         </div>
         <SnackbarGroup
-          snackbar={snackbar}
           closeSnackbar={closeSnackbar}
           error={error}
-          loading={loading}
           loadingMessage={loadingMessage}
         />
         <WizardControls
@@ -353,7 +330,8 @@ const App: React.FC = (): ReactElement => {
             contractAddress={contractAddress}
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
-            loading={loading}
+            setLoadingMessage={setLoadingMessage}
+            loadingMessage={loadingMessage}
             handleContractSubmit={handleContractCodeSubmit}
             updateContractAddress={updateContractAddress}
             handleNetworkChange={handleContractNetworkChange}
@@ -363,11 +341,10 @@ const App: React.FC = (): ReactElement => {
             txnAddress={txnAddress}
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
-            loading={loading}
             signer={signer}
+            loadingMessage={loadingMessage}
             setSigner={setSigner}
             setupSigner={setupSigner}
-            setLoading={setLoading}
             setLoadingMessage={setLoadingMessage}
             handleLaunchSubmit={handleContractLaunchSubmit}
             handleNetworkChange={handleLaunchNetworkChange}

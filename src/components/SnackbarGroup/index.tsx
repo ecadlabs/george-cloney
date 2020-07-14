@@ -3,32 +3,22 @@ import Snackbar from './Snackbar';
 import { SnackbarGroupProps } from './types';
 
 const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
-  const { snackbar, closeSnackbar, error, loading, loadingMessage } = props;
+  const { closeSnackbar, error, loadingMessage } = props;
   return (
     <>
       {error && !loadingMessage && (
         <Snackbar
-          snackbar={snackbar}
+          snackbar={error.length > 0}
           closeSnackbar={closeSnackbar}
           type="warning"
         >
           <>{error}</>
         </Snackbar>
       )}
-      {loading && (
+      {!error && loadingMessage && (
         <Snackbar
           duration={'none'}
-          snackbar={snackbar}
-          closeSnackbar={closeSnackbar}
-          type="info"
-        >
-          <>{loadingMessage}</>
-        </Snackbar>
-      )}
-      {!loading && !error && loadingMessage && (
-        <Snackbar
-          duration={'none'}
-          snackbar={snackbar}
+          snackbar={loadingMessage.length > 0}
           closeSnackbar={closeSnackbar}
           type="info"
         >
