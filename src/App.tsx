@@ -1,110 +1,94 @@
-import React, { useState, ReactElement, useEffect } from 'react';
-import { Tezos } from '@taquito/taquito';
-import { MichelsonV1Expression } from '@taquito/rpc';
-import { ValidationResult, validateContractAddress } from '@taquito/utils';
-import ContractReviewForm from './components/ContractReviewForm';
-import ContractFetchForm from './components/ContractFetchForm';
-import ContractOriginationForm from './components/ContractOriginationForm';
-import ContractResultForm from './components/ContractResultForm';
-import SnackbarGroup from './components/SnackbarGroup';
-import LastOriginatedContract from './components/LastOriginatedContract';
-import WizardControls from './components/WizardControls';
-import Navbar from './components/Navbar';
-import Confetti from './components/Confetti';
-import ErrorBoundary from 'react-error-boundary';
-import { TezBridgeWallet } from '@taquito/tezbridge-wallet';
-import georgeCloneyTitleImg from './assets/george-cloney-title.png';
-import builtWithTaquitoImg from './assets/built-with-taquito.png';
-import { BeaconWallet } from '@taquito/beacon-wallet';
-import { InitialState } from './utils/initial-app-state';
-import { HttpBackend } from '@taquito/http-utils';
-import { RemoteSigner } from '@taquito/remote-signer';
-import './App.css';
-import generateDefaultStorage from './utils/generate-default-storage';
-import { TEST_NETWORK } from './utils/constants';
-import requestBeaconPermissions from './utils/request-beacon-permissions';
+import React, { useState, ReactElement, useEffect } from "react";
+import { Tezos } from "@taquito/taquito";
+import { MichelsonV1Expression } from "@taquito/rpc";
+import { ValidationResult, validateContractAddress } from "@taquito/utils";
+import ContractReviewForm from "./components/ContractReviewForm";
+import ContractFetchForm from "./components/ContractFetchForm";
+import ContractOriginationForm from "./components/ContractOriginationForm";
+import ContractResultForm from "./components/ContractResultForm";
+import SnackbarGroup from "./components/SnackbarGroup";
+import LastOriginatedContract from "./components/LastOriginatedContract";
+import WizardControls from "./components/WizardControls";
+import Navbar from "./components/Navbar";
+import Confetti from "./components/Confetti";
+import ErrorBoundary from "react-error-boundary";
+import { TezBridgeWallet } from "@taquito/tezbridge-wallet";
+import georgeCloneyTitleImg from "./assets/george-cloney-title.png";
+import builtWithTaquitoImg from "./assets/built-with-taquito.png";
+import { BeaconWallet } from "@taquito/beacon-wallet";
+import { InitialState } from "./utils/initial-app-state";
+import { HttpBackend } from "@taquito/http-utils";
+import { RemoteSigner } from "@taquito/remote-signer";
+import "./App.css";
+import generateDefaultStorage from "./utils/generate-default-storage";
+import { TEST_NETWORK } from "./utils/constants";
+import requestBeaconPermissions from "./utils/request-beacon-permissions";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [loadingMessage, setLoadingMessage] = useState<string>('');
-  const [error, setError] = useState<string>('');
-  const [validationError, setValidationError] = useState<string>('');
-  const [signer, setSigner] = useState<string>('');
-  const [provider, setProvider] = useState<string>('');
+  const [loadingMessage, setLoadingMessage] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [validationError, setValidationError] = useState<string>("");
+  const [signer, setSigner] = useState<string>("");
+  const [provider, setProvider] = useState<string>("");
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
-  const [launchNetwork, setLaunchNetwork] = useState<string>(
-    InitialState.LAUNCH_NETWORK
-  );
-  const [contractNetwork, setContractNetwork] = useState<string>(
-    InitialState.CONTRACT_NETWORK
-  );
-  const [contractAddress, setContractAddress] = useState<string>(
-    InitialState.CONTRACT_ADDRESS
-  );
-  const [txnAddress, setTxnAddress] = useState<string>('');
-  const [lastOriginatedContract, setLastOriginatedContract] = useState<string>(
-    ''
-  );
+  const [launchNetwork, setLaunchNetwork] = useState<string>(InitialState.LAUNCH_NETWORK);
+  const [contractNetwork, setContractNetwork] = useState<string>(InitialState.CONTRACT_NETWORK);
+  const [contractAddress, setContractAddress] = useState<string>(InitialState.CONTRACT_ADDRESS);
+  const [txnAddress, setTxnAddress] = useState<string>("");
+  const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
 
   useEffect(() => {
     // If new contract is deployed update localStorage and Last Originated Contract button
     if (txnAddress) {
-      localStorage.setItem(
-        'lastLaunchedContract',
-        `${txnAddress},${launchNetwork}`
-      );
+      localStorage.setItem("lastLaunchedContract", `${txnAddress},${launchNetwork}`);
       setLastOriginatedContract(`${txnAddress},${launchNetwork}`);
     }
     // If there's no contract deployed yet check local storage to see if we have a past deployed one
     // If we do add the Last Originated Contract button below the wizard
     if (!txnAddress) {
-      const lastLaunchedContract = localStorage.getItem(
-        'lastLaunchedContract'
-      ) as string;
+      const lastLaunchedContract = localStorage.getItem("lastLaunchedContract") as string;
       setLastOriginatedContract(lastLaunchedContract);
     }
   }, [launchNetwork, txnAddress]);
 
   const closeSnackbar = (): void => {
-    setLoadingMessage('');
+    setLoadingMessage("");
   };
 
   const handleError = (error: any): void => {
     // Get state ready for Snackbar displays
-    setLoadingMessage('');
+    setLoadingMessage("");
     if (error && error.status === 404) {
-      setError(
-        error.message +
-          '\n This typically means the contract was not found on this network.'
-      );
+      setError(error.message + "\n This typically means the contract was not found on this network.");
     } else {
       setError(error?.message ?? error);
     }
     // Remove error after 5 seconds
-    setTimeout(() => setError(''), 5000);
+    setTimeout(() => setError(""), 5000);
   };
 
   const resetGeorgeCloney = (): void => {
     // Set entire application back to initial state
     setCurrentStep(1);
-    setLoadingMessage('');
-    setError('');
-    setSigner('');
-    setProvider('');
+    setLoadingMessage("");
+    setError("");
+    setSigner("");
+    setProvider("");
     setCode([]);
-    setStorage('');
+    setStorage("");
     setLaunchNetwork(InitialState.LAUNCH_NETWORK);
     setContractNetwork(InitialState.CONTRACT_NETWORK);
     setContractAddress(InitialState.CONTRACT_ADDRESS);
-    setTxnAddress('');
-    setLastOriginatedContract('');
+    setTxnAddress("");
+    setLastOriginatedContract("");
     setConfettiShown(false);
   };
 
   const handleLaunchNetworkChange = async (network: string): Promise<void> => {
-    if (network !== 'mainnet' && network !== TEST_NETWORK) {
+    if (network !== "mainnet" && network !== TEST_NETWORK) {
       // Set custom node as provider
       await Tezos.setProvider({ rpc: network });
       setLaunchNetwork(network);
@@ -115,10 +99,8 @@ const App: React.FC = (): ReactElement => {
     setLaunchNetwork(network);
   };
 
-  const handleContractNetworkChange = async (
-    network: string
-  ): Promise<void> => {
-    if (network !== 'mainnet' && network !== TEST_NETWORK) {
+  const handleContractNetworkChange = async (network: string): Promise<void> => {
+    if (network !== "mainnet" && network !== TEST_NETWORK) {
       // Set custom node as provider
       await Tezos.setProvider({ rpc: network });
       setProvider(network);
@@ -135,20 +117,18 @@ const App: React.FC = (): ReactElement => {
     try {
       // Reset steps 2-4
       setCurrentStep(1);
-      setSigner('');
-      setProvider('');
+      setSigner("");
+      setProvider("");
       setCode([]);
-      setStorage('');
-      setError('');
-      setLaunchNetwork('mainnet');
-      setTxnAddress('');
+      setStorage("");
+      setError("");
+      setLaunchNetwork("mainnet");
+      setTxnAddress("");
       // Set loading state and snackbar
-      setLoadingMessage('Loading contract code...');
+      setLoadingMessage("Loading contract code...");
       // Redundancy measure to make sure provider is set
       await Tezos.setProvider({
-        rpc: provider.includes('http')
-          ? provider
-          : `https://api.tez.ie/rpc/${contractNetwork}`,
+        rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
       });
 
       // Grab contracts code from the blockchain and add code to the editors
@@ -157,46 +137,43 @@ const App: React.FC = (): ReactElement => {
       setCode(newContract.script.code);
       setStorage(newContract.script.storage);
       setCurrentStep(2);
-      setLoadingMessage('');
+      setLoadingMessage("");
     } catch (error) {
       handleError(error);
     }
   };
 
   const setupSigner = async (signer: string): Promise<void> => {
-    if (signer === 'beacon') {
+    if (signer === "beacon") {
       const beaconWallet = new BeaconWallet({
-        name: 'georgeCloneyWallet',
+        name: "georgeCloneyWallet",
         eventHandlers: {
           // To enable your own wallet connection success message
           PERMISSION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
             handler: async (data) => {
-              setLoadingMessage('Wallet connected!');
+              setLoadingMessage("Wallet connected!");
             },
           },
           // to enable your own transaction sent message
           OPERATION_REQUEST_SENT: {
             // setting up the handler method will disable the default one
             handler: async (data) => {
-              setLoadingMessage('Operation successfully sent!');
+              setLoadingMessage("Operation successfully sent!");
             },
           },
           // to enable your own transaction success message
           OPERATION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
             handler: async (data) => {
-              setLoadingMessage('Operation successful!');
-              setTimeout(
-                () => setLoadingMessage('Injecting contract...'),
-                1000
-              );
+              setLoadingMessage("Operation successful!");
+              setTimeout(() => setLoadingMessage("Injecting contract..."), 1000);
             },
           },
           OPERATION_REQUEST_ERROR: {
             // setting up the handler method will disable the default one
             handler: async (data) => {
-              setError('An error has occurred!');
+              setError("An error has occurred!");
             },
           },
         },
@@ -206,43 +183,34 @@ const App: React.FC = (): ReactElement => {
       await requestBeaconPermissions(beaconWallet, launchNetwork);
       Tezos.setProvider({ wallet: beaconWallet });
     }
-    if (signer === 'ephemeral') {
+    if (signer === "ephemeral") {
       const httpClient = new HttpBackend();
       const { id, pkh } = await httpClient.createRequest({
         url: `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral`,
-        method: 'POST',
-        headers: { Authorization: 'Bearer taquito-example' },
+        method: "POST",
+        headers: { Authorization: "Bearer taquito-example" },
       });
-      const signer = new RemoteSigner(
-        pkh,
-        `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral/${id}/`,
-        {
-          headers: { Authorization: 'Bearer taquito-example' },
-        }
-      );
+      const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral/${id}/`, {
+        headers: { Authorization: "Bearer taquito-example" },
+      });
       await Tezos.setProvider({ signer });
     }
-    if (signer === 'tezbridge') {
+    if (signer === "tezbridge") {
       Tezos.setProvider({ wallet: new TezBridgeWallet() });
     }
   };
 
   const handleContractLaunchSubmit = async (): Promise<void> => {
     // Set snackbar
-    setLoadingMessage('Launching contract...');
+    setLoadingMessage("Launching contract...");
 
-    const defaultStorage = await generateDefaultStorage(
-      contractAddress,
-      contractNetwork
-    );
+    const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork);
     console.log(defaultStorage.msg);
 
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
       config: { confirmationPollingIntervalSecond: 5 },
-      rpc: provider.includes('http')
-        ? provider
-        : `https://api.tez.ie/rpc/${launchNetwork}`,
+      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${launchNetwork}`,
     });
 
     await Tezos.wallet
@@ -256,19 +224,16 @@ const App: React.FC = (): ReactElement => {
       })
       .then((contract) => {
         // Add block explorer snackbar message
-        setLoadingMessage('');
+        setLoadingMessage("");
         setTxnAddress(contract.address);
         setCurrentStep(4);
       })
       .catch(async (error) => {
-        setLoadingMessage('');
-        setSigner('');
+        setLoadingMessage("");
+        setSigner("");
 
         if (error && error.status === 404) {
-          setError(
-            error.message +
-              '\n This typically means the contract was not found on this network.'
-          );
+          setError(error.message + "\n This typically means the contract was not found on this network.");
         } else {
           setError(error?.message ?? error);
         }
@@ -284,44 +249,30 @@ const App: React.FC = (): ReactElement => {
 
     // Update the contract address that we'll be pulling data from if it's valid
     if (isValid) {
-      setValidationError('');
+      setValidationError("");
       return setContractAddress(newContractAddress.trim());
     }
     // Clear error if the invalid address is erased
-    if (newContractAddress === '') return setValidationError('');
+    if (newContractAddress === "") return setValidationError("");
     // Set validation error if address is invalid
-    setValidationError('Contract addresses need to be 36 characters');
+    setValidationError("Contract addresses need to be 36 characters");
     setContractAddress(newContractAddress.trim());
   };
 
   return (
     <ErrorBoundary onError={handleError}>
-      {currentStep === 4 && !confettiShown && (
-        <Confetti setConfettiShown={setConfettiShown} />
-      )}
+      {currentStep === 4 && !confettiShown && <Confetti setConfettiShown={setConfettiShown} />}
       <Navbar />
       <div id="wallet">
         <div className="title-group">
-          <img
-            alt="George Cloney signature in cursive"
-            src={georgeCloneyTitleImg}
-          />
+          <img alt="George Cloney signature in cursive" src={georgeCloneyTitleImg} />
           <h4>
-            George Cloney will find any Tezos Smart Contract and clone it for
-            you. <br /> Great for testing and exploring.
+            George Cloney will find any Tezos Smart Contract and clone it for you. <br /> Great for testing and
+            exploring.
           </h4>
         </div>
-        <SnackbarGroup
-          closeSnackbar={closeSnackbar}
-          error={error}
-          loadingMessage={loadingMessage}
-        />
-        <WizardControls
-          signer={signer}
-          txnAddress={txnAddress}
-          currentStep={currentStep}
-          code={code}
-        />
+        <SnackbarGroup closeSnackbar={closeSnackbar} error={error} loadingMessage={loadingMessage} />
+        <WizardControls signer={signer} txnAddress={txnAddress} currentStep={currentStep} code={code} />
         <div id="main-forms">
           <ContractFetchForm
             handleError={handleError}
@@ -357,12 +308,7 @@ const App: React.FC = (): ReactElement => {
             launchNetwork={launchNetwork}
           />
         </div>
-        <ContractReviewForm
-          setCurrentStep={setCurrentStep}
-          currentStep={currentStep}
-          code={code}
-          storage={storage}
-        />
+        <ContractReviewForm setCurrentStep={setCurrentStep} currentStep={currentStep} code={code} storage={storage} />
         <LastOriginatedContract
           code={code}
           currentStep={currentStep}
@@ -371,17 +317,8 @@ const App: React.FC = (): ReactElement => {
         />
       </div>
       <div className="built-with-taquito-logo">
-        <a
-          href="https://tezostaquito.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            height="56"
-            width="128"
-            alt="Built with Taquito logo"
-            src={builtWithTaquitoImg}
-          />
+        <a href="https://tezostaquito.io/" target="_blank" rel="noopener noreferrer">
+          <img height="56" width="128" alt="Built with Taquito logo" src={builtWithTaquitoImg} />
         </a>
       </div>
     </ErrorBoundary>
