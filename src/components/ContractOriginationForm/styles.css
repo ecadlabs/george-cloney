@@ -50,6 +50,7 @@
 .signer-button:hover {
   background: #35636e;
   opacity: 0.9;
+  box-shadow: 0 0 15px rgba(107, 96, 96, 0.6);
   color: white;
   cursor: pointer;
 }
