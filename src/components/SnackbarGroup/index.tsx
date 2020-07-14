@@ -26,11 +26,6 @@ const SnackbarGroup = (props: SnackbarGroupProps): ReactElement => {
         </Snackbar>
       )}
       {!loading && !error && loadingMessage && (
-        <Snackbar snackbar={snackbar} closeSnackbar={closeSnackbar} type="info">
-          <>{loadingMessage}</>
-        </Snackbar>
-      )}
-      {!loading && !error && loadingMessage && (
         <Snackbar
           duration={'none'}
           snackbar={snackbar}
