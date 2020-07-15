@@ -12,7 +12,7 @@ interface Storage {
 
 const generateDefaultStorage = async (address: string, contractNetwork: string) => {
   await Tezos.setProvider({
-    rpc: `https://api.tez.ie/rpc/${contractNetwork}`,
+    rpc: `https://api.tez.ie/rpc/${contractNetwork}`
   });
 
   const simpleTypes: string[] = ["address", "bool", "nat", "int", "string", "timestamp"];
@@ -30,56 +30,64 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
     const newSchema = new Schema(code.args[0]);
     const schema = newSchema.ExtractSchema();
 
-    // loops through schema and populates default storage
-    Object.keys(schema).forEach((key: string) => {
-      const value: any = storage[key];
-      if (simpleTypes.includes(schema[key])) {
-        // simple types
-        defaultStorage[key] = value;
-      } else if (schema[key] === "set" && Array.isArray(value)) {
-        // sets
-        defaultStorage[key] = value;
-      } else if (
-        typeof schema[key] === "object" &&
-        schema[key] !== null &&
-        Object.keys(schema[key]).length === 1 &&
-        Object.keys(schema[key])[0] === "map"
-      ) {
-        // maps
-        // verifies value is a map
-        if (MichelsonMap.isMichelsonMap(value)) {
-          // copies map values
-          const newMap: any = {};
-          value.forEach((_value: string, _key: string) => {
-            const newNewMap = {};
-            if (typeof _key === "object") {
-              Object.keys(_key).forEach((k) => {
-                (newNewMap as any)[k] = new MichelsonMap();
-              });
-            } else {
-              newMap[_key] = _value;
-            }
-          });
-          defaultStorage[key] = MichelsonMap.fromLiteral(newMap);
+    console.log("Schema:", schema, "Storage:", storage);
+
+    const schemaKeys: string[] = Object.keys(schema);
+    if (schemaKeys.length === 1 && schemaKeys[0] === "map") {
+      // the storage is just a map
+      defaultStorage = new MichelsonMap();
+    } else {
+      // loops through schema and populates default storage
+      schemaKeys.forEach((key: string) => {
+        const value: any = storage[key];
+        if (simpleTypes.includes(schema[key])) {
+          // simple types
+          defaultStorage[key] = value;
+        } else if (schema[key] === "set" && Array.isArray(value)) {
+          // sets
+          defaultStorage[key] = value;
+        } else if (
+          typeof schema[key] === "object" &&
+          schema[key] !== null &&
+          Object.keys(schema[key]).length === 1 &&
+          Object.keys(schema[key])[0] === "map"
+        ) {
+          // maps
+          // verifies value is a map
+          if (MichelsonMap.isMichelsonMap(value)) {
+            // copies map values
+            const newMap: any = {};
+            value.forEach((_value: string, _key: string) => {
+              const newNewMap = {};
+              if (typeof _key === "object") {
+                Object.keys(_key).forEach(k => {
+                  (newNewMap as any)[k] = new MichelsonMap();
+                });
+              } else {
+                newMap[_key] = _value;
+              }
+            });
+            defaultStorage[key] = MichelsonMap.fromLiteral(newMap);
+          }
+        } else if (
+          typeof schema[key] === "object" &&
+          schema[key] !== null &&
+          Object.keys(schema[key]).length === 1 &&
+          Object.keys(schema[key])[0] !== "map"
+        ) {
+          // Empty BigMaps
+          defaultStorage[key] = new MichelsonMap();
+        } else if (
+          typeof schema[key] === "object" &&
+          schema[key] !== null &&
+          Object.keys(schema[key]).length > 1 &&
+          Object.keys(schema[key])[0] !== "map"
+        ) {
+          if (storage[key]) defaultStorage[key] = MichelsonMap.fromLiteral(storage[key]);
+          defaultStorage[key] = MichelsonMap.fromLiteral(storage);
         }
-      } else if (
-        typeof schema[key] === "object" &&
-        schema[key] !== null &&
-        Object.keys(schema[key]).length === 1 &&
-        Object.keys(schema[key])[0] !== "map"
-      ) {
-        // Empty BigMaps
-        defaultStorage[key] = new MichelsonMap();
-      } else if (
-        typeof schema[key] === "object" &&
-        schema[key] !== null &&
-        Object.keys(schema[key]).length > 1 &&
-        Object.keys(schema[key])[0] !== "map"
-      ) {
-        if (storage[key]) defaultStorage[key] = MichelsonMap.fromLiteral(storage[key]);
-        defaultStorage[key] = MichelsonMap.fromLiteral(storage);
-      }
-    });
+      });
+    }
     return { status: "success", msg: defaultStorage };
   } catch (err) {
     return { status: "error", msg: err };
