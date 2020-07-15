@@ -49,6 +49,13 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
         <h4 className="newly-originated-contract">{txnAddress}</h4>
         <label id="react-select-signer-label">View New Contract:</label>
         <div className="contract-result-explorers">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://better-call.dev/${launchNetwork}/${txnAddress}/operations`}
+          >
+            <button className="contract-result-button">Better Call Dev</button>
+          </a>
           <a target="_blank" rel="noopener noreferrer" href={`https://${launchNetwork}.tzstats.com/${txnAddress}`}>
             <button className="contract-result-button">TzStats</button>
           </a>

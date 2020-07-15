@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, useEffect } from "react";
+import React, { useState, ReactElement, useEffect, MouseEventHandler } from "react";
 import { Tezos } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { ValidationResult, validateContractAddress } from "@taquito/utils";
@@ -53,6 +53,17 @@ const App: React.FC = (): ReactElement => {
       setLastOriginatedContract(lastLaunchedContract);
     }
   }, [launchNetwork, txnAddress]);
+
+  // Remove loading state if user clicks on Modal Close button for Beacon
+  useEffect(() => {
+    const onClick = (event: any) => {
+      if (event.target.className === "beacon-modal__close__icon") {
+        setLoadingMessage("");
+      }
+    };
+    window.addEventListener("click", onClick);
+    return () => window.removeEventListener("click", onClick);
+  }, []);
 
   const closeSnackbar = (): void => {
     setLoadingMessage("");
