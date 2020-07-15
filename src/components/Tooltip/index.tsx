@@ -6,6 +6,10 @@ import "./styles.css";
 
 const HtmlTooltip = withStyles(() => ({
   tooltip: {
+    marginTop: "-15px",
+    marginBottom: "-15px",
+    paddingTop: "-15px",
+    paddingBottom: "-15px",
     backgroundColor: "#f5f5f9",
     color: "rgba(0, 0, 0, 0.87)",
     maxWidth: 260,

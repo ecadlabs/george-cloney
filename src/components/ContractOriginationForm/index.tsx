@@ -1,20 +1,18 @@
-import React, { ReactElement, useEffect } from 'react';
-import Creatable from 'react-select/creatable';
+import React, { ReactElement, useEffect } from "react";
+import Creatable from "react-select/creatable";
 import {
   generateNetworkSelectValue,
   networkSelectOptions,
   networkSelectStyles,
-} from '../../utils/custom-network-select';
-import LoadingSpinner from '../LoadingSpinner';
-import ToolTipComponent from '../Tooltip';
-import { ContractOriginationFormProps } from './types';
-import { useForm } from 'react-hook-form';
-import { TEST_NETWORK } from '../../utils/constants';
-import './styles.css';
+} from "../../utils/custom-network-select";
+import LoadingSpinner from "../LoadingSpinner";
+import ToolTipComponent from "../Tooltip";
+import { ContractOriginationFormProps } from "./types";
+import { useForm } from "react-hook-form";
+import { TEST_NETWORK } from "../../utils/constants";
+import "./styles.css";
 
-const ContractOriginationForm = (
-  props: ContractOriginationFormProps
-): ReactElement | null => {
+const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElement | null => {
   const {
     setupSigner,
     setLoadingMessage,
@@ -33,15 +31,15 @@ const ContractOriginationForm = (
   // Handle snackbar on errors
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
-      setLoadingMessage('');
+      setLoadingMessage("");
     }
   }, [errors, setLoadingMessage]);
 
   // Make sure signer is setup for ephemeral automatically for Test Network
   useEffect(() => {
-    if (network === TEST_NETWORK && signer === '') {
-      setupSigner('ephemeral');
-      setSigner('ephemeral');
+    if (network === TEST_NETWORK && signer === "") {
+      setupSigner("ephemeral");
+      setSigner("ephemeral");
     }
   }, [network, setSigner, setupSigner, signer]);
 
@@ -52,17 +50,17 @@ const ContractOriginationForm = (
 
   const locallyUpdateSigner = (e: React.MouseEvent<HTMLInputElement>): void => {
     if (loadingMessage) return;
-    if (e.currentTarget.value === 'ephemeral') {
-      setupSigner('ephemeral');
-      setSigner('ephemeral');
+    if (e.currentTarget.value === "ephemeral") {
+      setupSigner("ephemeral");
+      setSigner("ephemeral");
     }
-    if (e.currentTarget.value === 'beacon') {
-      setupSigner('beacon');
-      setSigner('beacon');
+    if (e.currentTarget.value === "beacon") {
+      setupSigner("beacon");
+      setSigner("beacon");
     }
-    if (e.currentTarget.value === 'tezbridge') {
-      setupSigner('tezbridge');
-      setSigner('tezbridge');
+    if (e.currentTarget.value === "tezbridge") {
+      setupSigner("tezbridge");
+      setSigner("tezbridge");
     }
   };
 
@@ -77,18 +75,15 @@ const ContractOriginationForm = (
             <ToolTipComponent
               title={
                 <>
-                  <h5>
-                    Step 3: Originate (aka Deploy) a clone of this contract
-                  </h5>
+                  <h3>Step 3:</h3>
+                  <h3>Originate (aka Deploy) a clone of this contract</h3>
                   <p>
                     {
-                      'In this step, George Cloney will help you clone the fetched and reviewed smart contract to any Tezos network.'
+                      "In this step, George Cloney will help you clone the fetched and reviewed smart contract to any Tezos network."
                     }
                   </p>
                   <p>
-                    {
-                      'Mr. Cloney will also allow you to choose any method to sign the transaction that you please!'
-                    }
+                    {"Mr. Cloney will also allow you to choose any method to sign the transaction that you please!"}
                   </p>
                 </>
               }
@@ -110,52 +105,21 @@ const ContractOriginationForm = (
         <label className="signer-toolbar">
           {network === TEST_NETWORK && (
             <>
-              <input
-                onClick={locallyUpdateSigner}
-                value="ephemeral"
-                id="ephemeral"
-                type="radio"
-              />
+              <input onClick={locallyUpdateSigner} value="ephemeral" id="ephemeral" type="radio" />
               <label
-                className={
-                  signer === 'ephemeral'
-                    ? 'signer-button-selected'
-                    : 'signer-button'
-                }
+                className={signer === "ephemeral" ? "signer-button-selected" : "signer-button"}
                 htmlFor="ephemeral"
               >
                 Let Us Sign
               </label>
             </>
           )}
-          <input
-            onClick={locallyUpdateSigner}
-            value="beacon"
-            id="beacon"
-            type="radio"
-          />
-          <label
-            className={
-              signer === 'beacon' ? 'signer-button-selected' : 'signer-button'
-            }
-            htmlFor="beacon"
-          >
+          <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
+          <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
             Beacon
           </label>
-          <input
-            onClick={locallyUpdateSigner}
-            value="tezbridge"
-            id="tezbridge"
-            type="radio"
-          />
-          <label
-            className={
-              signer === 'tezbridge'
-                ? 'signer-button-selected'
-                : 'signer-button'
-            }
-            htmlFor="tezbridge"
-          >
+          <input onClick={locallyUpdateSigner} value="tezbridge" id="tezbridge" type="radio" />
+          <label className={signer === "tezbridge" ? "signer-button-selected" : "signer-button"} htmlFor="tezbridge">
             TezBridge
           </label>
         </label>
@@ -166,7 +130,7 @@ const ContractOriginationForm = (
                 <LoadingSpinner className="loading-spinner-origination" />
               ) : (
                 <input
-                  disabled={signer === '' || loadingMessage ? true : false}
+                  disabled={signer === "" || loadingMessage ? true : false}
                   id="show-balance-button"
                   type="submit"
                 />
@@ -176,10 +140,7 @@ const ContractOriginationForm = (
         </div>
       </div>
       {txnAddress.length > 0 ? (
-        <span
-          onClick={() => setCurrentStep(4)}
-          className="right-next-step"
-        ></span>
+        <span onClick={() => setCurrentStep(4)} className="right-next-step"></span>
       ) : (
         <span className="right"></span>
       )}

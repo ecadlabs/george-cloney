@@ -6,6 +6,10 @@
   font-weight: bold;
 }
 
+.tooltip-fetch {
+  margin-top: 5px;
+}
+
 #dialog h2 span {
   display: inline-flex;
 }
