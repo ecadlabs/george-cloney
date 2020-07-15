@@ -47,7 +47,7 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
         <h2>New Originated Contract</h2>
         <label id="react-select-signer-label">Contract Address:</label>
         <h4 className="newly-originated-contract">{txnAddress}</h4>
-        <label id="react-select-signer-label">View New Contract:</label>
+        <label id="react-select-signer-label">View Originated Contract:</label>
         <div className="contract-result-explorers">
           <a
             target="_blank"

@@ -1,5 +1,5 @@
 export interface SnackbarGroupProps {
-  closeSnackbar: () => void;
+  closeSnackbar?: () => void;
   error: string;
   loadingMessage: string;
 }
