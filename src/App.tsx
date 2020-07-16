@@ -23,7 +23,6 @@ import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
 import { TEST_NETWORK } from "./utils/constants";
 import requestBeaconPermissions from "./utils/request-beacon-permissions";
-import { defaultProps } from "react-select/src/Select";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
