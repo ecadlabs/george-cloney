@@ -23,6 +23,7 @@ import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
 import { TEST_NETWORK } from "./utils/constants";
 import requestBeaconPermissions from "./utils/request-beacon-permissions";
+import { defaultProps } from "react-select/src/Select";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -54,10 +55,10 @@ const App: React.FC = (): ReactElement => {
     }
   }, [launchNetwork, txnAddress]);
 
-  // Remove loading state if user clicks on Modal Close button for Beacon
+  // Remove loading state if user clicks on Modal X or Done button for Beacon
   useEffect(() => {
     const onClick = (event: any) => {
-      if (event.target.className === "beacon-modal__close__icon") {
+      if (event.target.className === "beacon-modal__close__icon" || event.target.className === "beacon-modal__button") {
         setLoadingMessage("");
       }
     };
@@ -188,6 +189,8 @@ const App: React.FC = (): ReactElement => {
           },
         },
       });
+      // Check to see if Chrome Extension is installed, maybe handy later
+      // const beaconWalletType = await (beaconWallet.client as any).transport;
       await beaconWallet.client.init();
       await beaconWallet.client.removeAllPeers();
       await requestBeaconPermissions(beaconWallet, launchNetwork);
