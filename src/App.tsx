@@ -146,9 +146,6 @@ const App: React.FC = (): ReactElement => {
       setStorage(newContract.script.storage);
       setCurrentStep(2);
       setLoadingMessage("");
-
-      const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork);
-      console.log("Default storage:", defaultStorage);
     } catch (error) {
       handleError(error);
     }
@@ -218,7 +215,6 @@ const App: React.FC = (): ReactElement => {
     setLoadingMessage("Launching contract...");
 
     const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork);
-    console.log(defaultStorage.msg);
 
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
