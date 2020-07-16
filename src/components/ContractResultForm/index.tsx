@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { ContractResultFormProps } from "./types";
-import { TEST_NETWORK } from "../../utils/constants";
+import { TEST_NETWORK, MAIN_NETWORK } from "../../utils/constants";
 import "./styles.css";
 
 const ContractResultForm = (props: ContractResultFormProps): ReactElement | null => {
@@ -40,6 +40,32 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
   };
 
   if (currentStep !== 4) return null;
+
+  // Only show Better Call Dev if user is originating from a custom node
+  if (launchNetwork !== TEST_NETWORK && launchNetwork !== MAIN_NETWORK) {
+    return (
+      <>
+        <span onClick={() => setCurrentStep(3)} className="left"></span>
+        <div id="dialog">
+          <h2>New Originated Contract</h2>
+          <label id="react-select-signer-label">Contract Address:</label>
+          <h4 className="newly-originated-contract">{txnAddress}</h4>
+          <label id="react-select-signer-label">View Originated Contract:</label>
+          <div className="contract-result-explorers">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://old.better-call.dev/sandbox/${txnAddress}/operations`}
+            >
+              <button className="contract-result-button">Better Call Dev</button>
+            </a>
+          </div>
+        </div>
+        <span className="right-arrow-hidden"></span>
+      </>
+    );
+  }
+
   return (
     <>
       <span onClick={() => setCurrentStep(3)} className="left"></span>
