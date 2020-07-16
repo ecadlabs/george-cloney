@@ -12,10 +12,20 @@ interface Storage {
 
 const generateDefaultStorage = async (address: string, contractNetwork: string) => {
   await Tezos.setProvider({
-    rpc: `https://api.tez.ie/rpc/${contractNetwork}`,
+    rpc: `https://api.tez.ie/rpc/${contractNetwork}`
   });
 
-  const simpleTypes: string[] = ["address", "bool", "nat", "int", "string", "timestamp"];
+  const comparableTypes: string[] = [
+    "int",
+    "nat",
+    "string",
+    "bytes",
+    "mutez",
+    "bool",
+    "key_hash",
+    "timestamp",
+    "address"
+  ];
   let defaultStorage: Storage = {};
 
   try {
@@ -36,11 +46,14 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
     if (schemaKeys.length === 1 && schemaKeys[0] === "map") {
       // the storage is just a map
       defaultStorage = new MichelsonMap();
+    } else if (schemaKeys.length === 1 && comparableTypes.includes(schemaKeys[0])) {
+      // the storage is just a big map
+      defaultStorage = new MichelsonMap();
     } else {
       // loops through schema and populates default storage
       schemaKeys.forEach((key: string) => {
         const value: any = storage[key];
-        if (simpleTypes.includes(schema[key])) {
+        if (comparableTypes.includes(schema[key])) {
           // simple types
           defaultStorage[key] = value;
         } else if (schema[key] === "set" && Array.isArray(value)) {
@@ -60,7 +73,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
             value.forEach((_value: string, _key: string) => {
               const newNewMap = {};
               if (typeof _key === "object") {
-                Object.keys(_key).forEach((k) => {
+                Object.keys(_key).forEach(k => {
                   (newNewMap as any)[k] = new MichelsonMap();
                 });
               } else {
