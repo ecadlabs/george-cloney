@@ -66,7 +66,7 @@ const App: React.FC = (): ReactElement => {
   }, []);
 
   const handleError = (error: any): void => {
-    // Get state ready for Snackbar displays
+    // Remove current snackbar message
     setLoadingMessage("");
     if (error && error.status === 404) {
       setError(error.message + "\n This typically means the contract was not found on this network.");
