@@ -72,7 +72,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
             />
           </span>
         </h2>
-        <label id="react-select-label">Choose Network or Insert Custom Network</label>
+        <label id="react-select-label">Choose or Enter Network</label>
         <Creatable
           styles={networkSelectStyles}
           className="network-select"
