@@ -205,7 +205,12 @@ const App: React.FC = (): ReactElement => {
       await Tezos.setProvider({ signer });
     }
     if (signer === "tezbridge") {
-      Tezos.setProvider({ wallet: new TezBridgeWallet() });
+      // Allow custom node users to set host
+      if (provider.includes("http")) {
+        const customProvider = new TezBridgeWallet().setHost(provider);
+        return Tezos.setProvider({ wallet: customProvider });
+      }
+      await Tezos.setProvider({ wallet: new TezBridgeWallet() });
     }
   };
 
