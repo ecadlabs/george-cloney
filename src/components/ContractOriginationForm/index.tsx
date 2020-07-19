@@ -124,7 +124,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
               </label>
             </>
           )}
-          {beaconWalletType !== "p2p" && (
+          {network !== TEST_NETWORK && beaconWalletType !== "p2p" && (
             <>
               <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
               <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
