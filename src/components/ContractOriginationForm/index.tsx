@@ -11,6 +11,7 @@ import { ContractOriginationFormProps } from "./types";
 import { useForm } from "react-hook-form";
 import { TEST_NETWORK } from "../../utils/constants";
 import "./styles.css";
+import { BeaconWallet } from "@taquito/beacon-wallet";
 
 const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElement | null => {
   const {
@@ -27,6 +28,15 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     currentStep,
   } = props;
   const { register, handleSubmit, errors } = useForm();
+
+  let beaconWalletType;
+  // Check to see if Chrome Extension is installed, maybe handy later
+  useEffect(() => {
+    (async () => {
+      const beaconWallet = new BeaconWallet({ name: "check" });
+      beaconWalletType = await (beaconWallet.client as any).transport;
+    })();
+  }, []);
 
   // Handle snackbar on errors
   useEffect(() => {
@@ -114,10 +124,14 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
               </label>
             </>
           )}
-          <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
-          <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
-            Beacon
-          </label>
+          {beaconWalletType !== "p2p" && (
+            <>
+              <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
+              <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
+                Beacon
+              </label>
+            </>
+          )}
           <input onClick={locallyUpdateSigner} value="tezbridge" id="tezbridge" type="radio" />
           <label className={signer === "tezbridge" ? "signer-button-selected" : "signer-button"} htmlFor="tezbridge">
             TezBridge

@@ -185,8 +185,6 @@ const App: React.FC = (): ReactElement => {
           },
         },
       });
-      // Check to see if Chrome Extension is installed, maybe handy later
-      // const beaconWalletType = await (beaconWallet.client as any).transport;
       await beaconWallet.client.init();
       await beaconWallet.client.removeAllPeers();
       await requestBeaconPermissions(beaconWallet, launchNetwork);
