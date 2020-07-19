@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import Creatable from "react-select/creatable";
 import {
   generateNetworkSelectValue,
@@ -29,12 +29,13 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
   } = props;
   const { register, handleSubmit, errors } = useForm();
 
-  let beaconWalletType;
+  const beaconWalletType = useRef();
+
   // Check to see if Chrome Extension is installed, maybe handy later
   useEffect(() => {
     (async () => {
       const beaconWallet = new BeaconWallet({ name: "check" });
-      beaconWalletType = await (beaconWallet.client as any).transport;
+      beaconWalletType.current = await (beaconWallet.client as any).transport;
     })();
   }, []);
 
@@ -124,7 +125,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
               </label>
             </>
           )}
-          {network !== TEST_NETWORK && beaconWalletType !== "p2p" && (
+          {network !== TEST_NETWORK && beaconWalletType.current !== "p2p" && (
             <>
               <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
               <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
