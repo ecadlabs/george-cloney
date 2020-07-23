@@ -23,6 +23,8 @@ import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
 import { TEST_NETWORK } from "./utils/constants";
 import requestBeaconPermissions from "./utils/request-beacon-permissions";
+import { ThanosWallet } from "@thanos-wallet/dapp";
+import { ThanosDAppNetwork } from "@thanos-wallet/dapp/src/types";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -153,8 +155,13 @@ const App: React.FC = (): ReactElement => {
   const setupSigner = async (signer: string): Promise<void> => {
     if (signer === "beacon") {
       const beaconWallet = new BeaconWallet({
-        name: "georgeCloneyWallet",
+        name: "George Cloney",
         eventHandlers: {
+          BROADCAST_REQUEST_SENT: {
+            handler: async data => {
+              console.log("broadcast request:", data);
+            }
+          },
           // To enable your own wallet connection success message
           PERMISSION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
@@ -210,6 +217,16 @@ const App: React.FC = (): ReactElement => {
         return Tezos.setProvider({ wallet });
       }
       await Tezos.setProvider({ wallet: new TezBridgeWallet() });
+    }
+    if (signer === "thanos") {
+      const wallet = new ThanosWallet("George Cloney");
+      // Allow custom node users to set host
+      if (provider.includes("http")) {
+        await wallet.connect("sandbox");
+      } else {
+        await wallet.connect(launchNetwork as ThanosDAppNetwork);
+      }
+      await Tezos.setProvider({ wallet });
     }
   };
 

@@ -1508,6 +1508,12 @@
     bs58check "^2.1.2"
     buffer "^5.6.0"
 
+"@thanos-wallet/dapp@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@thanos-wallet/dapp/-/dapp-0.5.0.tgz#5ec3901a50c028c5b607185cdb9845c1310ab2e5"
+  dependencies:
+    nanoid "^3.1.10"
+
 "@types/babel__core@^7.1.0":
   version "7.1.7"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.7.tgz#1dacad8840364a57c98d0dd4855c6dd3752c6b89"
@@ -6682,6 +6688,10 @@ mute-stream@0.0.8:
 nan@^2.12.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
+
+nanoid@^3.1.10:
+  version "3.1.10"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.10.tgz#69a8a52b77892de0d11cede96bc9762852145bc4"
 
 nanomatch@^1.2.9:
   version "1.2.13"

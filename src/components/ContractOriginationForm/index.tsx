@@ -1,9 +1,9 @@
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import Creatable from "react-select/creatable";
 import {
   generateNetworkSelectValue,
   networkSelectOptions,
-  networkSelectStyles,
+  networkSelectStyles
 } from "../../utils/custom-network-select";
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { TEST_NETWORK } from "../../utils/constants";
 import "./styles.css";
 import { BeaconWallet } from "@taquito/beacon-wallet";
+import { ThanosWallet } from "@thanos-wallet/dapp";
 
 const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElement | null => {
   const {
@@ -25,16 +26,21 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     txnAddress,
     loadingMessage,
     network,
-    currentStep,
+    currentStep
   } = props;
   const { register, handleSubmit, errors } = useForm();
 
   const beaconWalletType = useRef();
 
+  const [isThanosAvailable, setThanosAvailability] = useState(false);
+
   // Check to see if Chrome Extension is installed, maybe handy later
   useEffect(() => {
     (async () => {
-      const beaconWallet = new BeaconWallet({ name: "check" });
+      // checks if Thanos is available
+      setThanosAvailability(await ThanosWallet.isAvailable());
+      // checks if Beacon is available
+      const beaconWallet = new BeaconWallet({ name: "George Cloney" });
       beaconWalletType.current = await (beaconWallet.client as any).transport;
     })();
   }, []);
@@ -72,6 +78,10 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     if (e.currentTarget.value === "tezbridge") {
       setupSigner("tezbridge");
       setSigner("tezbridge");
+    }
+    if (e.currentTarget.value === "thanos") {
+      setupSigner("thanos");
+      setSigner("thanos");
     }
   };
 
@@ -137,6 +147,14 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
           <label className={signer === "tezbridge" ? "signer-button-selected" : "signer-button"} htmlFor="tezbridge">
             TezBridge
           </label>
+          {isThanosAvailable && (
+            <>
+              <input onClick={locallyUpdateSigner} value="thanos" id="thanos" type="radio" />
+              <label className={signer === "thanos" ? "signer-button-selected" : "signer-button"} htmlFor="thanos">
+                Thanos
+              </label>
+            </>
+          )}
         </label>
         <div id="content">
           <div id="contract-launch-form">
