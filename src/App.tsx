@@ -23,8 +23,10 @@ import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
 import { TEST_NETWORK } from "./utils/constants";
 import requestBeaconPermissions from "./utils/request-beacon-permissions";
+import { getQrData } from "@airgap/beacon-sdk/dist/utils/qr.js";
 import { ThanosWallet } from "@thanos-wallet/dapp";
 import { ThanosDAppNetwork } from "@thanos-wallet/dapp/src/types";
+import ToolTipComponent from "./components/Tooltip/index";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -41,6 +43,8 @@ const App: React.FC = (): ReactElement => {
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [qrCode, setQrCode] = useState({ data: "", token: "" });
 
   useEffect(() => {
     // If new contract is deployed update localStorage and Last Originated Contract button
@@ -157,9 +161,11 @@ const App: React.FC = (): ReactElement => {
       const beaconWallet = new BeaconWallet({
         name: "George Cloney",
         eventHandlers: {
-          BROADCAST_REQUEST_SENT: {
+          P2P_LISTEN_FOR_CHANNEL_OPEN: {
             handler: async data => {
-              console.log("broadcast request:", data);
+              setShowPopup(true);
+              console.log(data);
+              setQrCode({ data: getQrData(JSON.stringify(data), "svg"), token: data.publicKey });
             }
           },
           // To enable your own wallet connection success message
@@ -291,6 +297,23 @@ const App: React.FC = (): ReactElement => {
   return (
     <ErrorBoundary onError={handleError}>
       {currentStep === 4 && !confettiShown && <Confetti setConfettiShown={setConfettiShown} />}
+      {showPopup && (
+        <div className="popup">
+          <div className="close-beacon-qrcode" onClick={() => setShowPopup(false)}>
+            <ToolTipComponent title={<div>Close</div>} placement="bottom" icon="X" />
+          </div>
+          <div className="popup-inner">
+            <p>
+              Scan this QR code <br /> to connect your wallet!
+            </p>
+            <div className="qrcode-container" dangerouslySetInnerHTML={{ __html: qrCode.data }}></div>
+            <p>
+              Token: <br />
+              {qrCode.token}
+            </p>
+          </div>
+        </div>
+      )}
       <Navbar />
       <div id="wallet">
         <div className="title-group">

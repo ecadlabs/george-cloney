@@ -14,16 +14,16 @@ const HtmlTooltip = withStyles(() => ({
     color: "rgba(0, 0, 0, 0.87)",
     maxWidth: 260,
     fontSize: 16,
-    border: "1px solid #dadde9",
-  },
+    border: "1px solid #dadde9"
+  }
 }))(Tooltip);
 
 const ToolTipComponent = (props: ToolTipProps): ReactElement => {
-  const { title, placement } = props;
+  const { title, placement, icon } = props;
   return (
     <div className="tooltip">
       <HtmlTooltip title={title} placement={placement || "bottom"}>
-        <span>?</span>
+        <span>{icon}</span>
       </HtmlTooltip>
     </div>
   );

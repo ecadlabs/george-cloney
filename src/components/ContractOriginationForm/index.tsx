@@ -109,6 +109,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
                 </>
               }
               placement="bottom"
+              icon="?"
             />
           </span>
         </h2>

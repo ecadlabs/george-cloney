@@ -4,12 +4,12 @@ import LoadingSpinner from "../LoadingSpinner";
 import {
   generateNetworkSelectValue,
   networkSelectOptions,
-  networkSelectStyles,
+  networkSelectStyles
 } from "../../utils/custom-network-select";
 import {
   generateContractSelectValue,
   generateContractSelectOptions,
-  contractSelectStyles,
+  contractSelectStyles
 } from "../../utils/custom-contract-select";
 import { ContractFetchFormProps } from "./types";
 import Creatable from "react-select/creatable";
@@ -29,7 +29,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
     loadingMessage,
     currentStep,
     contractAddress,
-    validationError,
+    validationError
   } = props;
   const { register, handleSubmit } = useForm();
 
@@ -69,6 +69,7 @@ const ContractFetchForm = (props: ContractFetchFormProps): ReactElement | null =
                 </>
               }
               placement="bottom"
+              icon="?"
             />
           </span>
         </h2>

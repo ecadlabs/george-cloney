@@ -414,3 +414,45 @@ li {
 .loading-spinner div {
   margin: 9px auto !important;
 }
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*background-color: rgba(0, 0, 0, 0.5);*/
+  background-image: url("https://m.media-amazon.com/images/M/MV5BYjk0ZDE1NzktZDAzYy00ZDI3LTgyMWMtYThjMzFlMDZlNTE3XkEyXkFqcGdeQXVyMDM1MzIyMQ@@._V1_.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 100;
+}
+
+.popup-inner {
+  position: absolute;
+  left: 15%;
+  top: 20%;
+  margin: auto;
+  border-radius: 20px;
+  background: white;
+  z-index: 101;
+  text-align: center;
+  padding: 20px;
+  width: 300px;
+  word-wrap: break-word;
+}
+
+.popup-inner .qrcode-container {
+  height: 80%;
+}
+
+.popup-inner svg {
+  width: 80%;
+  height: 80%;
+}
+
+.close-beacon-qrcode {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

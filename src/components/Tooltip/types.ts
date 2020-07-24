@@ -16,4 +16,5 @@ export interface ToolTipProps {
     | "top-start"
     | "top"
     | undefined;
+  icon: string;
 }
