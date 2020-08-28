@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/george-cloney/static/css/main.b79ee4c7.chunk.css",
-    "main.js": "/george-cloney/static/js/main.9ae73b4e.chunk.js",
-    "main.js.map": "/george-cloney/static/js/main.9ae73b4e.chunk.js.map",
-    "runtime-main.js": "/george-cloney/static/js/runtime-main.02366c6e.js",
-    "runtime-main.js.map": "/george-cloney/static/js/runtime-main.02366c6e.js.map",
-    "static/js/2.caf56a83.chunk.js": "/george-cloney/static/js/2.caf56a83.chunk.js",
-    "static/js/2.caf56a83.chunk.js.map": "/george-cloney/static/js/2.caf56a83.chunk.js.map",
-    "index.html": "/george-cloney/index.html",
-    "precache-manifest.d2e050eaf2eb8006c7da11d2d2f52fea.js": "/george-cloney/precache-manifest.d2e050eaf2eb8006c7da11d2d2f52fea.js",
-    "service-worker.js": "/george-cloney/service-worker.js",
-    "static/css/main.b79ee4c7.chunk.css.map": "/george-cloney/static/css/main.b79ee4c7.chunk.css.map",
-    "static/js/2.caf56a83.chunk.js.LICENSE.txt": "/george-cloney/static/js/2.caf56a83.chunk.js.LICENSE.txt",
-    "static/media/george-cloney-title.png": "/george-cloney/static/media/george-cloney-title.b00f5f74.png",
-    "static/media/george-cloney.png": "/george-cloney/static/media/george-cloney.399f1c6d.png",
-    "static/media/github.jpg": "/george-cloney/static/media/github.24b62548.jpg"
+    "main.css": "/static/css/main.b79ee4c7.chunk.css",
+    "main.js": "/static/js/main.e621dd05.chunk.js",
+    "main.js.map": "/static/js/main.e621dd05.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.eb32de69.js",
+    "runtime-main.js.map": "/static/js/runtime-main.eb32de69.js.map",
+    "static/js/2.41b5b77e.chunk.js": "/static/js/2.41b5b77e.chunk.js",
+    "static/js/2.41b5b77e.chunk.js.map": "/static/js/2.41b5b77e.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.b2bc584b460af11c6d2782e85c5d160f.js": "/precache-manifest.b2bc584b460af11c6d2782e85c5d160f.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.b79ee4c7.chunk.css.map": "/static/css/main.b79ee4c7.chunk.css.map",
+    "static/js/2.41b5b77e.chunk.js.LICENSE.txt": "/static/js/2.41b5b77e.chunk.js.LICENSE.txt",
+    "static/media/george-cloney-title.png": "/static/media/george-cloney-title.b00f5f74.png",
+    "static/media/george-cloney.png": "/static/media/george-cloney.399f1c6d.png",
+    "static/media/github.jpg": "/static/media/github.24b62548.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.02366c6e.js",
-    "static/js/2.caf56a83.chunk.js",
+    "static/js/runtime-main.eb32de69.js",
+    "static/js/2.41b5b77e.chunk.js",
     "static/css/main.b79ee4c7.chunk.css",
-    "static/js/main.9ae73b4e.chunk.js"
+    "static/js/main.e621dd05.chunk.js"
   ]
 }
