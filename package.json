@@ -43,7 +43,8 @@
     "acorn": "^7.1.1",
     "minimist": "^1.2.3",
     "yargs-parser": "^18.1.2",
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.19",
+    "serialize-javascript": "^3.1.0"
   },
   "eslintConfig": {
     "extends": "react-app"
