@@ -137,7 +137,7 @@ const App: React.FC = (): ReactElement => {
       setLoadingMessage("Loading contract code...");
       // Redundancy measure to make sure provider is set
       await Tezos.setProvider({
-        rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`
+        rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
       });
 
       // Grab contracts code from the blockchain and add code to the editors
@@ -158,39 +158,39 @@ const App: React.FC = (): ReactElement => {
         name: "George Cloney",
         eventHandlers: {
           BROADCAST_REQUEST_SENT: {
-            handler: async data => {
+            handler: async (data) => {
               console.log("broadcast request:", data);
-            }
+            },
           },
           // To enable your own wallet connection success message
           PERMISSION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               setLoadingMessage("Wallet connected!");
-            }
+            },
           },
           // to enable your own transaction sent message
           OPERATION_REQUEST_SENT: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               setLoadingMessage("Operation successfully sent!");
-            }
+            },
           },
           // to enable your own transaction success message
           OPERATION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               setLoadingMessage("Operation successful!");
               setTimeout(() => setLoadingMessage("Injecting contract..."), 1000);
-            }
+            },
           },
           OPERATION_REQUEST_ERROR: {
             // setting up the handler method will disable the default one
-            handler: async data => {
+            handler: async (data) => {
               setError("An error has occurred!");
-            }
-          }
-        }
+            },
+          },
+        },
       });
       await beaconWallet.client.init();
       await beaconWallet.client.removeAllPeers();
@@ -202,10 +202,10 @@ const App: React.FC = (): ReactElement => {
       const { id, pkh } = await httpClient.createRequest({
         url: `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral`,
         method: "POST",
-        headers: { Authorization: "Bearer taquito-example" }
+        headers: { Authorization: "Bearer taquito-example" },
       });
       const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral/${id}/`, {
-        headers: { Authorization: "Bearer taquito-example" }
+        headers: { Authorization: "Bearer taquito-example" },
       });
       await Tezos.setProvider({ signer });
     }
@@ -239,25 +239,25 @@ const App: React.FC = (): ReactElement => {
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
       config: { confirmationPollingIntervalSecond: 5 },
-      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${launchNetwork}`
+      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${launchNetwork}`,
     });
 
     await Tezos.wallet
       .originate({
         code: code as MichelsonV1Expression[],
-        storage: defaultStorage.msg as MichelsonV1Expression
+        storage: defaultStorage.msg as MichelsonV1Expression,
       })
       .send()
-      .then(originationOp => {
+      .then((originationOp) => {
         return originationOp.contract();
       })
-      .then(contract => {
+      .then((contract) => {
         // Add block explorer snackbar message
         setLoadingMessage("");
         setTxnAddress(contract.address);
         setCurrentStep(4);
       })
-      .catch(async error => {
+      .catch(async (error) => {
         setLoadingMessage("");
         setSigner("");
 
