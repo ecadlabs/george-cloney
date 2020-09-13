@@ -55,7 +55,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
       // loops through schema and populates default storage
       schemaKeys.forEach((key: string) => {
         const value: any = storage[key];
-        if (comparableTypes.includes(schema[key]) || schema[key] === "array") {
+        if (comparableTypes.includes(schema[key])) {
           // simple types
           defaultStorage[key] = value;
         } else if (schema[key] === "set" && Array.isArray(value)) {
