@@ -12,19 +12,20 @@ interface Storage {
 
 const generateDefaultStorage = async (address: string, contractNetwork: string) => {
   await Tezos.setProvider({
-    rpc: `https://api.tez.ie/rpc/${contractNetwork}`
+    rpc: `https://api.tez.ie/rpc/${contractNetwork}`,
   });
 
   const comparableTypes: string[] = [
     "int",
     "nat",
+    "list",
     "string",
     "bytes",
     "mutez",
     "bool",
     "key_hash",
     "timestamp",
-    "address"
+    "address",
   ];
   let defaultStorage: Storage = {};
 
@@ -43,6 +44,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
     console.log("Schema:", schema, "Storage:", storage);
 
     const schemaKeys: string[] = Object.keys(schema);
+
     if (schemaKeys.length === 1 && schemaKeys[0] === "map") {
       // the storage is just a map
       defaultStorage = new MichelsonMap();
@@ -73,7 +75,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
             value.forEach((_value: string, _key: string) => {
               const newNewMap = {};
               if (typeof _key === "object") {
-                Object.keys(_key).forEach(k => {
+                Object.keys(_key).forEach((k) => {
                   (newNewMap as any)[k] = new MichelsonMap();
                 });
               } else {
