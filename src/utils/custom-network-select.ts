@@ -12,6 +12,7 @@ export const generateNetworkSelectValue = (network: string) => {
 export const networkSelectOptions = [
   { value: "mainnet", label: "Mainnet" },
   { value: TEST_NETWORK, label: TEST_NETWORK.replace(/^./, TEST_NETWORK[0].toUpperCase()) },
+  { value: "carthagenet", label: "Carthagenet" },
   { value: "http://localhost:9999", label: "Flextesa Default" },
   { value: "Start typing Custom Network", label: "Add Custom Network" },
 ];

@@ -1,5 +1,3 @@
-import { TEST_NETWORK } from "../utils/constants";
-
 // React Select constants
 export const generateContractSelectValue = (contract: string) => {
   // Return default placeholder value if there's no contract address added
@@ -18,10 +16,15 @@ export const generateContractSelectOptions = (network: string) => {
       { value: "KT1LN4LPSqTMS7Sd2CJw4bbDGRkMv2t68Fy9", label: "USDtz Contract" },
       { value: "Contract Address", label: "Add Contract Address" },
     ];
-  } else if (network === TEST_NETWORK) {
+  } else if (network === "carthagenet") {
     return [
       { value: "KT1X19MnXuWhwzyHdEa5RHcw7XDVK1rF3G86", label: "Simple Oracle Contract" },
       { value: "KT1McL1e8UgHUMxxW9B8jxifcLKP11Pyv1wC", label: "Simple BigMap Contract" },
+      { value: "Contract Address", label: "Add Contract Address" },
+    ];
+  } else if (network === "delphinet") {
+    return [
+      { value: "KT1S5NRRizqVWzUVJAz85sJx97ies31jKnU9", label: "Simple Contract" },
       { value: "Contract Address", label: "Add Contract Address" },
     ];
   } else {
