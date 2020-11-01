@@ -24,7 +24,8 @@ export const generateContractSelectOptions = (network: string) => {
     ];
   } else if (network === "delphinet") {
     return [
-      { value: "KT1S5NRRizqVWzUVJAz85sJx97ies31jKnU9", label: "Simple Contract" },
+      { value: "KT18jUxSEFsodKLM42uyyA334CXKh5YbbuJe", label: "FA 2.0 Contract" },
+      { value: "KT1X3CsgqZYDYwZAmFFdFJKMQEGKrJJk1BTo", label: "FA 1.2 Contract" },
       { value: "Contract Address", label: "Add Contract Address" },
     ];
   } else {
