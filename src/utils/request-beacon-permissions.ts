@@ -1,11 +1,11 @@
 import { NetworkType, TEST_NETWORK } from "./constants";
 
 const requestBeaconPermissions = async (beaconWallet: any, launchNetwork: string): Promise<void> => {
-  if (launchNetwork === "carthagenet") {
+  if (launchNetwork === "delphinet") {
     await beaconWallet.requestPermissions({
       network: {
-        type: NetworkType.CARTHAGENET,
-        name: "Carthagenet",
+        type: NetworkType.DELPHINET,
+        name: "Delphinet",
         rpcUrl: `https://api.tez.ie/rpc/${TEST_NETWORK}`,
       },
     });

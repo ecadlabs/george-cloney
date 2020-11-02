@@ -1,5 +1,5 @@
 import React, { useState, ReactElement, useEffect } from "react";
-import { Tezos } from "@taquito/taquito";
+import { TezosToolkit } from "@taquito/taquito";
 import { MichelsonV1Expression } from "@taquito/rpc";
 import { ValidationResult, validateContractAddress } from "@taquito/utils";
 import ContractReviewForm from "./components/ContractReviewForm";
@@ -41,6 +41,7 @@ const App: React.FC = (): ReactElement => {
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
+  const [Tezos, _] = useState(new TezosToolkit("https://api.tez.ie/rpc/mainnet"));
 
   useEffect(() => {
     // If new contract is deployed update localStorage and Last Originated Contract button
@@ -234,7 +235,7 @@ const App: React.FC = (): ReactElement => {
     // Set snackbar
     setLoadingMessage("Launching contract...");
 
-    const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork);
+    const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork, Tezos);
 
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
@@ -264,6 +265,7 @@ const App: React.FC = (): ReactElement => {
         if (error && error.status === 404) {
           setError(error.message + "\n This typically means the contract was not found on this network.");
         } else {
+          console.log(error);
           setError(error?.message ?? error);
         }
       });

@@ -1,17 +1,19 @@
 import React, { ReactElement } from "react";
 import { ContractResultFormProps } from "./types";
-import { TEST_NETWORK, MAIN_NETWORK } from "../../utils/constants";
+import { TEST_NETWORK, TEST_NETWORKS, MAIN_NETWORK } from "../../utils/constants";
 import "./styles.css";
 
 const ContractResultForm = (props: ContractResultFormProps): ReactElement | null => {
   const { currentStep, txnAddress, launchNetwork, setCurrentStep } = props;
+  // Turns Delphinet into Delphi etc
+  const shortenedNetworkName = (testNet: string): string => testNet.slice(0, -3);
 
   const getTzktUrl = (network: string, address: string): string | undefined => {
     switch (network) {
       case "mainnet":
         return `https://tzkt.io/${address}/operations`;
       case TEST_NETWORK:
-        return `https://carthage.tzkt.io/${address}/operations`;
+        return `https://${shortenedNetworkName(TEST_NETWORK)}.tzkt.io/${address}/operations`;
       default:
         break;
     }
@@ -42,7 +44,7 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
   if (currentStep !== 4) return null;
 
   // Only show Better Call Dev if user is originating from a custom node
-  if (launchNetwork !== TEST_NETWORK && launchNetwork !== MAIN_NETWORK) {
+  if (!TEST_NETWORKS.includes(launchNetwork) && launchNetwork !== MAIN_NETWORK) {
     return (
       <>
         <span onClick={() => setCurrentStep(3)} className="left"></span>

@@ -1,16 +1,11 @@
-import { Tezos, MichelsonMap } from "@taquito/taquito";
+import { TezosToolkit, MichelsonMap } from "@taquito/taquito";
 import { Schema } from "@taquito/michelson-encoder";
 
 interface Storage {
   [property: string]: any;
 }
-// BigMap:  "KT1HqWsXrGbHWc9muqkApqWu64WsxCU3FoRf"
-// "KT1Q5Je6M3TocfMo9khKvUzXEGCh1HmXdABS";
-// USDtz KT1LN4LPSqTMS7Sd2CJw4bbDGRkMv2t68Fy9
-// tzBTC KT1PWx2mnDueood7fEmfbBDKx1D9BAnnXitn
-// StakerDAO KT1EctCuorV2NfVb1XTQgvzJ88MQtWP8cMMv
 
-const generateDefaultStorage = async (address: string, contractNetwork: string) => {
+const generateDefaultStorage = async (address: string, contractNetwork: string, Tezos: TezosToolkit) => {
   await Tezos.setProvider({
     rpc: `https://api.tez.ie/rpc/${contractNetwork}`,
   });
@@ -44,13 +39,16 @@ const generateDefaultStorage = async (address: string, contractNetwork: string) 
     console.log("Schema:", schema, "Storage:", storage);
 
     const schemaKeys: string[] = Object.keys(schema);
-
     if (schemaKeys.length === 1 && schemaKeys[0] === "map") {
       // the storage is just a map
       defaultStorage = new MichelsonMap();
     } else if (schemaKeys.length === 1 && comparableTypes.includes(schemaKeys[0])) {
       // the storage is just a big map
       defaultStorage = new MichelsonMap();
+    } else if (schema === "list") {
+      // Set storage to the first item in the array
+      // If you use the whole storage it could be too big of an operation
+      defaultStorage = [storage[0]];
     } else {
       // loops through schema and populates default storage
       schemaKeys.forEach((key: string) => {

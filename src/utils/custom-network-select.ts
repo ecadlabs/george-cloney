@@ -1,4 +1,4 @@
-import { TEST_NETWORK } from "./constants";
+import { TEST_NETWORKS } from "./constants";
 
 // React Select constants
 export const generateNetworkSelectValue = (network: string) => {
@@ -8,13 +8,24 @@ export const generateNetworkSelectValue = (network: string) => {
   };
 };
 
+const generateNetworkSelectOptions = (testNetworks: Array<string>): Array<{ value: string; label: string }> => {
+  const testnets = testNetworks.map((network) => {
+    return {
+      value: network,
+      label: network.replace(/^./, network[0].toUpperCase()),
+    };
+  });
+  const networkOptions = [
+    ...testnets,
+    { value: "mainnet", label: "Mainnet" },
+    { value: "http://localhost:9999", label: "Flextesa Default" },
+    { value: "Start typing Custom Network", label: "Add Custom Network" },
+  ];
+  return networkOptions;
+};
+
 // React Select constants
-export const networkSelectOptions = [
-  { value: "mainnet", label: "Mainnet" },
-  { value: TEST_NETWORK, label: TEST_NETWORK.replace(/^./, TEST_NETWORK[0].toUpperCase()) },
-  { value: "http://localhost:9999", label: "Flextesa Default" },
-  { value: "Start typing Custom Network", label: "Add Custom Network" },
-];
+export const networkSelectOptions = generateNetworkSelectOptions(TEST_NETWORKS);
 
 // React Select styles
 export const networkSelectStyles = {
