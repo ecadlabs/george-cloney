@@ -1,16 +1,11 @@
-import { Tezos, MichelsonMap } from "@taquito/taquito";
+import { TezosToolkit, MichelsonMap } from "@taquito/taquito";
 import { Schema } from "@taquito/michelson-encoder";
 
 interface Storage {
   [property: string]: any;
 }
-// BigMap:  "KT1HqWsXrGbHWc9muqkApqWu64WsxCU3FoRf"
-// "KT1Q5Je6M3TocfMo9khKvUzXEGCh1HmXdABS";
-// USDtz KT1LN4LPSqTMS7Sd2CJw4bbDGRkMv2t68Fy9
-// tzBTC KT1PWx2mnDueood7fEmfbBDKx1D9BAnnXitn
-// StakerDAO KT1EctCuorV2NfVb1XTQgvzJ88MQtWP8cMMv
 
-const generateDefaultStorage = async (address: string, contractNetwork: string) => {
+const generateDefaultStorage = async (address: string, contractNetwork: string, Tezos: TezosToolkit) => {
   await Tezos.setProvider({
     rpc: `https://api.tez.ie/rpc/${contractNetwork}`,
   });

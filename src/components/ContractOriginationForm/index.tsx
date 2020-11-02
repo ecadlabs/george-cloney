@@ -3,7 +3,7 @@ import Creatable from "react-select/creatable";
 import {
   generateNetworkSelectValue,
   networkSelectOptions,
-  networkSelectStyles
+  networkSelectStyles,
 } from "../../utils/custom-network-select";
 import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
@@ -26,7 +26,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     txnAddress,
     loadingMessage,
     network,
-    currentStep
+    currentStep,
   } = props;
   const { register, handleSubmit, errors } = useForm();
 
@@ -65,7 +65,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
     handleNetworkChange(selectedOption.value);
   };
 
-  const locallyUpdateSigner = (e: React.MouseEvent<HTMLInputElement>): void => {
+  const locallyUpdateSigner = async (e: React.MouseEvent<HTMLInputElement>): Promise<void> => {
     if (loadingMessage) return;
     if (e.currentTarget.value === "ephemeral") {
       setupSigner("ephemeral");

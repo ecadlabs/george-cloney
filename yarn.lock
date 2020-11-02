@@ -2,16 +2,16 @@
 # yarn lockfile v1
 
 
-"@airgap/beacon-sdk@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@airgap/beacon-sdk/-/beacon-sdk-1.1.0.tgz#932354e9252dbe6638e276ee2073fe18cbf3de0e"
+"@airgap/beacon-sdk@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@airgap/beacon-sdk/-/beacon-sdk-1.1.1.tgz#08186e9c9a9485138f6c4ca96e122944e5f6d8e0"
   dependencies:
     "@types/chrome" "0.0.115"
     "@types/libsodium-wrappers" "0.7.7"
     axios "0.19.2"
     bignumber.js "9.0.0"
     bs58check "2.1.2"
-    libsodium-wrappers "0.7.6"
+    libsodium-wrappers "0.7.8"
     qrcode-generator "1.4.4"
 
 "@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
@@ -1224,14 +1224,15 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@jest/types@^25.5.0":
-  version "25.5.0"
-  resolved "https://registry.yarnpkg.com/@jest/types/-/types-25.5.0.tgz#4d6a4793f7b9599fc3680877b856a97dbccf2a9d"
+"@jest/types@^26.6.1":
+  version "26.6.1"
+  resolved "https://registry.yarnpkg.com/@jest/types/-/types-26.6.1.tgz#2638890e8031c0bc8b4681e0357ed986e2f866c5"
   dependencies:
     "@types/istanbul-lib-coverage" "^2.0.0"
-    "@types/istanbul-reports" "^1.1.1"
+    "@types/istanbul-reports" "^3.0.0"
+    "@types/node" "*"
     "@types/yargs" "^15.0.0"
-    chalk "^3.0.0"
+    chalk "^4.0.0"
 
 "@material-ui/core@^4.9.3":
   version "4.9.14"
@@ -1408,147 +1409,82 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@taquito/beacon-wallet@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/beacon-wallet/-/beacon-wallet-6.3.3-beta.0.tgz#4a3e2df26db1c33147b9b3f4e291dd16d8f9da48"
+"@taquito/beacon-wallet@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/beacon-wallet/-/beacon-wallet-7.0.0-beta.0.tgz#03411983a2904a792e76bf2e7f1815c26a6296ae"
   dependencies:
-    "@airgap/beacon-sdk" "1.1.0"
-    "@taquito/taquito" "^6.3.3-beta.0"
-    "@taquito/utils" "^6.3.3-beta.0"
+    "@airgap/beacon-sdk" "1.1.1"
+    "@taquito/taquito" "^7.0.0-beta.0"
+    "@taquito/utils" "^7.0.0-beta.0"
 
-"@taquito/http-utils@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/http-utils/-/http-utils-6.3.3-beta.0.tgz#a8be2a27d16d4c33ece3a22ca0ed170a3efb9c9e"
-  dependencies:
-    xhr2-cookies "^1.1.0"
-
-"@taquito/http-utils@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/http-utils/-/http-utils-6.3.4-beta.0.tgz#d93c1b12122e27e7fab043d246606de4302fcf6d"
+"@taquito/http-utils@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/http-utils/-/http-utils-7.0.0-beta.0.tgz#d660a5e8de33001891c66c917e03fe90b8b0b8e1"
   dependencies:
     xhr2-cookies "^1.1.0"
 
-"@taquito/michel-codec@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-6.3.3-beta.0.tgz#ff82796a145d3636fbf79caea92eab8ead93f857"
+"@taquito/michel-codec@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-7.0.0-beta.0.tgz#66e8162f418b413270cce0ae1e39b9be3f045464"
 
-"@taquito/michel-codec@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-6.3.4-beta.0.tgz#b064a20e095094ba85f955a9e3f42e06724c6d9c"
-
-"@taquito/michelson-encoder@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/michelson-encoder/-/michelson-encoder-6.3.3-beta.0.tgz#cc29e351fc3aa017461ceceb0ba4a6e388c5ffb0"
+"@taquito/michelson-encoder@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/michelson-encoder/-/michelson-encoder-7.0.0-beta.0.tgz#7a5b90082c48895b9d9f7cbc7fe78a7ae49f0a73"
   dependencies:
-    "@taquito/utils" "^6.3.3-beta.0"
-    bignumber.js "^9.0.0"
+    "@taquito/rpc" "^7.0.0-beta.0"
+    "@taquito/utils" "^7.0.0-beta.0"
+    bignumber.js "^9.0.1"
     fast-json-stable-stringify "^2.1.0"
 
-"@taquito/michelson-encoder@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/michelson-encoder/-/michelson-encoder-6.3.4-beta.0.tgz#40e33389de48c04a28c1a06991149f1e18ef2d21"
+"@taquito/remote-signer@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/remote-signer/-/remote-signer-7.0.0-beta.0.tgz#5633f50329541af2667d934fb8a3e8080e96aee8"
   dependencies:
-    "@taquito/utils" "^6.3.4-beta.0"
-    bignumber.js "^9.0.0"
-    fast-json-stable-stringify "^2.1.0"
-
-"@taquito/remote-signer@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/remote-signer/-/remote-signer-6.3.3-beta.0.tgz#d6d152f2282c2b431c559737a30c4fbcf34ca030"
-  dependencies:
-    "@taquito/http-utils" "^6.3.3-beta.0"
-    "@taquito/taquito" "^6.3.3-beta.0"
-    "@taquito/utils" "^6.3.3-beta.0"
-    "@types/jest" "^25.2.2"
-    elliptic "^6.5.2"
-    libsodium-wrappers "^0.7.6"
+    "@taquito/http-utils" "^7.0.0-beta.0"
+    "@taquito/taquito" "^7.0.0-beta.0"
+    "@taquito/utils" "^7.0.0-beta.0"
+    "@types/jest" "^26.0.14"
+    elliptic "^6.5.3"
+    libsodium-wrappers "^0.7.8"
     typedarray-to-buffer "^3.1.5"
 
-"@taquito/rpc@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/rpc/-/rpc-6.3.3-beta.0.tgz#9adcd2e0ccafe5ece4c29a351c980dfc12a881aa"
+"@taquito/rpc@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/rpc/-/rpc-7.0.0-beta.0.tgz#31238dc1e98a2a556800e689cbcf2c349f612a61"
   dependencies:
-    "@taquito/http-utils" "^6.3.3-beta.0"
-    bignumber.js "^9.0.0"
-    lodash "^4.17.15"
+    "@taquito/http-utils" "^7.0.0-beta.0"
+    bignumber.js "^9.0.1"
+    lodash "^4.17.20"
 
-"@taquito/rpc@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/rpc/-/rpc-6.3.4-beta.0.tgz#ea43d79e329c60b5f4494effb9203afd65ac229f"
+"@taquito/taquito@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/taquito/-/taquito-7.0.0-beta.0.tgz#2495d0ca36cb1d41450e62eef5c5c1b93ff65a6c"
   dependencies:
-    "@taquito/http-utils" "^6.3.4-beta.0"
-    bignumber.js "^9.0.0"
-    lodash "^4.17.15"
-
-"@taquito/signer@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/signer/-/signer-6.3.3-beta.0.tgz#5714780f1f52c2e0cd2b589f7398b1ce6b73caa8"
-  dependencies:
-    "@taquito/utils" "^6.3.3-beta.0"
-    bignumber.js "^9.0.0"
-    bip39 "^3.0.2"
-    elliptic "^6.5.2"
-    libsodium-wrappers "^0.7.6"
-    pbkdf2 "^3.0.17"
-    typedarray-to-buffer "^3.1.5"
-
-"@taquito/signer@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/signer/-/signer-6.3.4-beta.0.tgz#d778585a73a7024abedd73108adf74994306d9b9"
-  dependencies:
-    "@taquito/utils" "^6.3.4-beta.0"
-    bignumber.js "^9.0.0"
-    bip39 "^3.0.2"
-    elliptic "^6.5.2"
-    libsodium-wrappers "^0.7.6"
-    pbkdf2 "^3.0.17"
-    typedarray-to-buffer "^3.1.5"
-
-"@taquito/taquito@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/taquito/-/taquito-6.3.3-beta.0.tgz#dc0b7721bf8fa4825f86dc08425aaec697a9e06f"
-  dependencies:
-    "@taquito/http-utils" "^6.3.3-beta.0"
-    "@taquito/michel-codec" "^6.3.3-beta.0"
-    "@taquito/michelson-encoder" "^6.3.3-beta.0"
-    "@taquito/rpc" "^6.3.3-beta.0"
-    "@taquito/signer" "^6.3.3-beta.0"
-    "@taquito/utils" "^6.3.3-beta.0"
-    bignumber.js "^9.0.0"
+    "@taquito/http-utils" "^7.0.0-beta.0"
+    "@taquito/michel-codec" "^7.0.0-beta.0"
+    "@taquito/michelson-encoder" "^7.0.0-beta.0"
+    "@taquito/rpc" "^7.0.0-beta.0"
+    "@taquito/utils" "^7.0.0-beta.0"
+    bignumber.js "^9.0.1"
     rx-sandbox "^1.0.3"
-    rxjs "^6.5.5"
+    rxjs "^6.6.3"
 
-"@taquito/taquito@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/taquito/-/taquito-6.3.4-beta.0.tgz#e988afc3d695a3e1133e577c3b49e74b929cb72d"
+"@taquito/tezbridge-signer@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/tezbridge-signer/-/tezbridge-signer-7.0.0-beta.0.tgz#0c02c63e5da3afc686fcd45dcc95e10e9eab5e6f"
   dependencies:
-    "@taquito/http-utils" "^6.3.4-beta.0"
-    "@taquito/michel-codec" "^6.3.4-beta.0"
-    "@taquito/michelson-encoder" "^6.3.4-beta.0"
-    "@taquito/rpc" "^6.3.4-beta.0"
-    "@taquito/signer" "^6.3.4-beta.0"
-    "@taquito/utils" "^6.3.4-beta.0"
-    bignumber.js "^9.0.0"
-    rx-sandbox "^1.0.3"
-    rxjs "^6.5.5"
+    "@taquito/utils" "^7.0.0-beta.0"
+    typedarray-to-buffer "^3.1.5"
 
-"@taquito/tezbridge-wallet@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/tezbridge-wallet/-/tezbridge-wallet-6.3.4-beta.0.tgz#54ecffe63de32028688bb3f19e76cfdc959fe004"
+"@taquito/tezbridge-wallet@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/tezbridge-wallet/-/tezbridge-wallet-7.0.0-beta.0.tgz#60478f68c34aafadacec01383cd8e800d2b8bb69"
   dependencies:
-    "@taquito/taquito" "^6.3.4-beta.0"
+    "@taquito/taquito" "^7.0.0-beta.0"
 
-"@taquito/utils@^6.3.3-beta.0":
-  version "6.3.3-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-6.3.3-beta.0.tgz#91affabfd57e408873bab6e15c404e9e13cc28d9"
-  dependencies:
-    blakejs "^1.1.0"
-    bs58check "^2.1.2"
-    buffer "^5.6.0"
-
-"@taquito/utils@^6.3.4-beta.0":
-  version "6.3.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-6.3.4-beta.0.tgz#10f84e681e7a98068a33ffdad0f2b76ba6ba0670"
+"@taquito/utils@^7.0.0-beta.0":
+  version "7.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-7.0.0-beta.0.tgz#cdc973c863a59be921ccb40b19568be28d3a2649"
   dependencies:
     blakejs "^1.1.0"
     bs58check "^2.1.2"
@@ -1627,8 +1563,8 @@
     "@types/node" "*"
 
 "@types/har-format@*":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@types/har-format/-/har-format-1.2.4.tgz#3275842095abb60d14b47fa798cc9ff708dab6d4"
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@types/har-format/-/har-format-1.2.5.tgz#4f6648814d0fdcb6a510e3364a9db439a753c4b1"
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.2"
@@ -1647,18 +1583,24 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/istanbul-reports@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/istanbul-reports/-/istanbul-reports-3.0.0.tgz#508b13aa344fa4976234e75dddcc34925737d821"
+  dependencies:
+    "@types/istanbul-lib-report" "*"
+
 "@types/jest@^24.0.0":
   version "24.9.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.9.1.tgz#02baf9573c78f1b9974a5f36778b366aa77bd534"
   dependencies:
     jest-diff "^24.3.0"
 
-"@types/jest@^25.2.2":
-  version "25.2.3"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-25.2.3.tgz#33d27e4c4716caae4eced355097a47ad363fdcaf"
+"@types/jest@^26.0.14":
+  version "26.0.15"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.15.tgz#12e02c0372ad0548e07b9f4e19132b834cb1effe"
   dependencies:
-    jest-diff "^25.2.1"
-    pretty-format "^25.2.1"
+    jest-diff "^26.0.0"
+    pretty-format "^26.0.0"
 
 "@types/json-schema@^7.0.3":
   version "7.0.4"
@@ -1675,10 +1617,6 @@
 "@types/node@*":
   version "14.0.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.5.tgz#3d03acd3b3414cf67faf999aed11682ed121f22b"
-
-"@types/node@11.11.6":
-  version "11.11.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.6.tgz#df929d1bb2eee5afdda598a41930fe50b43eaa6a"
 
 "@types/node@^12.0.0":
   version "12.12.42"
@@ -1738,8 +1676,8 @@
     "@types/yargs-parser" "*"
 
 "@types/yargs@^15.0.0":
-  version "15.0.5"
-  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-15.0.5.tgz#947e9a6561483bdee9adffc983e91a6902af8b79"
+  version "15.0.9"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-15.0.9.tgz#524cd7998fe810cdb02f26101b699cccd156ff19"
   dependencies:
     "@types/yargs-parser" "*"
 
@@ -2038,7 +1976,13 @@ ansi-styles@^3.0.0, ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ansi-styles@^4.0.0, ansi-styles@^4.1.0:
+ansi-styles@^4.0.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-4.3.0.tgz#edd803628ae71c04c85ae7a0906edad34b648937"
+  dependencies:
+    color-convert "^2.0.1"
+
+ansi-styles@^4.1.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-4.2.1.tgz#90ae75c424d008d2624c5bf29ead3177ebfcf359"
   dependencies:
@@ -2438,9 +2382,13 @@ big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
 
-bignumber.js@9.0.0, bignumber.js@^9.0.0:
+bignumber.js@9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.0.0.tgz#805880f84a329b5eac6e7cb6f8274b6d82bdf075"
+
+bignumber.js@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.0.1.tgz#8d7ba124c882bfd8e43260c67475518d0689e4e5"
 
 binary-extensions@^1.0.0:
   version "1.13.1"
@@ -2455,15 +2403,6 @@ bindings@^1.5.0:
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
   dependencies:
     file-uri-to-path "1.0.0"
-
-bip39@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/bip39/-/bip39-3.0.2.tgz#2baf42ff3071fc9ddd5103de92e8f80d9257ee32"
-  dependencies:
-    "@types/node" "11.11.6"
-    create-hash "^1.1.0"
-    pbkdf2 "^3.0.9"
-    randombytes "^2.0.1"
 
 blakejs@^1.1.0:
   version "1.1.0"
@@ -2841,6 +2780,13 @@ chalk@^1.1.3:
 chalk@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
+chalk@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
@@ -3623,9 +3569,9 @@ diff-sequences@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-24.9.0.tgz#5715d6244e2aa65f48bba0bc972db0b0b11e95b5"
 
-diff-sequences@^25.2.6:
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-25.2.6.tgz#5f467c00edd35352b7bca46d7927d60e687a76dd"
+diff-sequences@^26.5.0:
+  version "26.5.0"
+  resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-26.5.0.tgz#ef766cf09d43ed40406611f11c6d8d9dd8b2fefd"
 
 diff@^3.2.0:
   version "3.5.0"
@@ -3789,7 +3735,7 @@ electron-to-chromium@^1.3.378, electron-to-chromium@^1.3.413:
   version "1.3.451"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.451.tgz#0c075af3e2f06d706670bde0279432802ca8c83f"
 
-elliptic@^6.0.0, elliptic@^6.5.2:
+elliptic@^6.0.0, elliptic@^6.5.2, elliptic@^6.5.3:
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.3.tgz#cb59eb2efdaf73a0bd78ccd7015a62ad6e0f93d6"
   dependencies:
@@ -5663,14 +5609,14 @@ jest-diff@^24.3.0, jest-diff@^24.9.0:
     jest-get-type "^24.9.0"
     pretty-format "^24.9.0"
 
-jest-diff@^25.2.1:
-  version "25.5.0"
-  resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-25.5.0.tgz#1dd26ed64f96667c068cef026b677dfa01afcfa9"
+jest-diff@^26.0.0:
+  version "26.6.1"
+  resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-26.6.1.tgz#38aa194979f454619bb39bdee299fb64ede5300c"
   dependencies:
-    chalk "^3.0.0"
-    diff-sequences "^25.2.6"
-    jest-get-type "^25.2.6"
-    pretty-format "^25.5.0"
+    chalk "^4.0.0"
+    diff-sequences "^26.5.0"
+    jest-get-type "^26.3.0"
+    pretty-format "^26.6.1"
 
 jest-docblock@^24.3.0:
   version "24.9.0"
@@ -5724,9 +5670,9 @@ jest-get-type@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-24.9.0.tgz#1684a0c8a50f2e4901b6644ae861f579eed2ef0e"
 
-jest-get-type@^25.2.6:
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-25.2.6.tgz#0b0a32fab8908b44d508be81681487dbabb8d877"
+jest-get-type@^26.3.0:
+  version "26.3.0"
+  resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-26.3.0.tgz#e97dc3c3f53c2b406ca7afaed4493b1d099199e0"
 
 jest-haste-map@^24.9.0:
   version "24.9.0"
@@ -6297,15 +6243,15 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libsodium-wrappers@0.7.6, libsodium-wrappers@^0.7.6:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/libsodium-wrappers/-/libsodium-wrappers-0.7.6.tgz#baed4c16d4bf9610104875ad8a8e164d259d48fb"
+libsodium-wrappers@0.7.8, libsodium-wrappers@^0.7.8:
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/libsodium-wrappers/-/libsodium-wrappers-0.7.8.tgz#d95cdf3e7236c2aef76844bf8e1929ba9eef3e9e"
   dependencies:
-    libsodium "0.7.6"
+    libsodium "0.7.8"
 
-libsodium@0.7.6:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/libsodium/-/libsodium-0.7.6.tgz#018b80c5728054817845fbffa554274441bda277"
+libsodium@0.7.8:
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/libsodium/-/libsodium-0.7.8.tgz#fbd12247b7b1353f88d8de1cbc66bc1a07b2e008"
 
 lines-and-columns@^1.1.6:
   version "1.1.6"
@@ -6413,7 +6359,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.5:
+"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.5:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
 
@@ -7317,7 +7263,7 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
 
-pbkdf2@^3.0.17, pbkdf2@^3.0.3, pbkdf2@^3.0.9:
+pbkdf2@^3.0.3:
   version "3.0.17"
   resolved "https://registry.yarnpkg.com/pbkdf2/-/pbkdf2-3.0.17.tgz#976c206530617b14ebb32114239f7b09336e93a6"
   dependencies:
@@ -8050,14 +7996,14 @@ pretty-format@^24.9.0:
     ansi-styles "^3.2.0"
     react-is "^16.8.4"
 
-pretty-format@^25.2.1, pretty-format@^25.5.0:
-  version "25.5.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-25.5.0.tgz#7873c1d774f682c34b8d48b6743a2bf2ac55791a"
+pretty-format@^26.0.0, pretty-format@^26.6.1:
+  version "26.6.1"
+  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-26.6.1.tgz#af9a2f63493a856acddeeb11ba6bcf61989660a8"
   dependencies:
-    "@jest/types" "^25.5.0"
+    "@jest/types" "^26.6.1"
     ansi-regex "^5.0.0"
     ansi-styles "^4.0.0"
-    react-is "^16.12.0"
+    react-is "^17.0.1"
 
 private@^0.1.8:
   version "0.1.8"
@@ -8312,9 +8258,13 @@ react-input-autosize@^2.2.2:
   dependencies:
     prop-types "^15.5.8"
 
-react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
+react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+
+react-is@^17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
 
 react-scripts@3.4.1:
   version "3.4.1"
@@ -8764,9 +8714,15 @@ rx-sandbox@^1.0.3:
     jest-matchers "^20.0.3"
     tslib "^1.10.0"
 
-rxjs@^6.5.3, rxjs@^6.5.5:
+rxjs@^6.5.3:
   version "6.5.5"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.6.3:
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#8ca84635c4daa900c0d3967a6ee7ac60271ee552"
   dependencies:
     tslib "^1.9.0"
 
