@@ -39,13 +39,16 @@ const generateDefaultStorage = async (address: string, contractNetwork: string, 
     console.log("Schema:", schema, "Storage:", storage);
 
     const schemaKeys: string[] = Object.keys(schema);
-
     if (schemaKeys.length === 1 && schemaKeys[0] === "map") {
       // the storage is just a map
       defaultStorage = new MichelsonMap();
     } else if (schemaKeys.length === 1 && comparableTypes.includes(schemaKeys[0])) {
       // the storage is just a big map
       defaultStorage = new MichelsonMap();
+    } else if (schema === "list") {
+      // Set storage to the first item in the array
+      // If you use the whole storage it could be too big of an operation
+      defaultStorage = [storage[0]];
     } else {
       // loops through schema and populates default storage
       schemaKeys.forEach((key: string) => {

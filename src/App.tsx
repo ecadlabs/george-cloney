@@ -265,6 +265,7 @@ const App: React.FC = (): ReactElement => {
         if (error && error.status === 404) {
           setError(error.message + "\n This typically means the contract was not found on this network.");
         } else {
+          console.log(error);
           setError(error?.message ?? error);
         }
       });

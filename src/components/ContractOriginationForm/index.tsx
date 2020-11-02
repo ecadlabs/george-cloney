@@ -9,7 +9,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import ToolTipComponent from "../Tooltip";
 import { ContractOriginationFormProps } from "./types";
 import { useForm } from "react-hook-form";
-import { TEST_NETWORK } from "../../utils/constants";
+import { TEST_NETWORKS } from "../../utils/constants";
 import "./styles.css";
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { ThanosWallet } from "@thanos-wallet/dapp";
@@ -54,7 +54,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
 
   // Make sure signer is setup for ephemeral automatically for Test Network
   useEffect(() => {
-    if (network === TEST_NETWORK && signer === "") {
+    if (TEST_NETWORKS.includes(network) && signer === "") {
       setupSigner("ephemeral");
       setSigner("ephemeral");
     }
@@ -124,7 +124,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
         />
         <label id="react-select-signer-label">Choose Signer</label>
         <label className="signer-toolbar">
-          {network === TEST_NETWORK && (
+          {TEST_NETWORKS.includes(network) && (
             <>
               <input onClick={locallyUpdateSigner} value="ephemeral" id="ephemeral" type="radio" />
               <label
@@ -135,7 +135,7 @@ const ContractOriginationForm = (props: ContractOriginationFormProps): ReactElem
               </label>
             </>
           )}
-          {network !== TEST_NETWORK && beaconWalletType.current !== "p2p" && (
+          {!TEST_NETWORKS.includes(network) && beaconWalletType.current !== "p2p" && (
             <>
               <input onClick={locallyUpdateSigner} value="beacon" id="beacon" type="radio" />
               <label className={signer === "beacon" ? "signer-button-selected" : "signer-button"} htmlFor="beacon">
