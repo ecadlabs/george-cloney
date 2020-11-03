@@ -94,15 +94,19 @@ const ContractResultForm = (props: ContractResultFormProps): ReactElement | null
           >
             <button className="contract-result-button">Arronax</button>
           </a>
-          <a target="_blank" rel="noopener noreferrer" href={getTzktUrl(launchNetwork, txnAddress)}>
-            <button className="contract-result-button">TzKT</button>
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href={getTezBlockUrl(launchNetwork, txnAddress)}>
-            <button className="contract-result-button">TezBlock</button>
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href={getTezosIdUrl(launchNetwork, txnAddress)}>
-            <button className="contract-result-button">Tezos.ID</button>
-          </a>
+          {launchNetwork !== "delphinet" && (
+            <>
+              <a target="_blank" rel="noopener noreferrer" href={getTzktUrl(launchNetwork, txnAddress)}>
+                <button className="contract-result-button">TzKT</button>
+              </a>
+              <a target="_blank" rel="noopener noreferrer" href={getTezBlockUrl(launchNetwork, txnAddress)}>
+                <button className="contract-result-button">TezBlock</button>
+              </a>
+              <a target="_blank" rel="noopener noreferrer" href={getTezosIdUrl(launchNetwork, txnAddress)}>
+                <button className="contract-result-button">Tezos.ID</button>
+              </a>
+            </>
+          )}
         </div>
       </div>
       <span className="right-arrow-hidden"></span>
