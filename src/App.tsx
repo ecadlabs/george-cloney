@@ -41,6 +41,7 @@ const App: React.FC = (): ReactElement => {
   const [txnAddress, setTxnAddress] = useState<string>("");
   const [lastOriginatedContract, setLastOriginatedContract] = useState<string>("");
   const [confettiShown, setConfettiShown] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [Tezos, _] = useState(new TezosToolkit("https://api.tez.ie/rpc/mainnet"));
 
   useEffect(() => {
