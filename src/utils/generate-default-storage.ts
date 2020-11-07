@@ -98,6 +98,10 @@ const generateDefaultStorage = async (address: string, contractNetwork: string, 
         ) {
           if (storage[key]) defaultStorage[key] = MichelsonMap.fromLiteral(storage[key]);
           defaultStorage[key] = MichelsonMap.fromLiteral(storage);
+          // Copy nested objects e.g.: roles: {minter: "tz1..", owner: "tz1.."}
+          if (typeof storage[key] === "object") {
+            defaultStorage[key] = storage[key];
+          }
         }
       });
     }
