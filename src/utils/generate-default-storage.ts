@@ -13,6 +13,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string, 
   const comparableTypes: string[] = [
     "int",
     "nat",
+    "number",
     "list",
     "string",
     "bytes",
@@ -39,6 +40,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string, 
     console.log("Schema:", schema, "Storage:", storage);
 
     const schemaKeys: string[] = Object.keys(schema);
+    if (comparableTypes.includes(schema)) defaultStorage = storage;
     if (schemaKeys.length === 1 && schemaKeys[0] === "map") {
       // the storage is just a map
       defaultStorage = new MichelsonMap();
