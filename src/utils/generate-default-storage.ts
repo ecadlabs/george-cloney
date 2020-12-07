@@ -1,13 +1,19 @@
 import { TezosToolkit, MichelsonMap } from "@taquito/taquito";
+import { validateAddress } from "@taquito/utils";
 import { Schema } from "@taquito/michelson-encoder";
 
 interface Storage {
   [property: string]: any;
 }
 
-const generateDefaultStorage = async (address: string, contractNetwork: string, Tezos: TezosToolkit) => {
+const generateDefaultStorage = async (
+  address: string,
+  contractNetwork: string,
+  userAddress: string,
+  Tezos: TezosToolkit
+) => {
   await Tezos.setProvider({
-    rpc: `https://api.tez.ie/rpc/${contractNetwork}`,
+    rpc: `https://api.tez.ie/rpc/${contractNetwork}`
   });
 
   const comparableTypes: string[] = [
@@ -21,7 +27,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string, 
     "bool",
     "key_hash",
     "timestamp",
-    "address",
+    "address"
   ];
   let defaultStorage: Storage = {};
 
@@ -75,7 +81,7 @@ const generateDefaultStorage = async (address: string, contractNetwork: string, 
             value.forEach((_value: string, _key: string) => {
               const newNewMap = {};
               if (typeof _key === "object") {
-                Object.keys(_key).forEach((k) => {
+                Object.keys(_key).forEach(k => {
                   (newNewMap as any)[k] = new MichelsonMap();
                 });
               } else {
@@ -107,7 +113,12 @@ const generateDefaultStorage = async (address: string, contractNetwork: string, 
         }
       });
     }
+    // switches original address for user's address if admin property in storage
+    if (defaultStorage.hasOwnProperty("admin") && validateAddress(userAddress) === 3) {
+      defaultStorage.admin = userAddress;
+    }
     console.log("Default Storage: ", defaultStorage);
+
     return { status: "success", msg: defaultStorage };
   } catch (err) {
     return { status: "error", msg: err };

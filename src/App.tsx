@@ -23,8 +23,6 @@ import "./App.css";
 import generateDefaultStorage from "./utils/generate-default-storage";
 import { TEST_NETWORK } from "./utils/constants";
 import requestBeaconPermissions from "./utils/request-beacon-permissions";
-import { ThanosWallet } from "@thanos-wallet/dapp";
-import { ThanosDAppNetwork } from "@thanos-wallet/dapp/src/types";
 
 const App: React.FC = (): ReactElement => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -32,6 +30,7 @@ const App: React.FC = (): ReactElement => {
   const [error, setError] = useState<string>("");
   const [validationError, setValidationError] = useState<string>("");
   const [signer, setSigner] = useState<string>("");
+  const [userAddress, setUserAddress] = useState<string>("");
   const [provider, setProvider] = useState<string>("");
   const [code, setCode] = useState<MichelsonV1Expression[]>([]);
   const [storage, setStorage] = useState<MichelsonV1Expression | string>();
@@ -139,7 +138,7 @@ const App: React.FC = (): ReactElement => {
       setLoadingMessage("Loading contract code...");
       // Redundancy measure to make sure provider is set
       await Tezos.setProvider({
-        rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`,
+        rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${contractNetwork}`
       });
 
       // Grab contracts code from the blockchain and add code to the editors
@@ -160,75 +159,66 @@ const App: React.FC = (): ReactElement => {
         name: "George Cloney",
         eventHandlers: {
           BROADCAST_REQUEST_SENT: {
-            handler: async (data) => {
+            handler: async data => {
               console.log("broadcast request:", data);
-            },
+            }
           },
           // To enable your own wallet connection success message
           PERMISSION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
-            handler: async (data) => {
-              setLoadingMessage("Wallet connected!");
-            },
+            handler: async data => {
+              setLoadingMessage("");
+            }
           },
           // to enable your own transaction sent message
           OPERATION_REQUEST_SENT: {
             // setting up the handler method will disable the default one
-            handler: async (data) => {
+            handler: async data => {
               setLoadingMessage("Operation successfully sent!");
-            },
+            }
           },
           // to enable your own transaction success message
           OPERATION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
-            handler: async (data) => {
+            handler: async data => {
               setLoadingMessage("Operation successful!");
               setTimeout(() => setLoadingMessage("Injecting contract..."), 1000);
-            },
+            }
           },
           OPERATION_REQUEST_ERROR: {
             // setting up the handler method will disable the default one
-            handler: async (data) => {
+            handler: async data => {
               setError("An error has occurred!");
-            },
-          },
-        },
+            }
+          }
+        }
       });
-      await beaconWallet.client.init();
-      await beaconWallet.client.removeAllPeers();
       await requestBeaconPermissions(beaconWallet, launchNetwork);
       Tezos.setProvider({ wallet: beaconWallet });
+      setUserAddress(await beaconWallet.getPKH());
     }
     if (signer === "ephemeral") {
       const httpClient = new HttpBackend();
       const { id, pkh } = await httpClient.createRequest({
         url: `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral`,
         method: "POST",
-        headers: { Authorization: "Bearer taquito-example" },
+        headers: { Authorization: "Bearer taquito-example" }
       });
       const signer = new RemoteSigner(pkh, `https://api.tez.ie/keys/${TEST_NETWORK}/ephemeral/${id}/`, {
-        headers: { Authorization: "Bearer taquito-example" },
+        headers: { Authorization: "Bearer taquito-example" }
       });
       await Tezos.setProvider({ signer });
+      setUserAddress(pkh);
     }
     if (signer === "tezbridge") {
       // Allow custom node users to set host
       if (provider.includes("http")) {
         const wallet = new TezBridgeWallet();
         await wallet.setHost(provider);
+        setUserAddress(await wallet.getPKH());
         return Tezos.setProvider({ wallet });
       }
       await Tezos.setProvider({ wallet: new TezBridgeWallet() });
-    }
-    if (signer === "thanos") {
-      const wallet = new ThanosWallet("George Cloney");
-      // Allow custom node users to set host
-      if (provider.includes("http")) {
-        await wallet.connect("sandbox");
-      } else {
-        await wallet.connect(launchNetwork as ThanosDAppNetwork);
-      }
-      await Tezos.setProvider({ wallet });
     }
   };
 
@@ -236,40 +226,30 @@ const App: React.FC = (): ReactElement => {
     // Set snackbar
     setLoadingMessage("Launching contract...");
 
-    const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork, Tezos);
+    const defaultStorage = await generateDefaultStorage(contractAddress, contractNetwork, userAddress, Tezos);
 
     // Redundancy measure to make sure provider is set
     await Tezos.setProvider({
       config: { confirmationPollingIntervalSecond: 5 },
-      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${launchNetwork}`,
+      rpc: provider.includes("http") ? provider : `https://api.tez.ie/rpc/${launchNetwork}`
     });
 
-    await Tezos.wallet
-      .originate({
-        code: code as MichelsonV1Expression[],
-        storage: defaultStorage.msg as MichelsonV1Expression,
-      })
-      .send()
-      .then((originationOp) => {
-        return originationOp.contract();
-      })
-      .then((contract) => {
-        // Add block explorer snackbar message
-        setLoadingMessage("");
-        setTxnAddress(contract.address);
-        setCurrentStep(4);
-      })
-      .catch(async (error) => {
-        setLoadingMessage("");
-        setSigner("");
-
-        if (error && error.status === 404) {
-          setError(error.message + "\n This typically means the contract was not found on this network.");
-        } else {
-          console.log(error);
-          setError(error?.message ?? error);
-        }
-      });
+    try {
+      const originationOp = await Tezos.wallet
+        .originate({
+          code: code as MichelsonV1Expression[],
+          storage: defaultStorage.msg as MichelsonV1Expression
+        })
+        .send();
+      const contract = await originationOp.contract();
+      setLoadingMessage("");
+      setTxnAddress(contract.address);
+      setCurrentStep(4);
+    } catch (error) {
+      setLoadingMessage("");
+      setSigner("");
+      console.log(error);
+    }
   };
 
   const updateContractAddress = (newContractAddress: string): void => {
