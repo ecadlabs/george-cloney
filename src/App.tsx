@@ -167,7 +167,10 @@ const App: React.FC = (): ReactElement => {
           PERMISSION_REQUEST_SUCCESS: {
             // setting up the handler method will disable the default one
             handler: async data => {
-              setLoadingMessage("");
+              setLoadingMessage("Wallet connected!");
+              setTimeout(() => {
+                setLoadingMessage("");
+              }, 2000);
             }
           },
           // to enable your own transaction sent message
