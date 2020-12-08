@@ -1409,7 +1409,7 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@taquito/beacon-wallet@^7.1.0-preview.9":
+"@taquito/beacon-wallet@^7.1.0-preview.10":
   version "7.1.0-preview-lambdaview.0"
   resolved "https://registry.yarnpkg.com/@taquito/beacon-wallet/-/beacon-wallet-7.1.0-preview-lambdaview.0.tgz#34c516cc5ef70d75b0dc24f1777c9d70bf02af72"
   integrity sha512-He4U5HinST/V5j5sy1RJNrYi4hn+3v3t94SUv+UlpkHngIO9uB19efl8lp9M9KQFkZ4/4tNSf1P44HcE2wGZkA==
@@ -1425,7 +1425,7 @@
   dependencies:
     xhr2-cookies "^1.1.0"
 
-"@taquito/michel-codec@^7.1.0-preview-lambdaview.0", "@taquito/michel-codec@^7.1.0-preview.9":
+"@taquito/michel-codec@^7.1.0-preview-lambdaview.0", "@taquito/michel-codec@^7.1.0-preview.10":
   version "7.1.0-preview-lambdaview.0"
   resolved "https://registry.yarnpkg.com/@taquito/michel-codec/-/michel-codec-7.1.0-preview-lambdaview.0.tgz#514e9d1a2a567940edcd5e5ef6af2d437b72afdb"
   integrity sha512-0wka0USOtM9qBvLVpszVJIvgW3/qyqe92GFPQjeEUl8uHExgMk/ShnB/kxcKnWaH08aO2LF7Mad/dkQkcxAoxA==
@@ -1440,7 +1440,7 @@
     bignumber.js "^9.0.1"
     fast-json-stable-stringify "^2.1.0"
 
-"@taquito/remote-signer@^7.1.0-preview.9":
+"@taquito/remote-signer@^7.1.0-preview.10":
   version "7.1.0-preview-lambdaview.0"
   resolved "https://registry.yarnpkg.com/@taquito/remote-signer/-/remote-signer-7.1.0-preview-lambdaview.0.tgz#9e3b59b0c289d9aeeea28b949a7deec3d811ad38"
   integrity sha512-ByRLS+TzPITf9H1LXNWkDtM5BtUKfdaMacLWBmTCqIiir0cGEJIkMmiNWcja++uHvDovamJFfOevq21jpDmWhQ==
@@ -1462,7 +1462,7 @@
     bignumber.js "^9.0.1"
     lodash "^4.17.20"
 
-"@taquito/taquito@^7.1.0-preview-lambdaview.0", "@taquito/taquito@^7.1.0-preview.9":
+"@taquito/taquito@^7.1.0-preview-lambdaview.0", "@taquito/taquito@^7.1.0-preview.10":
   version "7.1.0-preview-lambdaview.0"
   resolved "https://registry.yarnpkg.com/@taquito/taquito/-/taquito-7.1.0-preview-lambdaview.0.tgz#0aceeda01f2a62788dfc2177ff8299a7f0fc6420"
   integrity sha512-bqjyzuZm1v6MyOGXTuudcgQqGni6v8L5q5q2u4grtMi14T6WYOAyBLI7Mu7jcM6E4zVhc+7v7525Y4Ukl9ee/w==
@@ -1476,7 +1476,7 @@
     rx-sandbox "^1.0.3"
     rxjs "^6.6.3"
 
-"@taquito/tezbridge-signer@^7.1.0-preview.9":
+"@taquito/tezbridge-signer@^7.1.0-preview.10":
   version "7.1.0-preview-lambdaview.0"
   resolved "https://registry.yarnpkg.com/@taquito/tezbridge-signer/-/tezbridge-signer-7.1.0-preview-lambdaview.0.tgz#9e00ec842f8f80a9649c34955fb6b2784edde65a"
   integrity sha512-Or7YZVK27AFjXHj0ULMJPcGtXBlEBD+KXPA/d/UCj6KkAkrj1qGMooADPNzOl/GgfNpVXCPWGG7DyK3vegQkCg==
@@ -1484,14 +1484,14 @@
     "@taquito/utils" "^7.1.0-preview-lambdaview.0"
     typedarray-to-buffer "^3.1.5"
 
-"@taquito/tezbridge-wallet@^7.1.0-preview.9":
+"@taquito/tezbridge-wallet@^7.1.0-preview.10":
   version "7.1.0-preview-lambdaview.0"
   resolved "https://registry.yarnpkg.com/@taquito/tezbridge-wallet/-/tezbridge-wallet-7.1.0-preview-lambdaview.0.tgz#6f9d7491fec5c6a00316bed2707651c3b95a78ad"
   integrity sha512-azkfwmoXe9o+fWqqM3aN3+jglEQ+qiwWVZZ06x4bSIf0KnHpOtwxOZajhMavC6bMes57C0+ssj4igEHvxV19pw==
   dependencies:
     "@taquito/taquito" "^7.1.0-preview-lambdaview.0"
 
-"@taquito/utils@^7.1.0-preview-lambdaview.0", "@taquito/utils@^7.1.0-preview.9":
+"@taquito/utils@^7.1.0-preview-lambdaview.0", "@taquito/utils@^7.1.0-preview.10":
   version "7.1.0-preview-lambdaview.0"
   resolved "https://registry.yarnpkg.com/@taquito/utils/-/utils-7.1.0-preview-lambdaview.0.tgz#89c5207ec7f753a0170dd41c10551a748dffa1d1"
   integrity sha512-Nm2v8TO+jho2ZsV3IGqymPkkiaZXVBVB6eMTDzqRx3BGzn2lTrYT5XqVoRCWZdkeavnrnu75ntMBrhMNpfDfLA==
