@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from "svelte";
+  import { onMount } from "svelte";
   import tippy from "tippy.js";
   import "tippy.js/dist/tippy.css";
   import "tippy.js/themes/light.css";
   import GeorgeCloney from "../../cloney/GeorgeCloney";
   import { NetworkType, TezosContractAddress } from "../../cloney/types";
   import store from "../../store";
+  import config from "../../config";
 
   let showNetworksList = false;
   let showContractExamples = false;
@@ -29,7 +30,7 @@
   onMount(() => {
     tippy(`#fetch-contract-info`, {
       content: `
-        <h3 className="tooltip-fetch">Step 1:</h3>
+        <h3>Step 1:</h3>
         <h3>Fetch Smart Contract Code</h3>
         <p style="font-size:0.9rem">In this step, George Cloney will fetch you any smart contract code from any Tezos network</p>
         <p style="font-size:0.9rem">From here, you'll be able to see the contract's code and initial storage in Michelson in the next step.</p>
@@ -38,21 +39,6 @@
       placement: "bottom",
       theme: "light"
     });
-  });
-
-  afterUpdate(() => {
-    /*const networksList = document.getElementById("network-selection-dropdown");
-    if (networksList) {
-      networksList.style.display = "block";
-      tippy(`#networks-list`, {
-        content: networksList,
-        allowHTML: true,
-        placement: "bottom-end",
-        theme: "dropdown",
-        trigger: "click",
-        arrow: false
-      });
-    }*/
   });
 </script>
 
@@ -129,12 +115,21 @@
         showContractExamples = false;
       }}
     >
-      <input
-        type="text"
-        id="network-selection"
-        value={$store.networkFrom ? $store.networkFrom.toLowerCase() : ""}
-        readonly
-      />
+      {#if $store.networkFrom && $store.networkFrom.networkType === NetworkType.CUSTOM}
+        <input
+          type="text"
+          id="network-selection"
+          placeholder="Enter RPC URL here"
+          on:input={e => store.updateNetworkFrom(NetworkType.CUSTOM, e.target.value)}
+        />
+      {:else}
+        <input
+          type="text"
+          id="network-selection"
+          value={$store.networkFrom ? $store.networkFrom.networkType.toLowerCase() : ""}
+          readonly
+        />
+      {/if}
       <button>
         <span class="material-icons"> expand_more </span>
       </button>
@@ -142,32 +137,34 @@
     {#if showNetworksList}
       <div id="network-selection-dropdown">
         <p
-          class:selected={$store.networkFrom === NetworkType.MAINNET}
-          on:click={() => store.updateNetworkFrom(NetworkType.MAINNET)}
+          class:selected={$store.networkFrom && $store.networkFrom.networkType === NetworkType.MAINNET}
+          on:click={() => store.updateNetworkFrom(NetworkType.MAINNET, config.defaultRpcUrl[NetworkType.MAINNET])}
         >
           Mainnet
         </p>
         <p
-          class:selected={$store.networkFrom === NetworkType.HANGZHOUNET}
-          on:click={() => store.updateNetworkFrom(NetworkType.HANGZHOUNET)}
+          class:selected={$store.networkFrom && $store.networkFrom.networkType === NetworkType.HANGZHOUNET}
+          on:click={() =>
+            store.updateNetworkFrom(NetworkType.HANGZHOUNET, config.defaultRpcUrl[NetworkType.HANGZHOUNET])}
         >
           Hangzhounet
         </p>
         <p
-          class:selected={$store.networkFrom === NetworkType.GRANADANET}
-          on:click={() => store.updateNetworkFrom(NetworkType.GRANADANET)}
+          class:selected={$store.networkFrom && $store.networkFrom.networkType === NetworkType.GRANADANET}
+          on:click={() => store.updateNetworkFrom(NetworkType.GRANADANET, config.defaultRpcUrl[NetworkType.GRANADANET])}
         >
           Granadanet
         </p>
         <p
-          class:selected={$store.networkFrom === NetworkType.FLORENCENET}
-          on:click={() => store.updateNetworkFrom(NetworkType.FLORENCENET)}
+          class:selected={$store.networkFrom && $store.networkFrom.networkType === NetworkType.FLORENCENET}
+          on:click={() =>
+            store.updateNetworkFrom(NetworkType.FLORENCENET, config.defaultRpcUrl[NetworkType.FLORENCENET])}
         >
           Florencenet
         </p>
         <p
-          class:selected={$store.networkFrom === NetworkType.CUSTOM}
-          on:click={() => store.updateNetworkFrom(NetworkType.CUSTOM)}
+          class:selected={$store.networkFrom && $store.networkFrom.networkType === NetworkType.CUSTOM}
+          on:click={() => store.updateNetworkFrom(NetworkType.CUSTOM, "")}
         >
           Custom
         </p>
@@ -178,31 +175,30 @@
   <label for="contract-address">
     <span>Enter Contract Address</span>
     <br />
-    <div
-      class="select-input"
-      on:click={() => {
-        showContractExamples = !showContractExamples;
-        showNetworksList = false;
-      }}
-    >
+    <div class="select-input">
       <input
         type="text"
         id="contract-address"
         value={contractAddress}
         on:input={e => (contractAddress = e.target.value)}
       />
-      <button>
+      <button
+        on:click={() => {
+          showContractExamples = !showContractExamples;
+          showNetworksList = false;
+        }}
+      >
         <span class="material-icons"> expand_more </span>
       </button>
     </div>
     {#if showContractExamples}
       <div id="contract-examples">
         <p
-          class:selected={contractAddress ===
-            "KT1GRSvLoikDsXujKgZPsGLX8k8VvR2Tq95b"}
+          class:selected={contractAddress === "KT1GRSvLoikDsXujKgZPsGLX8k8VvR2Tq95b"}
           on:click={() => {
             contractAddress = "KT1GRSvLoikDsXujKgZPsGLX8k8VvR2Tq95b";
-            store.updateNetworkFrom(NetworkType.MAINNET);
+            store.updateNetworkFrom(NetworkType.MAINNET, config.defaultRpcUrl[NetworkType.MAINNET]);
+            showContractExamples = false;
             const input = document.getElementById("contract-address");
             setTimeout(() => input.blur(), 10);
           }}
@@ -210,11 +206,11 @@
           Plenty token (FA1.2 token)
         </p>
         <p
-          class:selected={contractAddress ===
-            "KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd"}
+          class:selected={contractAddress === "KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd"}
           on:click={() => {
             contractAddress = "KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd";
-            store.updateNetworkFrom(NetworkType.MAINNET);
+            store.updateNetworkFrom(NetworkType.MAINNET, config.defaultRpcUrl[NetworkType.MAINNET]);
+            showContractExamples = false;
             const input = document.getElementById("contract-address");
             setTimeout(() => input.blur(), 10);
           }}
@@ -225,11 +221,7 @@
     {/if}
   </label>
   <br />
-  <button
-    class="submit"
-    disabled={!$store.networkFrom || !contractAddress || fetching}
-    on:click={fetchContract}
-  >
+  <button class="submit" disabled={!$store.networkFrom || !contractAddress || fetching} on:click={fetchContract}>
     {#if fetching}
       <span class="material-icons loading"> settings </span>
     {:else}

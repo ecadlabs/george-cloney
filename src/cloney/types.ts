@@ -11,3 +11,9 @@ export enum NetworkType {
 export interface Config {
   defaultRpcUrls: { [p in Exclude<NetworkType, NetworkType.CUSTOM>]: string };
 }
+
+export enum StorageType {
+  "EMPTY" = "EMPTY",
+  "CURRENT" = "CURRENT",
+  "CUSTOM" = "CUSTOM"
+}

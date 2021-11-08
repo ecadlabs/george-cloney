@@ -1,7 +1,16 @@
 <script lang="ts">
-  import ContractFetchForm from "./ContractFetchForm.svelte";
   import StepsCounter from "./StepsCounter.svelte";
   import store from "../../store";
+  import ContractFetchForm from "./ContractFetchForm.svelte";
+  import ContractInitialStorage from "./ContractInitialStorage.svelte";
+  import type { InitialStore } from "../../types";
+
+  const containerMinWidth: { [p in InitialStore["currentStep"]]: string } = {
+    fetch: "25%",
+    storage: "45%",
+    originate: "25%",
+    view: "25%"
+  };
 </script>
 
 <style lang="scss">
@@ -18,11 +27,11 @@
 </style>
 
 <StepsCounter />
-<div class="cloney-container">
+<div class="cloney-container" style={`min-width:${containerMinWidth[$store.currentStep]}`}>
   {#if $store.currentStep === "fetch"}
     <ContractFetchForm />
   {:else if $store.currentStep === "storage"}
-    <div>Create storage</div>
+    <ContractInitialStorage />
   {:else if $store.currentStep === "originate"}
     <div>Originate contract</div>
   {:else if $store.currentStep === "view"}

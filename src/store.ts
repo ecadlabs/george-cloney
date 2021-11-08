@@ -1,14 +1,7 @@
 import { writable } from "svelte/store";
 import type GeorgeCloney from "./cloney/GeorgeCloney";
 import type { NetworkType } from "./cloney/types";
-
-interface InitialStore {
-  georgeCloney: GeorgeCloney | undefined;
-  networkFrom: NetworkType | undefined;
-  networkTo: NetworkType | undefined;
-  contractFrom: string | undefined;
-  currentStep: "fetch" | "storage" | "originate" | "view";
-}
+import type { InitialStore } from "./types";
 
 const initialStore: InitialStore = {
   georgeCloney: undefined,
@@ -38,12 +31,11 @@ const state = {
         return { ...store, georgeCloney: g };
       }
     }),
-  updateNetworkFrom: (networkFrom: NetworkType) =>
-    store.update(store => ({ ...store, networkFrom })),
-  updateNetworkTo: (networkTo: NetworkType) =>
-    store.update(store => ({ ...store, networkTo })),
-  updateCurrentStep: (step: InitialStore["currentStep"]) =>
-    store.update(store => ({ ...store, currentStep: step }))
+  updateNetworkFrom: (networkFrom: NetworkType, rpcUrl: string) =>
+    store.update(store => ({ ...store, networkFrom: { networkType: networkFrom, rpcUrl } })),
+  updateNetworkTo: (networkTo: NetworkType, rpcUrl: string) =>
+    store.update(store => ({ ...store, networkTo: { networkType: networkTo, rpcUrl } })),
+  updateCurrentStep: (step: InitialStore["currentStep"]) => store.update(store => ({ ...store, currentStep: step }))
 };
 
 export default state;

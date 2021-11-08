@@ -9,7 +9,7 @@ body {
 
 body {
   display: grid;
-  grid-template-rows: 15% 85%;
+  grid-template-rows: 10% 90%;
 }
 
 .bubble {
@@ -37,16 +37,23 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 
   label {
     width: 100%;
     height: 80px;
     position: relative;
+    text-align: center;
 
     span {
       font-weight: bold;
     }
+  }
+
+  input[type="text"] {
+    padding: 4px 6px;
+    border: solid 1px $main-color;
+    border-radius: 3px;
   }
 
   .select-input {
@@ -60,6 +67,7 @@ body {
       height: 20px;
       width: 100%;
       padding: 5px;
+      border-radius: 0px;
       border: solid 2px $main-color;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;

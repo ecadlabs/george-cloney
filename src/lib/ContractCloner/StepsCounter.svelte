@@ -1,5 +1,5 @@
 <script lang="ts">
-  let activeBubble = 1;
+  import store from "../../store";
 </script>
 
 <style lang="scss">
@@ -27,19 +27,19 @@
 
 <div class="steps">
   <div class="step">
-    <div class="bubble" class:active={activeBubble === 1}>1</div>
+    <div class="bubble" class:active={$store.currentStep === "fetch"}>1</div>
     <div class="step-title">Fetch Contract</div>
   </div>
   <div class="step">
-    <div class="bubble" class:active={activeBubble === 2}>2</div>
+    <div class="bubble" class:active={$store.currentStep === "storage"}>2</div>
     <div class="step-title">Review Contract</div>
   </div>
   <div class="step">
-    <div class="bubble" class:active={activeBubble === 3}>3</div>
+    <div class="bubble" class:active={$store.currentStep === "originate"}>3</div>
     <div class="step-title">Originate New Contract</div>
   </div>
   <div class="step">
-    <div class="bubble" class:active={activeBubble === 4}>4</div>
+    <div class="bubble" class:active={$store.currentStep === "view"}>4</div>
     <div class="step-title">View New Contract</div>
   </div>
 </div>
