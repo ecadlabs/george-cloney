@@ -1,3 +1,7 @@
+<script lang="ts">
+  import Wallet from "./Wallet/Wallet.svelte";
+</script>
+
 <style lang="scss">
   $side-padding: 20px;
 
@@ -13,14 +17,17 @@
     img {
       vertical-align: middle;
 
-      &.github {
-        height: 60px;
-      }
       &.cloney {
         height: 55px;
         width: 60px;
       }
     }
+  }
+
+  .github-link {
+    position: fixed;
+    right: 20px;
+    bottom: 0px;
   }
 </style>
 
@@ -29,18 +36,12 @@
     <img class="cloney" src="images/george-cloney.png" alt="george-cloney" />
   </div>
   <div>
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://github.com/ecadlabs/george-cloney"
-    >
-      <img
-        class="github"
-        alt="Github logo"
-        height="55"
-        width="100"
-        src="images/github.jpg"
-      />
-    </a>
+    <Wallet />
   </div>
 </header>
+
+<div class="github-link">
+  <a target="_blank" rel="noopener noreferrer" href="https://github.com/ecadlabs/george-cloney">
+    <img class="github" alt="Github logo" height="55" width="100" src="images/github.jpg" />
+  </a>
+</div>

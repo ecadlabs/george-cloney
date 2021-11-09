@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@taquito/beacon-wallet": "^10.1.0-beta",
+    "@taquito/signer": "^10.2.1",
     "@taquito/taquito": "^10.1.0-beta",
     "file-loader": "^6.2.0",
     "tippy.js": "^6.3.3"

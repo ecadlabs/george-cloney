@@ -3,6 +3,7 @@
   import store from "../../store";
   import ContractFetchForm from "./ContractFetchForm.svelte";
   import ContractInitialStorage from "./ContractInitialStorage.svelte";
+  import ContractOriginate from "./ContractOriginate.svelte";
   import type { InitialStore } from "../../types";
 
   const containerMinWidth: { [p in InitialStore["currentStep"]]: string } = {
@@ -33,7 +34,7 @@
   {:else if $store.currentStep === "storage"}
     <ContractInitialStorage />
   {:else if $store.currentStep === "originate"}
-    <div>Originate contract</div>
+    <ContractOriginate />
   {:else if $store.currentStep === "view"}
     <div>View new contract</div>
   {/if}

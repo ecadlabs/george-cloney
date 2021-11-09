@@ -17,7 +17,7 @@
     if (contractAddress) {
       fetching = true;
 
-      let george = new GeorgeCloney(NetworkType.MAINNET);
+      let george = new GeorgeCloney(NetworkType.MAINNET, true, "test");
       store.initGeorgeCloney(george);
       george = await george.fetch(contractAddress);
       store.updateGeorgeCloney(george);
@@ -57,44 +57,6 @@
 
   #fetch-contract-info {
     cursor: help;
-  }
-
-  #network-selection-dropdown,
-  #contract-examples {
-    position: absolute;
-    top: 70px;
-    left: 0px;
-    background-color: white;
-    width: 100%;
-    color: $main-color;
-    border: solid 2px $main-color;
-    border-radius: 3px;
-    font-size: 1rem;
-    text-align: center;
-    padding: 0px;
-    z-index: 999;
-
-    p {
-      margin: 0px;
-      padding: 10px 0px;
-      cursor: pointer;
-      transition: 0.3s;
-      background-color: white;
-
-      &:hover {
-        background-color: #2584ff;
-        color: white;
-      }
-
-      &.selected {
-        background-color: #ddecff;
-
-        &:hover {
-          background-color: #2584ff;
-          color: white;
-        }
-      }
-    }
   }
 </style>
 

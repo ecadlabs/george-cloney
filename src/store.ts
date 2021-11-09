@@ -1,10 +1,12 @@
 import { writable } from "svelte/store";
+import type { BeaconWallet } from "@taquito/beacon-wallet";
 import type GeorgeCloney from "./cloney/GeorgeCloney";
 import type { NetworkType } from "./cloney/types";
 import type { InitialStore } from "./types";
 
 const initialStore: InitialStore = {
   georgeCloney: undefined,
+  wallet: undefined,
   contractFrom: undefined,
   networkFrom: undefined,
   networkTo: undefined,
@@ -35,7 +37,8 @@ const state = {
     store.update(store => ({ ...store, networkFrom: { networkType: networkFrom, rpcUrl } })),
   updateNetworkTo: (networkTo: NetworkType, rpcUrl: string) =>
     store.update(store => ({ ...store, networkTo: { networkType: networkTo, rpcUrl } })),
-  updateCurrentStep: (step: InitialStore["currentStep"]) => store.update(store => ({ ...store, currentStep: step }))
+  updateCurrentStep: (step: InitialStore["currentStep"]) => store.update(store => ({ ...store, currentStep: step })),
+  updateWallet: (wallet: BeaconWallet) => store.update(store => ({ ...store, wallet }))
 };
 
 export default state;

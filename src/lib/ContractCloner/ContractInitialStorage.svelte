@@ -29,6 +29,7 @@
       });
       $store.georgeCloney.addStorage(StorageType.CUSTOM, newStorage);
     }
+    store.updateCurrentStep("originate");
   };
 
   const setNewStorage = async () => {

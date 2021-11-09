@@ -1,6 +1,8 @@
 import { TezosToolkit, BigMapAbstraction, MichelsonMap } from "@taquito/taquito";
 import { validateContractAddress } from "@taquito/utils";
 import type { MichelsonV1Expression } from "@taquito/rpc";
+import { InMemorySigner } from "@taquito/signer";
+import { BeaconWallet } from "@taquito/beacon-wallet";
 import BigNumber from "bignumber.js";
 import { NetworkType, TezosContractAddress, StorageType } from "./types";
 import config from "./config";
@@ -10,12 +12,24 @@ export default class GeorgeCloney {
   public networkFromUrl: string;
   public networkTo: NetworkType;
   public networkToUrl: string;
-  public contractToOriginate: { rpcData: MichelsonV1Expression[]; storage: any } | undefined;
+  public contractToOriginate:
+    | { address: TezosContractAddress; code: MichelsonV1Expression[]; storage: any }
+    | undefined;
+  private newStorage: any;
+  private newStorageType: StorageType;
   private TezosFrom: TezosToolkit;
   private TezosTo: TezosToolkit;
+  private taquitoApi: "wallet" | "contract";
 
-  constructor(from: NetworkType, to?: NetworkType, options?: { fromUrl?: string; toUrl?: string }) {
+  constructor(
+    from: NetworkType,
+    walletApi: boolean,
+    signer: BeaconWallet | string,
+    to?: NetworkType,
+    options?: { fromUrl?: string; toUrl?: string }
+  ) {
     this.networkFrom = from;
+    this.taquitoApi = walletApi ? "wallet" : "contract";
 
     if (to) {
       this.networkTo = to;
@@ -29,13 +43,19 @@ export default class GeorgeCloney {
     // sets RPC URL for contract to be created
     if (options?.toUrl) {
       this.networkToUrl = options.toUrl;
+      this.TezosTo = new TezosToolkit(this.networkToUrl);
+    }
+    // sets the signer
+    console.log(signer instanceof BeaconWallet);
+    if (typeof signer === "string") {
+      const newSigner = new InMemorySigner(signer);
+      this.TezosTo.setSignerProvider(newSigner);
     } else {
-      this.networkToUrl = config.defaultRpcUrls[to];
+      this.TezosTo.setWalletProvider(signer);
     }
 
-    // creates both instances of the TezosToolkit
+    // creates an instance of the TezosToolkit
     this.TezosFrom = new TezosToolkit(this.networkFromUrl);
-    this.TezosTo = new TezosToolkit(this.networkToUrl);
   }
 
   // fetches the code and the storage of the source contract
@@ -48,7 +68,7 @@ export default class GeorgeCloney {
     try {
       const contract = await this.TezosFrom.contract.at(contractAddress);
       const storage: any = await contract.storage();
-      const newContract = { rpcData: contract.script.code, storage };
+      const newContract = { address: contractAddress, code: contract.script.code, storage };
       this.contractToOriginate = newContract;
 
       return this;
@@ -112,15 +132,59 @@ export default class GeorgeCloney {
         }
       }
     }
-    console.log(newStorage);
+    this.newStorage = newStorage;
+    this.newStorageType = storageType;
+
+    return this;
+  }
+
+  // sets the network where the new contract will be originated
+  public setTargetNetwork(network: NetworkType, rpcUrl?: string) {
+    this.networkTo = network;
+
+    if (rpcUrl) {
+      this.networkToUrl = rpcUrl;
+    } else {
+      this.networkToUrl = config.defaultRpcUrls[network];
+    }
+
+    this.TezosTo = new TezosToolkit(this.networkToUrl);
   }
 
   // copies data from bigmap in source contract
   public copyBigMap(bigmapId: number) {}
 
   // originates a new contract
-  public clone() {}
+  public async clone(): Promise<string> {
+    if (!this.networkFrom) throw "No source network";
+    if (!this.networkTo) throw "No target network";
+    if (!this.contractToOriginate) throw "No contract to originate";
+
+    let op;
+    if (this.taquitoApi === "wallet") {
+      op = this.TezosTo.wallet
+        .originate({
+          code: this.contractToOriginate.code,
+          storage: this.newStorage
+        })
+        .send();
+    } else if (this.taquitoApi === "contract") {
+      op = this.TezosTo.contract.originate({
+        code: this.contractToOriginate.code,
+        storage: this.newStorage
+      });
+    }
+    await op.confirmation();
+    const contract = await op.contract;
+
+    return contract.address;
+  }
 
   // clears data related to previously fetched contract
   public clear() {}
+
+  // returns the currently saved storage for the new contract
+  public getNewStorage() {
+    return { storage: this.newStorage, type: this.newStorageType };
+  }
 }

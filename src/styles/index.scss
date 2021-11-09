@@ -125,6 +125,62 @@ body {
   }
 }
 
+button {
+  &.wallet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #d9d9d9;
+    }
+  }
+}
+
+#network-selection-dropdown,
+#contract-examples {
+  position: absolute;
+  top: 70px;
+  left: 0px;
+  background-color: white;
+  width: 100%;
+  color: $main-color;
+  border: solid 2px $main-color;
+  border-radius: 3px;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0px;
+  z-index: 999;
+
+  p {
+    margin: 0px;
+    padding: 10px 0px;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: white;
+
+    &:hover {
+      background-color: #2584ff;
+      color: white;
+    }
+
+    &.selected {
+      background-color: #ddecff;
+
+      &:hover {
+        background-color: #2584ff;
+        color: white;
+      }
+    }
+  }
+}
+
 @-moz-keyframes spin {
   100% {
     -moz-transform: rotate(360deg);
