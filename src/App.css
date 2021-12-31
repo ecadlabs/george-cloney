@@ -226,14 +226,9 @@ li {
 }
 
 .built-with-taquito-logo {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.built-with-taquito-logo img {
-  transform: translateY(80%);
-  margin-right: 20px;
-  padding-bottom: 20px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 
 .show {
