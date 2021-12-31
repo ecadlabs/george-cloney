@@ -34,13 +34,6 @@ h1 {
   .title-group img {
     width: 300px;
   }
-  .built-with-taquito-logo {
-    justify-content: center !important;
-  }
-  .built-with-taquito-logo img {
-    padding-bottom: 0px !important;
-    padding-top: 0px !important;
-  }
   .right-next-step:after,
   .right:after {
     margin-left: -0.6em !important;
@@ -226,14 +219,9 @@ li {
 }
 
 .built-with-taquito-logo {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.built-with-taquito-logo img {
-  transform: translateY(80%);
-  margin-right: 20px;
-  padding-bottom: 20px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 
 .show {
